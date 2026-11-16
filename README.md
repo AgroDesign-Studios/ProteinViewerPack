@@ -43,7 +43,8 @@
 | Safari（macOS） | 16.4 以降 | 17 以降 |
 | iPhone・iPad のブラウザ（Safari・Edge・Chrome など。どれも Safari と同じ WebKit で動きます） | iOS / iPadOS 16.4 以降 | iOS / iPadOS 17 以降 |
 
-- **実機で確認済み**: Windows の Chrome、iPhone の Edge（作者が実機で確認）。Linux の Chrome（headless 版・ソフトウェア描画での自動検証で、3Dmol.js と PyMOL の両方でサンプルを表示）
+- **実機で確認済み**: Windows の Chrome、iPhone の Edge（作者が実機で確認）
+- **自動検証のみ**: Linux の Chrome（画面を出さない headless 版・ソフトウェア描画で、3Dmol.js と PyMOL の両方でサンプルを表示。実機の画面では未確認）
 - **要件上は動くはず（未確認）**: Android（Chrome・Firefox など）、macOS（Safari・Chrome など）、Windows の Edge・Firefox、iPhone の Safari、iPad
 - PyMOL は起動に時間がかかり、メモリを 0.5〜1.5 GB 使います。メモリの少ないスマホでは、ブラウザの版が足りていても PyMOL が起動できないことがあります。そのときも 3Dmol.js で表示できます。
 - PyMOL に必要な機能がないブラウザ（例: iOS 17 より前の iPhone・iPad）では、3Dmol.js だけで構造を表示します。WebGL が使えないブラウザでは、構造の代わりに鎖とリガンドの一覧を文字で表示します。
@@ -130,7 +131,8 @@ The browser versions the app needs, worked out from what it uses (WebGL for 3Dmo
 | Safari (macOS) | 16.4 or later | 17 or later |
 | Browsers on an iPhone or iPad (Safari, Edge, Chrome and others, which all run on Safari's WebKit) | iOS / iPadOS 16.4 or later | iOS / iPadOS 17 or later |
 
-- **Tried on real devices**: Chrome on Windows and Edge on an iPhone (by the author). Chrome on Linux (an automated check with headless Chrome and software rendering, showing the sample with both 3Dmol.js and PyMOL)
+- **Tried on real devices**: Chrome on Windows and Edge on an iPhone (by the author)
+- **Automated check only**: Chrome on Linux (headless Chrome with software rendering showed the sample with both 3Dmol.js and PyMOL; not yet tried on a real screen)
 - **Should work from the requirements (not yet tried)**: Android (Chrome, Firefox and others), macOS (Safari, Chrome and others), Edge and Firefox on Windows, Safari on an iPhone, an iPad
 - PyMOL takes a while to start and uses 0.5-1.5 GB of memory. On a phone with little memory it may fail to start even in a new enough browser; 3Dmol.js still shows the structure.
 - In a browser without what PyMOL needs (for example an iPhone or iPad before iOS 17), the app shows structures with 3Dmol.js only. In a browser without WebGL, it lists the chains and ligands in words instead of drawing the structure.
