@@ -67,14 +67,15 @@
 
 <p align="center">
 <img src="images/gesture-pinch.webp" alt="2 本指で広げると拡大し、つまむと縮小する（Light viewer）" width="172">
-<img src="images/gesture-pan.webp" alt="2 本指でなぞると構造が横に動く（Heavy viewer）" width="172">
+<img src="images/gesture-pan.webp" alt="2 本指でなぞると構造が横に動く" width="172">
 <img src="images/gesture-rotate.webp" alt="1 本指でなぞると構造が回る（Light viewer）" width="172">
 </p>
-<p align="center"><sub>左: ピンチで拡大・縮小。中: 2 本指でなぞって移動（Heavy viewer）。右: 1 本指で回転。灰色の丸は指の位置です。</sub></p>
+<p align="center"><sub>左: ピンチで拡大・縮小。中: 2 本指でなぞって移動。右: 1 本指で回転。灰色の丸は指の位置です。</sub></p>
 
 - **1 本指でなぞる**: 回転
 - **2 本指で広げる・つまむ（ピンチ）**: 拡大・縮小
-- **2 本指でなぞる**: 上下左右に移動（Heavy viewer）。Light viewer では 3 本指でなぞります。
+- **2 本指でなぞる**: 上下左右に移動（Light viewer と Heavy viewer で同じ）
+- **3Dmol.js オリジナルの操作**: Light viewer は、3Dmol.js 本来の操作（2 本指は拡大・縮小だけ、3 本指で移動）にも切り替えられます。下部バーの「表示」か HELP の「使い方」の「3Dmol.js オリジナルの操作を使う」で、選んだ操作はこのブラウザが覚えます。
 - **下部バーの「表示」**: 拡大・縮小のボタン（Heavy viewer では全体を表示するボタンも）
 - **下部バーの「エンジン」**: Light viewer と Heavy viewer の切り替え
 
@@ -182,14 +183,15 @@ Mail services often cap attachments at about 20-25 MB, so the full edition (abou
 
 <p align="center">
 <img src="images/gesture-pinch-en.webp" alt="Two fingers spread to zoom in and pinch to zoom out (Light viewer)" width="172">
-<img src="images/gesture-pan-en.webp" alt="Two fingers dragged move the structure sideways (Heavy viewer)" width="172">
+<img src="images/gesture-pan-en.webp" alt="Two fingers dragged move the structure sideways" width="172">
 <img src="images/gesture-rotate-en.webp" alt="One finger dragged turns the structure (Light viewer)" width="172">
 </p>
-<p align="center"><sub>Left: pinch to zoom. Middle: drag with two fingers to move (Heavy viewer). Right: drag with one finger to turn. The grey circles show where the fingers are.</sub></p>
+<p align="center"><sub>Left: pinch to zoom. Middle: drag with two fingers to move. Right: drag with one finger to turn. The grey circles show where the fingers are.</sub></p>
 
 - **Drag with one finger**: turn
 - **Spread or pinch two fingers**: zoom in or out
-- **Drag with two fingers**: move up, down and sideways (Heavy viewer). In the Light viewer, drag with three fingers.
+- **Drag with two fingers**: move up, down and sideways (the same in the Light viewer and the Heavy viewer)
+- **The original 3Dmol.js controls**: the Light viewer can use 3Dmol.js's own controls instead (two fingers only zoom, three fingers move): "Use the original 3Dmol.js controls" under "View" in the bottom bar or in Help > "How to use". This browser remembers the choice.
 - **"View" in the bottom bar**: buttons to zoom in and out (and, in the Heavy viewer, to show everything)
 - **"Engine" in the bottom bar**: switch between the Light viewer and the Heavy viewer
 
