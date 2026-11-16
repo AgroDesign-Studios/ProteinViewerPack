@@ -18,7 +18,7 @@
 <img src="images/screenshot-phone-3dmol-framed.png" alt="スマホで 25HN を 3Dmol.js で表示" width="260">
 <img src="images/screenshot-phone-pymol-framed.png" alt="スマホで 25HN をフル版の 2 つ目のビューアで表示" width="260">
 </p>
-<p align="center"><sub>スマホで見たサンプル 25HN。左: 3Dmol.js、右: フル版の 2 つ目のビューア（Built using PyMOL™）</sub></p>
+<p align="center"><sub>スマホで見たサンプル 25HN。左: 3Dmol.js、右: フル版の 2 つ目のビューア（Built using PyMOL™.）</sub></p>
 
 *English follows below.*
 
@@ -38,10 +38,10 @@
 ## メールで構造を送る
 
 1. 構造を開く
-2. 「エクスポート…」→「HTMLappとして出力（このアプリをコピー）」で、「版」を選んで保存
+2. 「エクスポート…」→「HTMLappとして出力（このアプリをコピー）」で、「版」（「ライト版」か、フル版にあたる「通常版」）を選んで保存
 3. 保存した .html をメールに添付
 
-メールの添付は 20〜25 MB 程度までのことが多く、フル版（約 21 MB＋構造）は届かないことがあります。メールにはライト版（アプリ内の表示は「軽量版」、約 1.2 MB＋構造）を使うか、フル版はファイル共有サービスで渡してください。
+メールの添付は 20〜25 MB 程度までのことが多く、フル版（約 21 MB＋構造）は届かないことがあります。メールにはライト版（約 1.2 MB＋構造）を使うか、フル版はファイル共有サービスで渡してください。
 
 ## 使い方
 
@@ -112,7 +112,7 @@ A protein structure viewer in **one HTML file**. Powered by 3Dmol.js. Contains P
 <img src="images/screenshot-phone-3dmol-en-framed.png" alt="25HN shown with 3Dmol.js on a phone" width="260">
 <img src="images/screenshot-phone-pymol-en-framed.png" alt="25HN shown with the full edition's second viewer on a phone" width="260">
 </p>
-<p align="center"><sub>The sample 25HN on a phone. Left: 3Dmol.js. Right: the full edition's second viewer (Built using PyMOL™).</sub></p>
+<p align="center"><sub>The sample 25HN on a phone. Left: 3Dmol.js. Right: the full edition's second viewer (Built using PyMOL™.)</sub></p>
 
 ## Download
 
