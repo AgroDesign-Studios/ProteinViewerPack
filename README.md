@@ -99,11 +99,20 @@
 - **要件上は動くはず（未確認）**: Android（Chrome・Firefox など）、macOS（Safari・Chrome など）、Windows の Edge・Firefox、iPhone の Safari、iPad
 - Heavy viewer が使えないブラウザやメモリの少ないスマホでは Light viewer で表示します。WebGL がないブラウザでは、鎖とリガンドの一覧を文字で表示します。
 
+## 引用
+
+このアプリを使った研究を発表するときは、使ったビューアを、それぞれの作者・会社が求める形で引用してください（引用文は英語の原文のまま）。
+
+- 3Dmol.js（Light viewer。フル版・ライト版とも）— 3Dmol.js の作者が求める論文:
+  Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322–1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
+- フル版の Heavy viewer（Includes PyMOL™.）— Schrödinger, LLC が求める形（版は同梱の Open-Source PyMOL 3.2.0a に合わせています）:
+  The PyMOL Molecular Graphics System, Version 3.2, Schrödinger, LLC.
+
 ## ライセンス・帰属・商標
 
 - このアプリ自体は [MIT License](LICENSE)。同梱のオープンソースソフトウェアはそれぞれのライセンスに従い、名前・版・全文は [`NOTICE`](NOTICE) とアプリの「HELP」→「このアプリについて」にあります。
 - Includes PyMOL™.（PyMOL™ を含みます。）フル版の Heavy viewer は、AgroDesign Studios が Open-Source PyMOL のソースコードをそのライセンスのもとで変更・機能追加し、WebAssembly でブラウザ向けにビルドしたものです。Schrödinger, LLC が配布する PyMOL 製品とは別のものです。
-- Powered by 3Dmol.js（BSD 3-Clause License）。論文: Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322–1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
+- Powered by 3Dmol.js（BSD 3-Clause License）。論文の引用は上の「引用」の節にあります。
 - サンプルは RCSB PDB のエントリ 25HN（[DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)）。PDB のデータは CC0 1.0 です。
 - バッジとスマホ・モニターの絵（[`images/`](images)）:
   - Android のロボットは Google の作品を複製・改変したもので、CC BY 3.0 の条件に従って使用しています（原文: "The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the [Creative Commons](https://creativecommons.org/licenses/by/3.0/) 3.0 Attribution License."）。
@@ -215,11 +224,20 @@ The switch at the top right changes between the Light viewer (left) and the Heav
 - **Should work from the requirements (not yet tried)**: Android (Chrome, Firefox and others), macOS (Safari, Chrome and others), Edge and Firefox on Windows, Safari on an iPhone, an iPad
 - Where the Heavy viewer cannot run (an older browser, a phone short of memory), the Light viewer shows the structure. Without WebGL, the app lists the chains and ligands in words.
 
+## Citation
+
+If you publish work that used this app, please cite the viewer you used, in the form its makers ask for (the citations are given word for word).
+
+- 3Dmol.js (the Light viewer, in both editions): the paper the 3Dmol.js authors ask users to cite:
+  Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322-1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
+- The full edition's Heavy viewer (Includes PyMOL™.): in the form Schrödinger, LLC asks for, with the version of the Open-Source PyMOL it is built from (3.2.0a):
+  The PyMOL Molecular Graphics System, Version 3.2, Schrödinger, LLC.
+
 ## License, attribution and trademarks
 
 - This app is under the [MIT License](LICENSE). The open-source software it carries keeps its own licence; names, versions and full texts are in [`NOTICE`](NOTICE) and in the app under "Help" → "About this app".
 - Includes PyMOL™. The full edition's Heavy viewer is built from Open-Source PyMOL source code, which AgroDesign Studios modified and extended under its license and compiled for the browser with WebAssembly. It is distinct from the PyMOL products distributed by Schrödinger, LLC.
-- Powered by 3Dmol.js (BSD 3-Clause License). Please cite: Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322-1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
+- Powered by 3Dmol.js (BSD 3-Clause License). Its paper is under "Citation" above.
 - The sample is PDB entry 25HN from the RCSB PDB ([DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)). PDB data are CC0 1.0.
 - Badges, phone and monitor pictures ([`images/`](images)):
   - The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the [Creative Commons](https://creativecommons.org/licenses/by/3.0/) 3.0 Attribution License.
