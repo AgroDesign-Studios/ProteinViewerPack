@@ -1,4 +1,4 @@
-AgroDesign Protein Viewer Pack (HTMLapp) ver 1.0.0 (171b0b6d80)
+AgroDesign Protein Viewer Pack (HTMLapp) ver 1.0.0 (8c4394cce3)
 Copyright (c) 2026 AgroDesign Studios
 
 This app's own program is licensed under the MIT License (see LICENSE).
@@ -1300,21 +1300,9 @@ In: layer1/Ray.cpp (RayRenderVRML2, the 96-to-32-bit hash)
        this is probably way overkill */
 
 ------------------------------------------------------------------------------
-Thomas Holder's psico-derived modules (shipped as Python source in the wheel)
-Licence: BSD-2-Clause, as each file says; the files carry no licence text, so the text below is the one pymol-psico (the project they are based on) ships, at commit f42cb1e4
-In: pymol/seqalign.py, pymol/morphing.py, pymol/plugins/*.py, pymol_path/data/startup/apbs_gui/creating.py and electrostatics.py
-
-[modules/pymol/seqalign.py]
-'''
-Sequence alignment stuff.
-
-Based on psico.seqalign
-
-(c) 2018 Schrodinger, Inc.
-(c) 2011 Thomas Holder, MPI for Developmental Biology
-
-License: BSD-2-Clause
-'''
+Thomas Holder's psico-derived module (shipped as Python source in the wheel)
+Licence: BSD-2-Clause, as the file says; it carries no licence text, so the text below is the one pymol-psico (the project it is based on) ships, at commit f42cb1e4
+In: pymol/morphing.py
 
 [modules/pymol/morphing.py]
 '''
@@ -1323,76 +1311,6 @@ Various morphing workflows
 (c) 2013 Schrodinger, Inc.
 (c) 2011 Thomas Holder
 (c) 2009 DeLano Scientific LLC.
-'''
-
-[modules/pymol/plugins/__init__.py]
-'''
-PyMOL Plugins Engine
-
-(c) 2011-2012 Thomas Holder, PyMOL OS Fellow
-License: BSD-2-Clause
-
-'''
-
-[modules/pymol/plugins/installation.py]
-'''
-PyMOL Plugins Engine, Installation Routines
-
-(c) 2011-2012 Thomas Holder, PyMOL OS Fellow
-License: BSD-2-Clause
-
-'''
-
-[modules/pymol/plugins/legacysupport.py]
-'''
-PyMOL Plugins Engine, Legacy Support
-
-This module overloads PyMOLs PMGApp class which so far handles plugin support.
-It also provides a get_pmgapp() function that either returns the actual PMGApp
-instance, or a fake instance with "root" and "menuBar" properties which can be
-used if PMGApp has retired.
-
-(c) 2011-2012 Thomas Holder, PyMOL OS Fellow
-License: BSD-2-Clause
-
-'''
-
-[modules/pymol/plugins/managergui.py]
-'''
-PyMOL Plugins Engine, Graphical Plugin Manager
-
-(c) 2011-2012 Thomas Holder, PyMOL OS Fellow
-License: BSD-2-Clause
-
-'''
-
-[modules/pymol/plugins/repository.py]
-'''
-PyMOL Plugins Engine, Repository Support
-
-This code is in very experimental state!
-
-(c) 2011-2012 Thomas Holder, PyMOL OS Fellow
-License: BSD-2-Clause
-
-'''
-
-[data/startup/apbs_gui/creating.py]
-'''
-(c) 2010-2012 Thomas Holder (https://github.com/speleo3/pymol-psico)
-(c) 2016 Thomas Holder, Schrodinger, Inc.
-
-License: BSD-2-Clause
-'''
-
-[data/startup/apbs_gui/electrostatics.py]
-'''
-APBS wrapper
-
-(c) 2012 Thomas Holder (https://github.com/speleo3/pymol-psico)
-(c) 2016 Thomas Holder, Schrodinger, Inc.
-
-License: BSD-2-Clause
 '''
 
 [upstream licence text: pymol-psico.LICENSE]
@@ -1427,28 +1345,6 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-------------------------------------------------------------------------------
-PyMOL XML-RPC server
-Licence: Open-Source PyMOL licence (the file says 'License: PyMol')
-In: pymol/rpc.py
-
-[modules/pymol/rpc.py]
-""" an XML-RPC server to allow remote control of PyMol
- 
-  Author: Greg Landrum (glandrum@users.sourceforge.net)
-  Created:       January 2002
-  $LastChangedDate$
-  License:  PyMol
-  Requires:
-            - a python xmlrpclib distribution containing the SimpleXMLRPCServer
-              module (1.0 or greater should be fine)
-            - python with threading enabled  
- 
-  RD Version: $Rev$            
-
-  Modified 2013-04-17 Thomas Holder, Schrodinger, Inc.
-"""
 
 --- Pyodide ---
 
@@ -1845,7 +1741,41 @@ under the same licence; its source is at:
   https://github.com/pyodide/hiwire (commit 6a1e67280a15d929ebeceee54a6358c9c8d5f697,
   the one Pyodide 314.0.7's cpython/Makefile builds)
 
-No file covered by the MPL was modified for this distribution.
+What this copy changed
+----------------------
+
+pyodide.js, pyodide.asm.mjs and pyodide.asm.wasm are the release's files,
+unmodified.
+
+python_stdlib.zip is NOT the release's file. AgDB's pinned builder
+(pymol-wasm/ in the AgDB repository, build.sh step 5b) made it from the
+release's python_stdlib.zip (in pyodide-core-314.0.7.tar.bz2 at the release
+link above) as follows, and changed nothing else:
+
+  - The 167 modules the PyMOL viewer imports while it starts
+    (pymol-wasm/pyc_targets.json, "stdlib") are shipped compiled: each x.py is
+    replaced, at the same place in the archive, by x.pyc, the bytecode the
+    same Pyodide 314.0.7 CPython (3.14.2) compiles from that x.py
+    (unchecked-hash, optimize 0, without the column table), and the x.py
+    itself is left out. The text of no file was edited.
+  - 15 of those modules are Pyodide's own Python code, covered by the MPL:
+    _pyodide/__init__.py, _pyodide/_base.py, _pyodide/_core_docs.py,
+    _pyodide/_future_helper.py, _pyodide/_importhook.py,
+    _pyodide/docs_argspec.py, _pyodide/docstring.py, _pyodide/jsbind.py,
+    pyodide/__init__.py, pyodide/_package_loader.py, pyodide/_state.py,
+    pyodide/code.py, pyodide/common.py, pyodide/ffi/__init__.py,
+    pyodide/webloop.py. They are in Executable Form only in this copy; their
+    Source Code Form is the same path in the release's python_stdlib.zip, and
+    in the pyodide repository at the tag above (src/py/).
+  - The other 152 are CPython standard-library modules (Python Software
+    Foundation License, LICENSE.cpython.txt). This paragraph is the brief
+    summary of the changes made to Python that the PSF License (clause 3) asks
+    a derivative work to include: those 152 modules are shipped as bytecode
+    without their source, and the archive is re-compressed. Their source is
+    the release's python_stdlib.zip, or CPython 3.14.2.
+  - Every member of the archive is re-compressed with deflate level 9 (the
+    release uses level 6); the uncompressed content of every member not named
+    above is byte-identical to the release's.
 
 --- CPython ---
 

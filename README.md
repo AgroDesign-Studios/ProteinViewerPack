@@ -105,7 +105,7 @@
 
 - 3Dmol.js（Light viewer。フル版・ライト版とも）— 3Dmol.js の作者が求める論文:
   Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322–1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
-- フル版の Heavy viewer（Includes PyMOL™.）— Schrödinger, LLC が求める形（版は同梱の Open-Source PyMOL 3.2.0a に合わせています）:
+- フル版の Heavy viewer：Built using PyMOL™. Schrödinger, LLC が求める形で、使った版を入れて:
   The PyMOL Molecular Graphics System, Version 3.2, Schrödinger, LLC.
 
 ## ライセンス・帰属・商標
@@ -230,7 +230,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 - 3Dmol.js (the Light viewer, in both editions): the paper the 3Dmol.js authors ask users to cite:
   Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322-1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
-- The full edition's Heavy viewer (Includes PyMOL™.): in the form Schrödinger, LLC asks for, with the version of the Open-Source PyMOL it is built from (3.2.0a):
+- The full edition's Heavy viewer: Built using PyMOL™. In the form Schrödinger, LLC asks for, with the version used:
   The PyMOL Molecular Graphics System, Version 3.2, Schrödinger, LLC.
 
 ## License, attribution and trademarks
