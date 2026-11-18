@@ -7,7 +7,9 @@
 <img src="images/badges/macos.svg" alt="macOS" height="28">
 <img src="images/badges/linux.svg" alt="Linux" height="28">
 </p>
+
 *English follows below.*
+
 **タンパク質構造データと複数のビューワーが１ファイルになった**ブラウザアプリです。Includes 3Dmol.js. Includes PyMOL™.
 
 - **HTML ファイル 1 つで動く** — ファイルを開くだけでウェブブラウザ上で動く。インストールもアカウントも不要。
