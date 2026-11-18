@@ -15,15 +15,15 @@
 - **メールで構造を送れる** — 構造を入れたままアプリを保存してメールに添付すれば、受け取った人はダブルクリックですぐに構造を見られます。インストールも、構造生物学の専門知識も要りません。
 
 <p align="center">
-<img src="images/screenshot-phone-3dmol-framed.png" alt="スマホで 25HN を Light viewer（3Dmol.js）で表示" width="260">
-<img src="images/screenshot-phone-pymol-framed.png" alt="スマホで 25HN をフル版の Heavy viewer で表示" width="260">
+<img src="images/screenshot-phone-3dmol-framed.png" alt="スマホで 25HN を &quot;3Dmol.js&quot; モードで表示" width="260">
+<img src="images/screenshot-phone-pymol-framed.png" alt="スマホで 25HN をフル版の &quot;Includes PyMOL™&quot; モードで表示" width="260">
 </p>
-<p align="center"><sub>スマホで見たサンプル 25HN。左: Light viewer（3Dmol.js）、右: フル版の Heavy viewer（Includes PyMOL™.）</sub></p>
+<p align="center"><sub>スマホで見たサンプル 25HN。左: "3Dmol.js" モード、右: フル版の "Includes PyMOL™" モード</sub></p>
 
 <p align="center">
-<img src="images/screenshot-pc-monitor.png" alt="PC の画面で 25HN を表示。斜めの線の左は Light viewer、右は Heavy viewer" width="524">
+<img src="images/screenshot-pc-monitor.png" alt="PC の画面で 25HN を表示。斜めの線の左は &quot;3Dmol.js&quot; モード、右は &quot;Includes PyMOL™&quot; モード" width="524">
 </p>
-<p align="center"><sub>PC でも。左: Light viewer（3Dmol.js）、右: Heavy viewer（Includes PyMOL™.）。ワンタッチで切り替えられます。</sub></p>
+<p align="center"><sub>PC でも。左: "3Dmol.js" モード、右: "Includes PyMOL™" モード。ワンタッチで切り替えられます。</sub></p>
 
 *English follows below.*
 
@@ -33,8 +33,8 @@
 
 | ファイル | 大きさ | 中身 |
 |---|---|---|
-| `AgroDesign-ProteinViewerPack-v<版>_full_<日付>.html`（フル版） | 約 21 MB | Light viewer（3Dmol.js）と Heavy viewer（Includes PyMOL™.）: Heavy viewer はメニュー・コマンドライン・レイトレース画像・.pse セッション |
-| `AgroDesign-ProteinViewerPack-v<版>_light_<日付>.html`（ライト版） | 約 1.2 MB | Light viewer（3Dmol.js）のみ |
+| `AgroDesign-ProteinViewerPack-v<版>_full_<日付>.html`（フル版） | 約 21 MB | "3Dmol.js" モードと "Includes PyMOL™" モード: "Includes PyMOL™" モードはメニュー・コマンドライン・レイトレース画像・.pse セッション |
+| `AgroDesign-ProteinViewerPack-v<版>_light_<日付>.html`（ライト版） | 約 1.2 MB | "3Dmol.js" モードのみ |
 
 ダウンロードしたファイルは空です。「ファイル/PDBを開く…」で構造ファイル（PDB・mmCIF・SDF/MOL・MOL2・XYZ、フル版は .pse も）を開くか、PDB ID を入れるか、ファイルをページにドロップします。
 
@@ -51,43 +51,43 @@
 ## 使い方
 
 - **回す・拡大・移動**: マウスは左ドラッグ・右ドラッグ・中ドラッグ。タッチは下の「スマホでの操作」。
-- **ビューアの切り替え（フル版）**: 右上の切り替え（スマホは下部バーの「エンジン」）で Light viewer と Heavy viewer を切り替えます。Heavy viewer は起動に時間がかかり、メモリを 0.5〜1.5 GB 使います。
+- **モードの切り替え（フル版）**: 右上の切り替え（スマホは下部バーの「モード」）で "3Dmol.js" モードと "Includes PyMOL™" モードを切り替えます。"Includes PyMOL™" モードは起動に時間がかかり、メモリを 0.5〜1.5 GB 使います。
 - **スマホ表示**: 幅の狭い画面では 1 画面に収まる表示になり、下部バーで操作します。上部の「スマホ表示」／「PC」で切り替えられます。
 - **言語**: 日本語で開きます。上部の「English」／「日本語」で切り替えます。
-- **HELP**: 「このアプリについて」「使い方」「最新版ダウンロード」。
+- **HELP**: 「使い方」「最新版ダウンロード」「ライセンス表記」「改良点」。
 
 ## できること
 
-- Light viewer（3Dmol.js）: リボン・スティック・ボール＆スティック・ライン・表面、配色、測定、ペンとレーザーポインター、奥行き強調、断面、平行投影
-- フル版の Heavy viewer（Includes PyMOL™.）: メニューとコマンドライン、.pse セッション、レイトレース画像
+- "3Dmol.js" モード: リボン・スティック・ボール＆スティック・ライン・表面、配色、測定、ペンとレーザーポインター、奥行き強調、断面、平行投影
+- フル版の "Includes PyMOL™" モード: メニューとコマンドライン、.pse セッション、レイトレース画像
 - 保存: スクリーンショット（PNG）、レイトレース画像、構造ファイル、選択範囲の分子ファイル、.pse、VRML（.wrl）、HTMLapp
 - 開いたファイルはどこにも送りません。ネットにつなぐのは、PDB から読むとき（files.rcsb.org）、「GitHub の最新版と比べる」を押したとき（api.github.com）、外へのリンクを開いたときだけです。
 
 ## スマホでの操作
 
 <p align="center">
-<img src="images/gesture-pinch.webp" alt="2 本指で広げると拡大し、つまむと縮小する（Light viewer）" width="172">
+<img src="images/gesture-pinch.webp" alt="2 本指で広げると拡大し、つまむと縮小する（&quot;3Dmol.js&quot; モード）" width="172">
 <img src="images/gesture-pan.webp" alt="2 本指でなぞると構造が横に動く" width="172">
-<img src="images/gesture-rotate.webp" alt="1 本指でなぞると構造が回る（Light viewer）" width="172">
+<img src="images/gesture-rotate.webp" alt="1 本指でなぞると構造が回る（&quot;3Dmol.js&quot; モード）" width="172">
 </p>
 <p align="center"><sub>左: ピンチで拡大・縮小。中: 2 本指でなぞって移動。右: 1 本指で回転。灰色の丸は指の位置です。</sub></p>
 
 - **1 本指でなぞる**: 回転
 - **2 本指で広げる・つまむ（ピンチ）**: 拡大・縮小
-- **2 本指でなぞる**: 上下左右に移動（Light viewer と Heavy viewer で同じ）
-- **3Dmol.js オリジナルの操作**: Light viewer は、3Dmol.js 本来の操作（2 本指は拡大・縮小だけ、3 本指で移動）にも切り替えられます。下部バーの「表示」か HELP の「使い方」の「3Dmol.js オリジナルの操作を使う」で、選んだ操作はこのブラウザが覚えます。
-- **下部バーの「表示」**: 拡大・縮小のボタン（Heavy viewer では全体を表示するボタンも）
-- **下部バーの「エンジン」**: Light viewer と Heavy viewer の切り替え
+- **2 本指でなぞる**: 上下左右に移動（"3Dmol.js" モードと "Includes PyMOL™" モードで同じ）
+- **3Dmol.js オリジナルの操作**: "3Dmol.js" モードは、3Dmol.js 本来の操作（2 本指は拡大・縮小だけ、3 本指で移動）にも切り替えられます。下部バーの「表示」か HELP の「使い方」の「3Dmol.js オリジナルの操作を使う」で、選んだ操作はこのブラウザが覚えます。
+- **下部バーの「表示」**: 拡大・縮小のボタン（"Includes PyMOL™" モードでは全体を表示するボタンも）
+- **下部バーの「モード」**: "3Dmol.js" モードと "Includes PyMOL™" モードの切り替え
 
 ## PC での表示（スイッチで切替）
 
-<img src="images/screenshot-pc-3dmol.png" alt="PC で 25HN を Light viewer で表示" width="49%"> <img src="images/screenshot-pc-pymol.png" alt="PC で 25HN をフル版の Heavy viewer で表示" width="49%">
+<img src="images/screenshot-pc-3dmol.png" alt="PC で 25HN を &quot;3Dmol.js&quot; モードで表示" width="49%"> <img src="images/screenshot-pc-pymol.png" alt="PC で 25HN をフル版の &quot;Includes PyMOL™&quot; モードで表示" width="49%">
 
-右上のスイッチで Light viewer（左）と Heavy viewer（右）を切り替えます。
+右上のスイッチで "3Dmol.js" モード（左）と "Includes PyMOL™" モード（右）を切り替えます。
 
 ## 動作環境
 
-| ブラウザ | Light viewer（両方の版） | Heavy viewer（フル版） |
+| ブラウザ | "3Dmol.js" モード（両方の版） | "Includes PyMOL™" モード（フル版） |
 |---|---|---|
 | Chrome・Edge（Windows・macOS・Linux・Android） | 111 以降 | 111 以降 |
 | Firefox（Windows・macOS・Linux・Android） | 121 以降 | 121 以降 |
@@ -97,21 +97,34 @@
 - **実機で確認済み**: Windows の Chrome、iPhone の Edge
 - **自動検証のみ**: Linux の Chrome（headless・ソフトウェア描画で両方のビューアを確認）
 - **要件上は動くはず（未確認）**: Android（Chrome・Firefox など）、macOS（Safari・Chrome など）、Windows の Edge・Firefox、iPhone の Safari、iPad
-- Heavy viewer が使えないブラウザやメモリの少ないスマホでは Light viewer で表示します。WebGL がないブラウザでは、鎖とリガンドの一覧を文字で表示します。
+- "Includes PyMOL™" モードが使えないブラウザやメモリの少ないスマホでは "3Dmol.js" モードで表示します。WebGL がないブラウザでは、鎖とリガンドの一覧を文字で表示します。
+
+## 改良点（研究者向け）
+
+フル版の "Includes PyMOL™" モードは、Open-Source PyMOL 3.2.0a（pymol-open-source のコミット edcda80f）を AgroDesign Studios が変更し、Pyodide 314.0.7 向けに WebAssembly でビルドしたものです。本家との違いは次のとおりです。
+
+- **入っていないもの**: TrueType のラベル用フォント 14 種のうち、Serif・Mono・Gentium の 10 種（9〜18 番。これらを指定したラベルは DejaVu Sans で描きます。Sans の 4 種は残しています）。Qt・プラグイン・HTTP/RPC サーバー・外部プログラム連携・デモのウィザードなど、ブラウザで動かない部分。メニューの 28 項目
+- **起動時の設定の違い**: `trilines`・`cgo_shader_ub_color` をオン、`defer_builds_mode` は表示中の状態だけを作る（グリッドでは本家どおり）、レイトレースは 1 スレッド
+- **ブラウザで動かすための変更**: WebGL1/WebGL2 向けのシェーダーの書き換えなど（パッチ 0001〜0005）
+- **ファイルを安全に読むための変更**: `.pse` セッションは許可リストで読み、pickle やスクリプトの形式は開きません。ムービーとウィザードはセッションから戻しません
+- **起動を速く、ダウンロードを小さく**: 不透明な表面の毎フレームの並べ替えをやめ、近傍リストの作り方を速くしたほか、Python のコンパイル済みファイルの同梱、numpy の遅延展開など。多くは結果を変えません。ビルドのたびに確かめているもの（タブに書いています）と、設計のときに手で確かめたものがあります。不透明な表面の変更では、表面の縁の数画素が変わることがあり、`transparency_global_sort 1` と `pick_surface 1` での動きも変わります。また、コンパイル済みの Python では、標準ライブラリの中のトレースバックの行にソースの文が出ません
+- **本家の修正の取り込み**: UTF-8 のバッファ修正（本家 #522）
+
+14 個のパッチの全文と、各変更の結果への影響（同じ・見た目が違うことがある・使えない など）は、フル版の HELP の「改良点」タブにあります。3Dmol.js 2.5.5 は改変せずに使っています。アプリがその周りに加えたもの（2 本指の移動など）は、どちらの版でも同じタブに挙げています。
 
 ## 引用
 
 このアプリを使った研究を発表するときは、使ったビューアを、それぞれの作者・会社が求める形で引用してください（引用文は英語の原文のまま）。
 
-- 3Dmol.js（Light viewer。フル版・ライト版とも）— 3Dmol.js の作者が求める論文:
+- 3Dmol.js（"3Dmol.js" モード。フル版・ライト版とも）— 3Dmol.js の作者が求める論文:
   Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322–1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
-- フル版の Heavy viewer：Built using PyMOL™. Schrödinger, LLC が求める形で、使った版を入れて:
+- フル版の "Includes PyMOL™" モード：Built using PyMOL™. Schrödinger, LLC が求める形で、使った版を入れて:
   The PyMOL Molecular Graphics System, Version 3.2, Schrödinger, LLC.
 
 ## ライセンス・帰属・商標
 
-- このアプリ自体は [MIT License](LICENSE)。同梱のオープンソースソフトウェアはそれぞれのライセンスに従い、名前・版・全文は [`NOTICE`](NOTICE) とアプリの「HELP」→「このアプリについて」にあります。
-- Includes PyMOL™.（PyMOL™ を含みます。）フル版の Heavy viewer は、AgroDesign Studios が Open-Source PyMOL のソースコードをそのライセンスのもとで変更・機能追加し、WebAssembly でブラウザ向けにビルドしたものです。Schrödinger, LLC が配布する PyMOL 製品とは別のものです。
+- このアプリ自体は [MIT License](LICENSE)。同梱のオープンソースソフトウェアはそれぞれのライセンスに従い、名前・版・全文は [`NOTICE`](NOTICE) とアプリの「HELP」→「ライセンス表記」にあります。
+- Includes PyMOL™.（PyMOL™ を含みます。）フル版の "Includes PyMOL™" モードは、AgroDesign Studios が Open-Source PyMOL のソースコードをそのライセンスのもとで変更・機能追加し、WebAssembly でブラウザ向けにビルドしたものです。Schrödinger, LLC が配布する PyMOL 製品とは別のものです。
 - Powered by 3Dmol.js（BSD 3-Clause License）。論文の引用は上の「引用」の節にあります。
 - サンプルは RCSB PDB のエントリ 25HN（[DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)）。PDB のデータは CC0 1.0 です。
 - バッジとスマホ・モニターの絵（[`images/`](images)）:
@@ -142,15 +155,15 @@ A protein structure viewer in **one HTML file**. Powered by 3Dmol.js. Includes P
 - **Send a structure by e-mail** — save the app with your structure inside and attach it. The recipient double-clicks it and sees the structure at once: no install, no structural-biology expertise.
 
 <p align="center">
-<img src="images/screenshot-phone-3dmol-en-framed.png" alt="25HN shown with the Light viewer (3Dmol.js) on a phone" width="260">
-<img src="images/screenshot-phone-pymol-en-framed.png" alt="25HN shown with the full edition's Heavy viewer on a phone" width="260">
+<img src="images/screenshot-phone-3dmol-en-framed.png" alt="25HN shown in &quot;3Dmol.js&quot; mode on a phone" width="260">
+<img src="images/screenshot-phone-pymol-en-framed.png" alt="25HN shown in the full edition's &quot;Includes PyMOL™&quot; mode on a phone" width="260">
 </p>
-<p align="center"><sub>The sample 25HN on a phone. Left: the Light viewer (3Dmol.js). Right: the full edition's Heavy viewer (Includes PyMOL™.)</sub></p>
+<p align="center"><sub>The sample 25HN on a phone. Left: "3Dmol.js" mode. Right: the full edition's "Includes PyMOL™" mode.</sub></p>
 
 <p align="center">
-<img src="images/screenshot-pc-monitor-en.png" alt="25HN on a PC screen: the Light viewer left of the slanted line, the Heavy viewer right of it" width="524">
+<img src="images/screenshot-pc-monitor-en.png" alt="25HN on a PC screen: &quot;3Dmol.js&quot; mode left of the slanted line, &quot;Includes PyMOL™&quot; mode right of it" width="524">
 </p>
-<p align="center"><sub>On a PC too. Left: the Light viewer (3Dmol.js). Right: the Heavy viewer (Includes PyMOL™.) One click switches between them.</sub></p>
+<p align="center"><sub>On a PC too. Left: "3Dmol.js" mode. Right: "Includes PyMOL™" mode. One click switches between them.</sub></p>
 
 ## Download
 
@@ -158,8 +171,8 @@ From [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases
 
 | File | Size | Contents |
 |---|---|---|
-| `AgroDesign-ProteinViewerPack-v<version>_full_<date>.html` (full edition) | about 21 MB | The Light viewer (3Dmol.js) and the Heavy viewer (Includes PyMOL™.): the Heavy viewer has menus, a command line, ray-traced images and .pse sessions |
-| `AgroDesign-ProteinViewerPack-v<version>_light_<date>.html` (light edition) | about 1.2 MB | The Light viewer (3Dmol.js) only |
+| `AgroDesign-ProteinViewerPack-v<version>_full_<date>.html` (full edition) | about 21 MB | "3Dmol.js" mode and "Includes PyMOL™" mode: "Includes PyMOL™" mode has menus, a command line, ray-traced images and .pse sessions |
+| `AgroDesign-ProteinViewerPack-v<version>_light_<date>.html` (light edition) | about 1.2 MB | "3Dmol.js" mode only |
 
 The downloaded files are empty. Open a structure file with "Open file/PDB…" (PDB, mmCIF, SDF/MOL, MOL2, XYZ; .pse in the full edition), enter a PDB ID, or drop a file on the page.
 
@@ -176,43 +189,43 @@ Mail services often cap attachments at about 20-25 MB, so the full edition (abou
 ## How to use
 
 - **Turn, zoom, move**: mouse left, right and middle drag; on a touch screen see "On a phone" below.
-- **Switch viewer (full edition)**: the control at the top right (on a phone, "Engine" in the bottom bar) switches between the Light viewer and the Heavy viewer. The Heavy viewer takes a while to start and uses 0.5-1.5 GB of memory.
+- **Switch mode (full edition)**: the control at the top right (on a phone, "Mode" in the bottom bar) switches between "3Dmol.js" mode and "Includes PyMOL™" mode. "Includes PyMOL™" mode takes a while to start and uses 0.5-1.5 GB of memory.
 - **Phone layout**: a narrow screen gets a one-screen layout with a bottom bar. "Phone view" / "PC" at the top switches.
 - **Language**: opens in Japanese; "English" / "日本語" at the top switches.
-- **Help**: "About this app", "How to use", "Latest version".
+- **Help**: "How to use", "Latest version", "Licences", "Code changes".
 
 ## Features
 
-- The Light viewer (3Dmol.js): ribbon, stick, ball and stick, line, surface; colouring; measuring; pen and laser pointer; depth cueing, slicing, orthographic view
-- The full edition's Heavy viewer (Includes PyMOL™.): menus and command line, .pse sessions, ray-traced images
+- "3Dmol.js" mode: ribbon, stick, ball and stick, line, surface; colouring; measuring; pen and laser pointer; depth cueing, slicing, orthographic view
+- The full edition's "Includes PyMOL™" mode: menus and command line, .pse sessions, ray-traced images
 - Save: screenshots (PNG), ray-traced images, structure files, molecule files of a selection, .pse, VRML (.wrl), HTMLapp
 - The files you open are sent nowhere. The app goes online only to load from the PDB (files.rcsb.org), when you press "Compare with the latest on GitHub" (api.github.com), or when you follow a link out of the file.
 
 ## On a phone
 
 <p align="center">
-<img src="images/gesture-pinch-en.webp" alt="Two fingers spread to zoom in and pinch to zoom out (Light viewer)" width="172">
+<img src="images/gesture-pinch-en.webp" alt="Two fingers spread to zoom in and pinch to zoom out (&quot;3Dmol.js&quot; mode)" width="172">
 <img src="images/gesture-pan-en.webp" alt="Two fingers dragged move the structure sideways" width="172">
-<img src="images/gesture-rotate-en.webp" alt="One finger dragged turns the structure (Light viewer)" width="172">
+<img src="images/gesture-rotate-en.webp" alt="One finger dragged turns the structure (&quot;3Dmol.js&quot; mode)" width="172">
 </p>
 <p align="center"><sub>Left: pinch to zoom. Middle: drag with two fingers to move. Right: drag with one finger to turn. The grey circles show where the fingers are.</sub></p>
 
 - **Drag with one finger**: turn
 - **Spread or pinch two fingers**: zoom in or out
-- **Drag with two fingers**: move up, down and sideways (the same in the Light viewer and the Heavy viewer)
-- **The original 3Dmol.js controls**: the Light viewer can use 3Dmol.js's own controls instead (two fingers only zoom, three fingers move): "Use the original 3Dmol.js controls" under "View" in the bottom bar or in Help > "How to use". This browser remembers the choice.
-- **"View" in the bottom bar**: buttons to zoom in and out (and, in the Heavy viewer, to show everything)
-- **"Engine" in the bottom bar**: switch between the Light viewer and the Heavy viewer
+- **Drag with two fingers**: move up, down and sideways (the same in "3Dmol.js" mode and "Includes PyMOL™" mode)
+- **The original 3Dmol.js controls**: "3Dmol.js" mode can use 3Dmol.js's own controls instead (two fingers only zoom, three fingers move): "Use the original 3Dmol.js controls" under "View" in the bottom bar or in Help > "How to use". This browser remembers the choice.
+- **"View" in the bottom bar**: buttons to zoom in and out (and, in "Includes PyMOL™" mode, to show everything)
+- **"Mode" in the bottom bar**: switch between "3Dmol.js" mode and "Includes PyMOL™" mode
 
 ## On a PC (one switch changes the viewer)
 
-<img src="images/screenshot-pc-3dmol-en.png" alt="25HN shown with the Light viewer on a PC" width="49%"> <img src="images/screenshot-pc-pymol-en.png" alt="25HN shown with the full edition's Heavy viewer on a PC" width="49%">
+<img src="images/screenshot-pc-3dmol-en.png" alt="25HN shown in &quot;3Dmol.js&quot; mode on a PC" width="49%"> <img src="images/screenshot-pc-pymol-en.png" alt="25HN shown in the full edition's &quot;Includes PyMOL™&quot; mode on a PC" width="49%">
 
-The switch at the top right changes between the Light viewer (left) and the Heavy viewer (right).
+The switch at the top right changes between "3Dmol.js" mode (left) and "Includes PyMOL™" mode (right).
 
 ## Supported environments
 
-| Browser | Light viewer (both editions) | Heavy viewer (full edition) |
+| Browser | "3Dmol.js" mode (both editions) | "Includes PyMOL™" mode (full edition) |
 |---|---|---|
 | Chrome, Edge (Windows, macOS, Linux, Android) | 111 or later | 111 or later |
 | Firefox (Windows, macOS, Linux, Android) | 121 or later | 121 or later |
@@ -222,21 +235,34 @@ The switch at the top right changes between the Light viewer (left) and the Heav
 - **Tried on real devices**: Chrome on Windows, Edge on an iPhone
 - **Automated check only**: Chrome on Linux (headless, software rendering, both viewers)
 - **Should work from the requirements (not yet tried)**: Android (Chrome, Firefox and others), macOS (Safari, Chrome and others), Edge and Firefox on Windows, Safari on an iPhone, an iPad
-- Where the Heavy viewer cannot run (an older browser, a phone short of memory), the Light viewer shows the structure. Without WebGL, the app lists the chains and ligands in words.
+- Where "Includes PyMOL™" mode cannot run (an older browser, a phone short of memory), "3Dmol.js" mode shows the structure. Without WebGL, the app lists the chains and ligands in words.
+
+## Code changes (for researchers)
+
+The full edition's "Includes PyMOL™" mode is Open-Source PyMOL 3.2.0a (pymol-open-source commit edcda80f), modified by AgroDesign Studios and compiled to WebAssembly for Pyodide 314.0.7. It differs from upstream as follows.
+
+- **Left out**: ten of the 14 TrueType label fonts, Serif, Mono and Gentium (ids 9–18; labels set to them are drawn in DejaVu Sans, and the four Sans faces stay); Qt, plugins, the HTTP/RPC servers, external-program bindings, the demo wizards and the other parts that cannot run in a browser; 28 menu entries
+- **Start-up settings that differ**: `trilines` and `cgo_shader_ub_color` on, `defer_builds_mode` builds only the state on screen (as upstream in grid views), one ray-tracing thread
+- **Changes to run in a browser**: shaders rewritten for WebGL1/WebGL2 and related fixes (patches 0001-0005)
+- **Safer reading of files**: `.pse` sessions are read through an allow-list, pickle and script formats are refused, and a session's movie and wizard are not restored
+- **Faster start-up, smaller download**: opaque surfaces are no longer re-sorted every frame, faster neighbour lists, precompiled Python, numpy unpacked on first use, among others. Most leave results unchanged; some are checked at every build (the tab marks them), others were checked by hand during the design work. The opaque-surface change can alter a few pixels at surface edges and changes how `transparency_global_sort 1` and `pick_surface 1` behave; with precompiled Python a traceback line inside the standard library shows no source text
+- **Fixes taken from upstream**: the UTF-8 buffer fix (upstream #522)
+
+In the full edition, Help > "Code changes" has all 14 patches in full and each change's effect on results (unchanged, the picture can differ, not available, ...). 3Dmol.js 2.5.5 is used unmodified; in both editions the same tab lists what the app adds around it (two-finger move and others).
 
 ## Citation
 
 If you publish work that used this app, please cite the viewer you used, in the form its makers ask for (the citations are given word for word).
 
-- 3Dmol.js (the Light viewer, in both editions): the paper the 3Dmol.js authors ask users to cite:
+- 3Dmol.js ("3Dmol.js" mode, in both editions): the paper the 3Dmol.js authors ask users to cite:
   Nicholas Rego and David Koes, "3Dmol.js: molecular visualization with WebGL", *Bioinformatics* 31(8):1322-1324 (2015), [doi:10.1093/bioinformatics/btu829](https://doi.org/10.1093/bioinformatics/btu829)
-- The full edition's Heavy viewer: Built using PyMOL™. In the form Schrödinger, LLC asks for, with the version used:
+- The full edition's "Includes PyMOL™" mode: Built using PyMOL™. In the form Schrödinger, LLC asks for, with the version used:
   The PyMOL Molecular Graphics System, Version 3.2, Schrödinger, LLC.
 
 ## License, attribution and trademarks
 
-- This app is under the [MIT License](LICENSE). The open-source software it carries keeps its own licence; names, versions and full texts are in [`NOTICE`](NOTICE) and in the app under "Help" → "About this app".
-- Includes PyMOL™. The full edition's Heavy viewer is built from Open-Source PyMOL source code, which AgroDesign Studios modified and extended under its license and compiled for the browser with WebAssembly. It is distinct from the PyMOL products distributed by Schrödinger, LLC.
+- This app is under the [MIT License](LICENSE). The open-source software it carries keeps its own licence; names, versions and full texts are in [`NOTICE`](NOTICE) and in the app under "Help" → "Licences".
+- Includes PyMOL™. The full edition's "Includes PyMOL™" mode is built from Open-Source PyMOL source code, which AgroDesign Studios modified and extended under its license and compiled for the browser with WebAssembly. It is distinct from the PyMOL products distributed by Schrödinger, LLC.
 - Powered by 3Dmol.js (BSD 3-Clause License). Its paper is under "Citation" above.
 - The sample is PDB entry 25HN from the RCSB PDB ([DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)). PDB data are CC0 1.0.
 - Badges, phone and monitor pictures ([`images/`](images)):
