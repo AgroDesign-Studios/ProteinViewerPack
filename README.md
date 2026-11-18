@@ -42,8 +42,8 @@
 
 | ファイル | 大きさ | 中身 |
 |---|---|---|
-| `AgroDesign-ProteinViewerPack-v<版>_full_<日付>.html`（フル版） | 約 20 MB | "3Dmol.js" モードと "Includes PyMOL™" モード: "Includes PyMOL™" モードはメニュー・コマンドライン・レイトレース画像・.pse セッション |
-| `AgroDesign-ProteinViewerPack-v<版>_light_<日付>.html`（ライト版） | 約 1.4 MB | "3Dmol.js" モードのみ |
+| `AgroDesign-ProteinViewerPack-v<版>_full_<日付>.html`（フル版） | 約 19 MB | "3Dmol.js" モードと "Includes PyMOL™" モード: "Includes PyMOL™" モードはメニュー・コマンドライン・レイトレース画像・.pse セッション |
+| `AgroDesign-ProteinViewerPack-v<版>_light_<日付>.html`（ライト版） | 約 1.2 MB | "3Dmol.js" モードのみ |
 
 ダウンロードしたファイルは空です。「ファイル/PDBを開く…」で構造ファイル（PDB・mmCIF・SDF/MOL・MOL2・XYZ、フル版は .pse も）を開くか、PDB ID を入れるか、ファイルをページにドロップします。
 
@@ -55,7 +55,7 @@
 2. 「エクスポート…」→「HTMLappとして出力（このアプリをコピー）」で、「版」（「ライト版」か、フル版にあたる「通常版」）を選んで保存
 3. 保存した .html をメールに添付
 
-メールの添付は 20〜25 MB 程度までのことが多く、フル版（約 20 MB＋構造）は届かないことがあります。メールにはライト版（約 1.4 MB＋構造）を使うか、フル版はファイル共有サービスで渡してください。
+メールの添付は 20〜25 MB 程度までのことが多く、フル版（約 19 MB＋構造）は届かないことがあります。メールにはライト版（約 1.2 MB＋構造）を使うか、フル版はファイル共有サービスで渡してください。
 ※注意：iPhone/iPadの場合は、iOSの仕様によりHTMLファイルをそのまま開くことができません。iOSアプリでは、Microsoft EdgeのみHTMLファイルを直接開けることを確認しております。（添付ファイルをクリック→右上(･･･）→共有→EDGEを選択→EDGEで開く）
 
 
@@ -188,8 +188,8 @@ From [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases
 
 | File | Size | Contents |
 |---|---|---|
-| `AgroDesign-ProteinViewerPack-v<version>_full_<date>.html` (full edition) | about 20 MB | "3Dmol.js" mode and "Includes PyMOL™" mode: "Includes PyMOL™" mode has menus, a command line, ray-traced images and .pse sessions |
-| `AgroDesign-ProteinViewerPack-v<version>_light_<date>.html` (light edition) | about 1.4 MB | "3Dmol.js" mode only |
+| `AgroDesign-ProteinViewerPack-v<version>_full_<date>.html` (full edition) | about 19 MB | "3Dmol.js" mode and "Includes PyMOL™" mode: "Includes PyMOL™" mode has menus, a command line, ray-traced images and .pse sessions |
+| `AgroDesign-ProteinViewerPack-v<version>_light_<date>.html` (light edition) | about 1.2 MB | "3Dmol.js" mode only |
 
 The downloaded files are empty. Open a structure file with "Open file/PDB…" (PDB, mmCIF, SDF/MOL, MOL2, XYZ; .pse in the full edition), enter a PDB ID, or drop a file on the page.
 
@@ -201,7 +201,7 @@ The downloaded files are empty. Open a structure file with "Open file/PDB…" (P
 2. "Export…" → "Save as HTMLapp (a copy of this app)", choose the edition and save
 3. Attach the saved .html to an e-mail
 
-Mail services often cap attachments at about 20-25 MB, so the full edition (about 20 MB plus the structure) may not get through. Send the light edition (about 1.4 MB plus the structure), or share the full edition through a file-sharing service.
+Mail services often cap attachments at about 20-25 MB, so the full edition (about 19 MB plus the structure) may not get through. Send the light edition (about 1.2 MB plus the structure), or share the full edition through a file-sharing service.
 
 ## How to use
 
@@ -297,6 +297,10 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
 
+### v1.0.1（2026-11-19）
+- アプリを本番用の設定で組み直しました。使い方と見た目は同じで、ファイルが小さくなりました（ライト版は約 1.4 MB → 約 1.2 MB）。v1.0.0 で入っていた、開発用の情報（作成に使ったコンピュータ内のファイルの場所）も入らなくなりました。
+- v1.0.0 をお使いの方は、HELP の「最新版ダウンロード」から、今のデータを引き継いだ v1.0.1 を準備できます。
+
 ### v1.0.0（2026-11-19）
 - 最初の版です。
 
@@ -305,6 +309,10 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## Release notes
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
+
+### v1.0.1 (2026-11-19)
+- The app is now built with production settings. It works and looks the same, but the files are smaller (the light edition goes from about 1.4 MB to about 1.2 MB). The development details v1.0.0 carried (where its files sat on the computer that built it) are gone.
+- If you use v1.0.0, HELP > "Latest version" can prepare v1.0.1 with your current data carried over.
 
 ### v1.0.0 (2026-11-19)
 - First version.
