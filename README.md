@@ -147,6 +147,11 @@
 - 製作: 株式会社アグロデザイン・スタジオ（AgroDesign Studios）、西ヶ谷有輝（NISHIGAYA Yuki）。Copyright (c) 2026 AgroDesign Studios
 - PyMOL は Schrödinger, LLC の商標です（原文はこの README の末尾）。
 
+## 製作
+
+- 株式会社アグロデザイン・スタジオ（AgroDesign Studios）: <https://www.agrodesign.co.jp>
+- タンパク質構造解析サービス AgroBox®: <https://www.agrobox.jp/>
+
 ---
 
 # AgroDesign Protein Viewer Pack (HTMLapp) (English)
@@ -159,11 +164,12 @@
 <img src="images/badges/linux.svg" alt="Linux" height="28">
 </p>
 
-A protein structure viewer in **one HTML file**. Includes 3Dmol.js. Includes PyMOL™.
+A browser app that puts **protein structure data and several viewers in one file**. Includes 3Dmol.js. Includes PyMOL™.
 
-- **One HTML file** — double-click it and it opens in your browser. Nothing to install, no account, works offline.
+- **Runs from one HTML file** — open the file and it runs in your web browser. No installation, no account.
+- **Works offline** — it is a browser app, yet it works fully with no network connection.
 - **On phones and PCs** — the same file runs in the browser on Windows, macOS, Linux, iPhone / iPad (iOS / iPadOS) and Android™.
-- **Send a structure by e-mail** — save the app with your structure inside and attach it. The recipient double-clicks it and sees the structure at once: no install, no structural-biology expertise.
+- **Send the app and the structure by e-mail, as one file** — save the app with your structure inside and attach it. The recipient double-clicks it and sees the structure at once: no install, no structural-biology expertise.
 
 <p align="center">
 <img src="images/screenshot-phone-3dmol-en-framed.png" alt="25HN shown in &quot;3Dmol.js&quot; mode on a phone" width="260">
@@ -202,6 +208,7 @@ The downloaded files are empty. Open a structure file with "Open file/PDB…" (P
 3. Attach the saved .html to an e-mail
 
 Mail services often cap attachments at about 20-25 MB, so the full edition (about 19 MB plus the structure) may not get through. Send the light edition (about 1.2 MB plus the structure), or share the full edition through a file-sharing service.
+Note: on iPhone / iPad, iOS does not open an HTML file as it is. Of the iOS apps, we have confirmed that only Microsoft Edge opens one directly (tap the attachment → (…) at the top right → Share → choose Edge → open in Edge).
 
 ## How to use
 
@@ -290,6 +297,11 @@ If you publish work that used this app, please cite the viewer you used, in the 
 - Trademarks: Android and Chrome are trademarks of Google LLC. iPhone, iPad, iPadOS, macOS and Safari are trademarks of Apple Inc., registered in the U.S. and other countries and regions. IOS is a trademark or registered trademark of Cisco in the U.S. and other countries and is used under license. Microsoft, Microsoft Edge and Windows are trademarks of the Microsoft group of companies. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. Firefox is a trademark of the Mozilla Foundation in the U.S. and other countries. This app is not officially associated with any of these companies or organisations, Mozilla included; the names are used only to say where the app runs.
 - Made by AgroDesign Studios, Inc. (NISHIGAYA Yuki). Copyright (c) 2026 AgroDesign Studios
 - The PyMOL trademark notice is at the end of this README.
+
+## Made by
+
+- AgroDesign Studios, Inc.: <https://www.agrodesign.co.jp>
+- AgroBox®, a protein structure analysis service: <https://www.agrobox.jp/>
 
 ---
 
