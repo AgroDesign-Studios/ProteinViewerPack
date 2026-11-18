@@ -292,7 +292,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
 
-### v1.0.0（2026-11-16）
+### v1.0.0（2026-11-19）
 - 最初の版です。
 
 ---
@@ -301,7 +301,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
 
-### v1.0.0 (2026-11-16)
+### v1.0.0 (2026-11-19)
 - First version.
 
 ---
