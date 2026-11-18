@@ -8,7 +8,7 @@
 <img src="images/badges/linux.svg" alt="Linux" height="28">
 </p>
 
-タンパク質の立体構造を見る、**HTML ファイル 1 つ**のアプリです。Powered by 3Dmol.js. Includes PyMOL™.
+タンパク質の立体構造を見る、**HTML ファイル 1 つ**のアプリです。Includes 3Dmol.js. Includes PyMOL™.
 
 - **HTML ファイル 1 つで動く** — ダブルクリックするだけ。インストールもアカウントも不要で、オフラインでも動きます。
 - **スマホでも PC でも** — 同じファイルが Windows・macOS・Linux・iPhone / iPad（iOS / iPadOS）・Android™ のブラウザで動きます。
@@ -27,14 +27,20 @@
 
 *English follows below.*
 
+## 稼働サンプル
+
+- **ブラウザで開く（稼働サンプル）**: <https://agrodesign-studios.github.io/ProteinViewerPack/>
+
+開くと、PDB エントリ [25HN](https://www.rcsb.org/structure/25HN)（Nitrosospira multiformis の Rubisco のクライオ電子顕微鏡構造）を入れたフル版が "3Dmol.js" モードで表示されます。右上のスイッチ（スマホでは下部バーの「モード」）で "Includes PyMOL™" モードに切り替えられます。スマホでもそのまま試せます。最初に約 21 MB を読み込みます。ほかの構造は「ファイル/PDBを開く…」（スマホでは下部バーの「開く」）で開けます。
+
 ## ダウンロード
 
 [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases/latest) からどちらか 1 つをダウンロードし、ダブルクリックで開きます。
 
 | ファイル | 大きさ | 中身 |
 |---|---|---|
-| `AgroDesign-ProteinViewerPack-v<版>_full_<日付>.html`（フル版） | 約 21 MB | "3Dmol.js" モードと "Includes PyMOL™" モード: "Includes PyMOL™" モードはメニュー・コマンドライン・レイトレース画像・.pse セッション |
-| `AgroDesign-ProteinViewerPack-v<版>_light_<日付>.html`（ライト版） | 約 1.2 MB | "3Dmol.js" モードのみ |
+| `AgroDesign-ProteinViewerPack-v<版>_full_<日付>.html`（フル版） | 約 20 MB | "3Dmol.js" モードと "Includes PyMOL™" モード: "Includes PyMOL™" モードはメニュー・コマンドライン・レイトレース画像・.pse セッション |
+| `AgroDesign-ProteinViewerPack-v<版>_light_<日付>.html`（ライト版） | 約 1.4 MB | "3Dmol.js" モードのみ |
 
 ダウンロードしたファイルは空です。「ファイル/PDBを開く…」で構造ファイル（PDB・mmCIF・SDF/MOL・MOL2・XYZ、フル版は .pse も）を開くか、PDB ID を入れるか、ファイルをページにドロップします。
 
@@ -46,7 +52,7 @@
 2. 「エクスポート…」→「HTMLappとして出力（このアプリをコピー）」で、「版」（「ライト版」か、フル版にあたる「通常版」）を選んで保存
 3. 保存した .html をメールに添付
 
-メールの添付は 20〜25 MB 程度までのことが多く、フル版（約 21 MB＋構造）は届かないことがあります。メールにはライト版（約 1.2 MB＋構造）を使うか、フル版はファイル共有サービスで渡してください。
+メールの添付は 20〜25 MB 程度までのことが多く、フル版（約 20 MB＋構造）は届かないことがあります。メールにはライト版（約 1.4 MB＋構造）を使うか、フル版はファイル共有サービスで渡してください。
 
 ## 使い方
 
@@ -125,7 +131,7 @@
 
 - このアプリ自体は [MIT License](LICENSE)。同梱のオープンソースソフトウェアはそれぞれのライセンスに従い、名前・版・全文は [`NOTICE`](NOTICE) とアプリの「HELP」→「ライセンス表記」にあります。
 - Includes PyMOL™.（PyMOL™ を含みます。）フル版の "Includes PyMOL™" モードは、AgroDesign Studios が Open-Source PyMOL のソースコードをそのライセンスのもとで変更・機能追加し、WebAssembly でブラウザ向けにビルドしたものです。Schrödinger, LLC が配布する PyMOL 製品とは別のものです。
-- Powered by 3Dmol.js（BSD 3-Clause License）。論文の引用は上の「引用」の節にあります。
+- Includes 3Dmol.js（BSD 3-Clause License）。論文の引用は上の「引用」の節にあります。
 - サンプルは RCSB PDB のエントリ 25HN（[DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)）。PDB のデータは CC0 1.0 です。
 - バッジとスマホ・モニターの絵（[`images/`](images)）:
   - Android のロボットは Google の作品を複製・改変したもので、CC BY 3.0 の条件に従って使用しています（原文: "The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the [Creative Commons](https://creativecommons.org/licenses/by/3.0/) 3.0 Attribution License."）。
@@ -148,7 +154,7 @@
 <img src="images/badges/linux.svg" alt="Linux" height="28">
 </p>
 
-A protein structure viewer in **one HTML file**. Powered by 3Dmol.js. Includes PyMOL™.
+A protein structure viewer in **one HTML file**. Includes 3Dmol.js. Includes PyMOL™.
 
 - **One HTML file** — double-click it and it opens in your browser. Nothing to install, no account, works offline.
 - **On phones and PCs** — the same file runs in the browser on Windows, macOS, Linux, iPhone / iPad (iOS / iPadOS) and Android™.
@@ -165,14 +171,20 @@ A protein structure viewer in **one HTML file**. Powered by 3Dmol.js. Includes P
 </p>
 <p align="center"><sub>On a PC too. Left: "3Dmol.js" mode. Right: "Includes PyMOL™" mode. One click switches between them.</sub></p>
 
+## Live sample
+
+- **Open in the browser (live sample)**: <https://agrodesign-studios.github.io/ProteinViewerPack/en/>
+
+It opens the full edition with PDB entry [25HN](https://www.rcsb.org/structure/25HN) (a cryo-EM structure of Rubisco from Nitrosospira multiformis) in "3Dmol.js" mode. The switch at the top right (on a phone, "Mode" in the bottom bar) changes to "Includes PyMOL™" mode. It works on a phone as well. The page loads about 21 MB the first time. Open other structures with "Open file/PDB…" (on a phone, "Open" in the bottom bar).
+
 ## Download
 
 From [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases/latest), download one file and double-click it.
 
 | File | Size | Contents |
 |---|---|---|
-| `AgroDesign-ProteinViewerPack-v<version>_full_<date>.html` (full edition) | about 21 MB | "3Dmol.js" mode and "Includes PyMOL™" mode: "Includes PyMOL™" mode has menus, a command line, ray-traced images and .pse sessions |
-| `AgroDesign-ProteinViewerPack-v<version>_light_<date>.html` (light edition) | about 1.2 MB | "3Dmol.js" mode only |
+| `AgroDesign-ProteinViewerPack-v<version>_full_<date>.html` (full edition) | about 20 MB | "3Dmol.js" mode and "Includes PyMOL™" mode: "Includes PyMOL™" mode has menus, a command line, ray-traced images and .pse sessions |
+| `AgroDesign-ProteinViewerPack-v<version>_light_<date>.html` (light edition) | about 1.4 MB | "3Dmol.js" mode only |
 
 The downloaded files are empty. Open a structure file with "Open file/PDB…" (PDB, mmCIF, SDF/MOL, MOL2, XYZ; .pse in the full edition), enter a PDB ID, or drop a file on the page.
 
@@ -184,7 +196,7 @@ The downloaded files are empty. Open a structure file with "Open file/PDB…" (P
 2. "Export…" → "Save as HTMLapp (a copy of this app)", choose the edition and save
 3. Attach the saved .html to an e-mail
 
-Mail services often cap attachments at about 20-25 MB, so the full edition (about 21 MB plus the structure) may not get through. Send the light edition (about 1.2 MB plus the structure), or share the full edition through a file-sharing service.
+Mail services often cap attachments at about 20-25 MB, so the full edition (about 20 MB plus the structure) may not get through. Send the light edition (about 1.4 MB plus the structure), or share the full edition through a file-sharing service.
 
 ## How to use
 
@@ -237,7 +249,7 @@ The switch at the top right changes between "3Dmol.js" mode (left) and "Includes
 - **Should work from the requirements (not yet tried)**: Android (Chrome, Firefox and others), macOS (Safari, Chrome and others), Edge and Firefox on Windows, Safari on an iPhone, an iPad
 - Where "Includes PyMOL™" mode cannot run (an older browser, a phone short of memory), "3Dmol.js" mode shows the structure. Without WebGL, the app lists the chains and ligands in words.
 
-## Code changes (for researchers)
+## Code changes
 
 The full edition's "Includes PyMOL™" mode is Open-Source PyMOL 3.2.0a (pymol-open-source commit edcda80f), modified by AgroDesign Studios and compiled to WebAssembly for Pyodide 314.0.7. It differs from upstream as follows.
 
@@ -263,7 +275,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 - This app is under the [MIT License](LICENSE). The open-source software it carries keeps its own licence; names, versions and full texts are in [`NOTICE`](NOTICE) and in the app under "Help" → "Licences".
 - Includes PyMOL™. The full edition's "Includes PyMOL™" mode is built from Open-Source PyMOL source code, which AgroDesign Studios modified and extended under its license and compiled for the browser with WebAssembly. It is distinct from the PyMOL products distributed by Schrödinger, LLC.
-- Powered by 3Dmol.js (BSD 3-Clause License). Its paper is under "Citation" above.
+- Includes 3Dmol.js (BSD 3-Clause License). Its paper is under "Citation" above.
 - The sample is PDB entry 25HN from the RCSB PDB ([DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)). PDB data are CC0 1.0.
 - Badges, phone and monitor pictures ([`images/`](images)):
   - The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the [Creative Commons](https://creativecommons.org/licenses/by/3.0/) 3.0 Attribution License.
