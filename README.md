@@ -166,10 +166,10 @@
 
 A browser app that puts **protein structure data and several viewers in one file**. Includes 3Dmol.js. Includes PyMOL™.
 
-- **Runs from one HTML file** — open the file and it runs in your web browser. No installation, no account.
-- **Works offline** — it is a browser app, yet it works fully with no network connection.
+- **Runs from one HTML file** — an app that runs in your web browser, with no installation and no account.
+- **Works offline** — it is a browser app, yet it works with no network connection.
 - **On phones and PCs** — the same file runs in the browser on Windows, macOS, Linux, iPhone / iPad (iOS / iPadOS) and Android™.
-- **Send the app and the structure by e-mail, as one file** — save the app with your structure inside and attach it. The recipient double-clicks it and sees the structure at once: no install, no structural-biology expertise.
+- **Send the app and the structure by e-mail, as one file** — save the app with your structure inside and attach it, and the recipient sees the structure at once.
 
 <p align="center">
 <img src="images/screenshot-phone-3dmol-en-framed.png" alt="25HN shown in &quot;3Dmol.js&quot; mode on a phone" width="260">
@@ -295,7 +295,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
   - The phone outline on the iOS / iPadOS badge and the phone and the monitor around the screenshots were drawn for this repository and depict no particular product. The other systems and the browsers are shown by name only.
   - The animations under "On a phone" are recordings of this app's own screen, with circles drawn where the fingers are.
 - Trademarks: Android and Chrome are trademarks of Google LLC. iPhone, iPad, iPadOS, macOS and Safari are trademarks of Apple Inc., registered in the U.S. and other countries and regions. IOS is a trademark or registered trademark of Cisco in the U.S. and other countries and is used under license. Microsoft, Microsoft Edge and Windows are trademarks of the Microsoft group of companies. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. Firefox is a trademark of the Mozilla Foundation in the U.S. and other countries. This app is not officially associated with any of these companies or organisations, Mozilla included; the names are used only to say where the app runs.
-- Made by AgroDesign Studios, Inc. (NISHIGAYA Yuki). Copyright (c) 2026 AgroDesign Studios
+- Made by AgroDesign Studios (NISHIGAYA Yuki). Copyright (c) 2026 AgroDesign Studios
 - The PyMOL trademark notice is at the end of this README.
 
 ## Made by
@@ -309,6 +309,11 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
 
+### v1.0.2（2026-11-19）
+- HELP の「使い方」の先頭にも、「最新版ダウンロード」「ライセンス表記」と同じく、アプリ名・使用中の版・製作会社・GitHub を出すようにしました。
+- HELP に、製作会社のサイトと、タンパク質構造解析サービス AgroBox® へのリンクを足しました。
+- エクスポートの「HTMLappとして出力」が、マウスを重ねると濃い色になるようにしました。
+
 ### v1.0.1（2026-11-19）
 - アプリを本番用の設定で組み直しました。使い方と見た目は同じで、ファイルが小さくなりました（ライト版は約 1.4 MB → 約 1.2 MB）。v1.0.0 で入っていた、開発用の情報（作成に使ったコンピュータ内のファイルの場所）も入らなくなりました。
 - v1.0.0 をお使いの方は、HELP の「最新版ダウンロード」から、今のデータを引き継いだ v1.0.1 を準備できます。
@@ -321,6 +326,11 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## Release notes
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
+
+### v1.0.2 (2026-11-19)
+- HELP's "How to use" now opens with the app's name, version in use, company and GitHub, as "Latest version" and "Licences" do.
+- HELP links to the company website and to AgroBox®, a protein structure analysis service.
+- In the export dialog, "Save as HTMLapp (a copy of this app)" now darkens under the pointer.
 
 ### v1.0.1 (2026-11-19)
 - The app is now built with production settings. It works and looks the same, but the files are smaller (the light edition goes from about 1.4 MB to about 1.2 MB). The development details v1.0.0 carried (where its files sat on the computer that built it) are gone.
