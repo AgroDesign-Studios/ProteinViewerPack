@@ -309,6 +309,11 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
 
+### v1.0.4（2026-11-19）
+- スマホの "Includes PyMOL™" モード: PyMOL のオブジェクト一覧の代わりに、分子の右上の「オブジェクト」から、アプリの一覧を開くようにしました。表示のスイッチと、名前を押すと表示の種類・色・ラベル・視点・削除が使えます。測定中は、距離・角度・二面角と「最後を消す」「終了」のカードが出ます。
+- パソコンの "3Dmol.js" モード: 分子の上のメニューを 1 段にしました。スタイル・表示・表面・奥行き・描画は分子の上に重なって開くので、分子の画面は小さくなりません。
+- パソコンの "Includes PyMOL™" モード: マウス欄のボタンの表をなくし、メニュー行の右端の「🖱 マウス操作」で、マウスの操作を言葉で一覧できるようにしました。
+
 ### v1.0.3（2026-11-19）
 - 初めて開いたときに、モードの切り替えとエクスポート（アプリのダウンロード）の場所を吹き出しで案内するようにしました。画面のどこかを押すと消えます。
 - PDB から開いた構造は、構造名の前に PDB ID を出し、押すと RCSB PDB のページを開くようにしました。
@@ -333,6 +338,11 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## Release notes
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
+
+### v1.0.4 (2026-11-19)
+- Phone, "Includes PyMOL™" mode: instead of PyMOL's object list, "Objects" at the top right of the view opens the app's own list: a switch per object, and, by its name, representations, colour, labels, view and delete. While measuring, a card offers distances, angles and dihedrals, "Delete last" and "Done".
+- Computer, "3Dmol.js" mode: the menu above the view is one row; Style, Show, Surface, Depth and Draw open over the view, so the view keeps its size.
+- Computer, "Includes PyMOL™" mode: the mouse box's grid of buttons is gone; "🖱 Mouse controls" at the right of the menu row lists the mouse actions in words.
 
 ### v1.0.3 (2026-11-19)
 - On first opening, speech bubbles show where the mode switch and Export (downloading the app) are; a press anywhere closes them.
