@@ -309,6 +309,13 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
 
+### v1.0.3（2026-11-19）
+- 初めて開いたときに、モードの切り替えとエクスポート（アプリのダウンロード）の場所を吹き出しで案内するようにしました。画面のどこかを押すと消えます。
+- PDB から開いた構造は、構造名の前に PDB ID を出し、押すと RCSB PDB のページを開くようにしました。
+- "Includes PyMOL™" モードの「創薬表示」のあとに出る説明に「詳しく」と「×」を付け、閉じられるようにしました。
+- "Includes PyMOL™" モードのオブジェクト一覧: パソコンでは、マウスが重なったボタンに枠を付け、そのボタンの働きを出すようにしました。スマホでは、一覧を 2 本指で広げる（または表示ツールの「大きく」）と、一覧のボタンが大きくなります。
+- スマホ表示の言語の切り替えを国旗だけにしました。英語表示の社名を「AgroDesign Studios」にしました。
+
 ### v1.0.2（2026-11-19）
 - HELP の「使い方」の先頭にも、「最新版ダウンロード」「ライセンス表記」と同じく、アプリ名・使用中の版・製作会社・GitHub を出すようにしました。
 - HELP に、製作会社のサイトと、タンパク質構造解析サービス AgroBox® へのリンクを足しました。
@@ -326,6 +333,13 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## Release notes
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
+
+### v1.0.3 (2026-11-19)
+- On first opening, speech bubbles show where the mode switch and Export (downloading the app) are; a press anywhere closes them.
+- A structure opened from the PDB shows its PDB ID before its name, linked to its RCSB PDB page.
+- In "Includes PyMOL™" mode, the note shown after a Drug discovery preset has "Show all" and a close button.
+- "Includes PyMOL™" mode's object list: on a computer, the button under the mouse is outlined and its function shown; on a phone, spreading two fingers on the list (or View tools > Larger) makes its buttons larger.
+- On a phone the language switch is the flag alone. The company name in English is "AgroDesign Studios".
 
 ### v1.0.2 (2026-11-19)
 - HELP's "How to use" now opens with the app's name, version in use, company and GitHub, as "Latest version" and "Licences" do.
