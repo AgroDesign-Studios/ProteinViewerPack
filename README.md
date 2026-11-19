@@ -300,7 +300,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 ## Made by
 
-- AgroDesign Studios, Inc.: <https://www.agrodesign.co.jp>
+- AgroDesign Studios: <https://www.agrodesign.co.jp>
 - AgroBox®, a protein structure analysis service: <https://www.agrobox.jp/>
 
 ---
