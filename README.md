@@ -71,8 +71,8 @@
 
 - "3Dmol.js" モード: リボン・スティック・ボール＆スティック・ライン・表面、配色、測定、ペンとレーザーポインター、奥行き強調、断面、平行投影
 - フル版の "Includes PyMOL™" モード: メニューとコマンドライン、.pse セッション、レイトレース画像
-- 保存: スクリーンショット（PNG）、レイトレース画像、構造ファイル、選択範囲の分子ファイル、.pse、VRML（.wrl）、HTMLapp
-- 開いたファイルはどこにも送りません。ネットにつなぐのは、PDB から読むとき（files.rcsb.org）、「GitHub の最新版と比べる」を押したとき（api.github.com）、外へのリンクを開いたときだけです。
+- 保存: スクリーンショット（PNG。画面の 1〜4 倍の解像度を選べます）、レイトレース画像、構造ファイル、選択範囲の分子ファイル、.pse、VRML（.wrl）、HTMLapp
+- 読み込んだファイルは、お使いの端末外には送信されません。ネットにつなぐのは、PDB から読むとき（files.rcsb.org）、HELP の「最新版ダウンロード」で「①GitHubの最新版を確認」を押したとき（api.github.com）とその後の「②今のデータを引き継いだ最新版を別途保存」（raw.githubusercontent.com）、外へのリンクを開いたときだけです。
 
 ## スマホでの操作
 
@@ -121,7 +121,7 @@
 - **起動を速く、ダウンロードを小さく**: 不透明な表面の毎フレームの並べ替えをやめ、近傍リストの作り方を速くしたほか、Python のコンパイル済みファイルの同梱、numpy の遅延展開など。多くは結果を変えません。ビルドのたびに確かめているもの（タブに書いています）と、設計のときに手で確かめたものがあります。不透明な表面の変更では、表面の縁の数画素が変わることがあり、`transparency_global_sort 1` と `pick_surface 1` での動きも変わります。また、コンパイル済みの Python では、標準ライブラリの中のトレースバックの行にソースの文が出ません
 - **オリジナル版の修正の取り込み**: UTF-8 のバッファ修正（オリジナル版 #522）
 
-14 個のパッチの全文と、各変更の結果への影響（同じ・見た目が違うことがある・使えない など）は、フル版の HELP の「改良点」タブにあります。3Dmol.js 2.5.5 は改変せずに使っています。アプリがその周りに加えたもの（2 本指の移動など）は、どちらの版でも同じタブに挙げています。
+14 個のパッチの全文と、各変更の結果への影響（同じ・見た目が違うことがある・使えない など）は [CODE-CHANGES.md](CODE-CHANGES.md) にあります（アプリの HELP の「改良点」から、その版の文書を開けます）。3Dmol.js 2.5.5 は改変せずに使っています。アプリがその周りに加えたもの（2 本指の移動など）も同じ文書に挙げています。
 
 ## 引用
 
@@ -222,8 +222,8 @@ Note: on iPhone / iPad, iOS does not open an HTML file as it is. Of the iOS apps
 
 - "3Dmol.js" mode: ribbon, stick, ball and stick, line, surface; colouring; measuring; pen and laser pointer; depth cueing, slicing, orthographic view
 - The full edition's "Includes PyMOL™" mode: menus and command line, .pse sessions, ray-traced images
-- Save: screenshots (PNG), ray-traced images, structure files, molecule files of a selection, .pse, VRML (.wrl), HTMLapp
-- The files you open are sent nowhere. The app goes online only to load from the PDB (files.rcsb.org), when you press "Compare with the latest on GitHub" (api.github.com), or when you follow a link out of the file.
+- Save: screenshots (PNG, at 1-4 times the screen's resolution), ray-traced images, structure files, molecule files of a selection, .pse, VRML (.wrl), HTMLapp
+- Files you open are never sent outside your device. The app goes online only to load from the PDB (files.rcsb.org), when you press "① Check the latest version on GitHub" in Help > "Latest version" (api.github.com) and then "② Save the latest version with the current data as a separate file" (raw.githubusercontent.com), or when you follow a link out of the file.
 
 ## On a phone
 
@@ -272,7 +272,7 @@ The full edition's "Includes PyMOL™" mode is Open-Source PyMOL 3.2.0a (pymol-o
 - **Faster start-up, smaller download**: opaque surfaces are no longer re-sorted every frame, faster neighbour lists, precompiled Python, numpy unpacked on first use, among others. Most leave results unchanged; some are checked at every build (the tab marks them), others were checked by hand during the design work. The opaque-surface change can alter a few pixels at surface edges and changes how `transparency_global_sort 1` and `pick_surface 1` behave; with precompiled Python a traceback line inside the standard library shows no source text
 - **Fixes taken from upstream**: the UTF-8 buffer fix (upstream #522)
 
-In the full edition, Help > "Code changes" has all 14 patches in full and each change's effect on results (unchanged, the picture can differ, not available, ...). 3Dmol.js 2.5.5 is used unmodified; in both editions the same tab lists what the app adds around it (two-finger move and others).
+[CODE-CHANGES.md](CODE-CHANGES.md#english) has all 14 patches in full and each change's effect on results (unchanged, the picture can differ, not available, ...); the app's Help > "Code changes" opens the document of its own version. 3Dmol.js 2.5.5 is used unmodified; the same document lists what the app adds around it (two-finger move and others).
 
 ## Citation
 
@@ -309,6 +309,15 @@ If you publish work that used this app, please cite the viewer you used, in the 
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
 
+### v1.0.5（2026-11-20）
+- スクリーンショットの解像度を選べるようにしました（画面と同じ〜画面の 4 倍）。「画像出力」→「スクリーンショット（PNG）…」で選び、「画像作成」で作ります。"Includes PyMOL™" モードでは、右側のオブジェクト一覧を画像から外したいときは、一覧を畳んでから「画像作成」を押してください（画面に案内が出ます）。
+- "Includes PyMOL™" モード（パソコン）: オブジェクト一覧の下のボタン（ムービーの操作とマウスモードの欄）にも、マウスを重ねると枠と説明が出るようにしました。この画面では働かないボタンは、点線の枠と理由を出します。
+- "Includes PyMOL™" モード: 開いたオブジェクト一覧のつまみを左に引くと、一覧の文字と A S H L C のボタンが大きくなります（右に引くと小さく。設定の「表示の倍率」と同じ値です）。
+- "Includes PyMOL™" モード: 「オリジナル表示」を選べるようにしました。v1.0.0 と同じオブジェクト一覧（パソコンではマウス操作の表も）に戻せます。パソコンは Setting →「すべての設定…」、スマホは表示ツールの「オブジェクト」の先頭にあります。
+- 「ファイル/PDBを開く…」: "Includes PyMOL™" モードでファイルの開き方を選ぶ欄を先頭に移し、目立つようにしました。説明を「読み込んだファイルは、お使いの端末外には送信されません。」にしました。
+- HELP の「最新版ダウンロード」: 「①GitHubの最新版を確認」⇓「②今のデータを引き継いだ最新版を別途保存」の順に並べ、①で確かめるまで②はグレーにしました。
+- HELP の「改良点」: 内容を GitHub の文書 [CODE-CHANGES.md](CODE-CHANGES.md) に移し、タブからはその版の文書を開くようにしました。アプリが小さくなりました。
+
 ### v1.0.4（2026-11-19）
 - スマホの "Includes PyMOL™" モード: PyMOL のオブジェクト一覧の代わりに、分子の右上の「オブジェクト」から、アプリの一覧を開くようにしました。表示のスイッチと、名前を押すと表示の種類・色・ラベル・視点・削除が使えます。測定中は、距離・角度・二面角と「最後を消す」「終了」のカードが出ます。
 - パソコンの "3Dmol.js" モード: 分子の上のメニューを 1 段にしました。スタイル・表示・表面・奥行き・描画は分子の上に重なって開くので、分子の画面は小さくなりません。
@@ -338,6 +347,15 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## Release notes
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
+
+### v1.0.5 (2026-11-20)
+- Screenshots at a chosen resolution (the screen's to 4 times it): "Save image" > "Screenshot (PNG)…", then "Create image". In "Includes PyMOL™" mode, fold the object panel on the right before "Create image" to leave it out of the picture (the form says so).
+- "Includes PyMOL™" mode (computer): the buttons under the object panel (the movie controls and the mouse-mode box) also get a frame and a description under the mouse; a button that does nothing in this app is dashed, with the reason.
+- "Includes PyMOL™" mode: pull the open object panel's tab to the left to make its text and A S H L C buttons larger (to the right, smaller; the same value as the settings' display scale).
+- "Includes PyMOL™" mode: "Original display" brings back the object list of v1.0.0 (with the mouse grid on a computer): Setting > "All settings…" on a computer, the head of "Objects" in the view tools on a phone.
+- "Open file/PDB…": the choice of how "Includes PyMOL™" mode opens a file comes first and stands out; the note reads "Files you open are never sent outside your device."
+- Help > "Latest version": "① Check the latest version on GitHub" ⇓ "② Save the latest version with the current data as a separate file", ② greyed until ① has checked.
+- Help > "Code changes": the list moved to the document [CODE-CHANGES.md](CODE-CHANGES.md#english) on GitHub; the tab opens the one of its version. The app is smaller.
 
 ### v1.0.4 (2026-11-19)
 - Phone, "Includes PyMOL™" mode: instead of PyMOL's object list, "Objects" at the top right of the view opens the app's own list: a switch per object, and, by its name, representations, colour, labels, view and delete. While measuring, a card offers distances, angles and dihedrals, "Delete last" and "Done".
