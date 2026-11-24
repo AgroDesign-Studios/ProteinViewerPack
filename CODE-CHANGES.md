@@ -395,31 +395,24 @@ index 6ac9fc1f..b41ad2b7 100644
 
 ````diff
 diff --git a/modules/chempy/pkl.py b/modules/chempy/pkl.py
-index aed58aa..dc30cc3 100644
+index aed58aa..75e541a 100644
 --- a/modules/chempy/pkl.py
 +++ b/modules/chempy/pkl.py
-@@ -49,6 +49,178 @@ if True:
+@@ -49,6 +49,169 @@ if True:
      pickle._Pickler.dispatch[str] = save_str
      pickle._Pickler.dispatch[bytes] = save_str
  
-+    # Restricted unpickler for session files (AgDB pymol-wasm patch 0006).
++    # Restricted unpickler for session files.
 +    #
-+    # A session can come from another user, and unpickling calls whatever
-+    # callable the pickle names. Every loads() a session reaches is therefore
-+    # replaced, unconditionally (no setting, argument or message turns it
-+    # off), by one whose find_class resolves only RESTRICTED_GLOBALS:
-+    #   - cPickle.loads below: load_pse -> io.pkl.fromString, set_session on
-+    #     compressed bytes, and the nested session['wizard'] pickle
-+    #     (wizarding.session_restore_wizard -> pkl.fromString);
-+    #   - pickle.loads and pickle._loads in the stdlib module itself: the C++
-+    #     restore path (layer1/PConv.cpp PConvPickleLoads, reached from
-+    #     ObjectCallback) imports the "pickle" module and calls its loads
-+    #     attribute, so a chempy-only replacement leaves it open.
++    # A session can come from another user, so session data is unpickled only
++    # by an unpickler whose find_class resolves RESTRICTED_GLOBALS and nothing
++    # else. It replaces cPickle.loads below and the stdlib pickle.loads and
++    # pickle._loads (the C++ session restore calls the stdlib one), and no
++    # setting, argument or message turns it off.
 +    # cPickle.load (a file) is left alone on purpose: it reads the bundled,
-+    # trusted fragments and mutagenesis data (plus chempy.dictdb's own socket
-+    # client/server, which the viewer never uses). Untrusted .pkl / model input
-+    # must be refused before it reaches cPickle.load, by the viewer frame's load
-+    # guards -- a separate relay step (TN0110 §4.2-6, step 3), not this patch.
++    # trusted fragments and mutagenesis data. Untrusted .pkl / model input is
++    # refused before it reaches cPickle.load by the viewer's own load checks,
++    # not by this patch.
 +
 +    import _compat_pickle
 +    import copyreg
@@ -450,11 +443,9 @@ index aed58aa..dc30cc3 100644
 +    ])
 +
 +    # Names that are allowed to be RESOLVED (so a reconstructor can take them as
-+    # an argument) but must never be the callable a pickle invokes directly.
-+    # numpy.ndarray(shape, object-dtype, raw-buffer) makes numpy read the raw
-+    # bytes as object pointers; a crafted session crashed the Pyodide runtime
-+    # with an out-of-bounds access (measured 2026-10-12 in the built wheel).
-+    # A legitimate array never calls ndarray directly: it calls
++    # an argument) but must never be the callable a pickle invokes directly:
++    # called directly, numpy.ndarray is not safe on session data. A legitimate
++    # array never calls ndarray directly: it calls
 +    # numpy._core.multiarray._reconstruct(ndarray, shape, dtype) and then BUILD,
 +    # so ndarray appears only as _reconstruct's first argument, never reduced.
 +    # Matched by (module, qualname); the object here is always one find_class
@@ -478,10 +469,10 @@ index aed58aa..dc30cc3 100644
 +            # Map PyMOL 2.x-era names (__builtin__.bytearray,
 +            # copy_reg._reconstructor) with _compat_pickle, THEN check the
 +            # allow-list: checking the as-written name refuses legitimate old
-+            # sessions, and __builtin__.eval maps to builtins.eval and stays
-+            # refused. (stdlib find_class maps only for proto < 3 and when
-+            # fix_imports is set; TN0110 §4.2-6 wants proto < 4 unconditionally,
-+            # which is wider but still ends at the same 18-name check.)
++            # sessions, and a mapped name is held to the same list. (stdlib
++            # find_class maps only for proto < 3 and when fix_imports is set;
++            # this maps for every proto < 4, which is wider but still ends at
++            # the same 18-name check.)
 +            if self.proto < 4:
 +                if (module, name) in _compat_pickle.NAME_MAPPING:
 +                    module, name = _compat_pickle.NAME_MAPPING[(module, name)]
@@ -577,7 +568,7 @@ index aed58aa..dc30cc3 100644
      class cPickle:
          dumps = pickle.dumps
          dump = pickle.dump
-@@ -57,7 +229,7 @@ if True:
+@@ -57,7 +220,7 @@ if True:
          def loads(s):
              if not isinstance(s, bytes):
                  s = s.encode(errors='ignore')
@@ -592,7 +583,7 @@ index aed58aa..dc30cc3 100644
 
 ##### PNG の読み込みに失敗したら画像を作らない — 見た目が違うことがある
 
-`MyPNGRead`（`layer0/MyPNG.cpp`）は幅と高さを 0 で始め、読み込みが成功したときだけ画像を作り、データ URI の長さと各読み込みを残りのバイト数と照らし、バイト数が `size_t`・`int` に収まらない大きさは確保の前に拒みます。大きさの上限は加えていません。PNG でない `bg_image_filename`（`.pse` から来るものも）でレイトレースの書き出しが落ち、32 ビットの WebAssembly では行の大きさの掛け算があふれてバッファを超えることがあったためです。
+`MyPNGRead`（`layer0/MyPNG.cpp`）は幅と高さを 0 で始め、読み込みが成功したときだけ画像を作り、データ URI の長さと各読み込みを残りのバイト数と照らし、バイト数が `size_t`・`int` に収まらない大きさは確保の前に拒みます。大きさの上限は加えていません。
 
 **影響:** 正しい PNG はこれまでどおり読めます。壊れた背景画像のレイトレースは、落ちずに背景なしで描きます。`load_png` に PNG でないファイル、途中で切れた PNG、短い・途中で切れた・base64 でないデータ URI を渡すとエラーになります。オリジナル版ではどれもエラーになりませんでした。PNG でないファイルからは中身のない画像、途中で切れた PNG からは一部が壊れた画像ができ、壊れたデータ URI はそのまま受け付けていました。
 
@@ -693,11 +684,11 @@ index aed58aa..dc30cc3 100644
      /* row_bytes is the width x number of channels x (bit-depth / 8) */
      row_bytes = png_get_rowbytes(png_ptr, info_ptr);
 -    if((png_pixels = (png_byte *) malloc(row_bytes * height * sizeof(png_byte))) == nullptr) {
-+    /* Refuse sizes whose byte counts do not fit, before allocating: the
-+     * 32-bit row_bytes * height wraps (size_t is 32-bit on wasm32), and
-+     * png_read_image would then write past a too-small buffer. The Image
-+     * below multiplies width * height in int, 4 bytes per pixel. A check on
-+     * arithmetic only, not a size cap: what fits is still tried. */
++    /* Refuse, before allocating, a size whose byte counts do not fit:
++     * row_bytes * height and the row pointers in size_t (32-bit on
++     * wasm32), and the Image below (width * height pixels of 4 bytes,
++     * counted in int). A check on arithmetic only, not a size cap: what
++     * fits is still tried. */
 +    if((uint64_t) row_bytes * height > SIZE_MAX ||
 +       (uint64_t) height * sizeof(png_bytep) > SIZE_MAX ||
 +       (uint64_t) width * height > INT_MAX ||
@@ -1409,22 +1400,21 @@ index aed58aa..dc30cc3 100644
 ````diff
 --- a/modules/chempy/pkl.py
 +++ b/modules/chempy/pkl.py
-@@ -241,11 +241,43 @@
+@@ -232,11 +232,42 @@
                  cls.dump = pickle.dump
  
  
-+# Bundled data through the C unpickler (AgDB pymol-wasm patch 0014).
++# Bundled data through the C unpickler.
 +#
 +# PKL.fromFile reads a file under $PYMOL_DATA (the fragments and mutagenesis
 +# side-chain libraries the wheel ships) with the stdlib C unpickler, which is
 +# much faster than the pure-Python cPickle.load, and every other file with
 +# cPickle.load exactly as before. Both are unrestricted file loaders, so no
-+# trust line moves: session bytes reach loads() / restricted_loads above,
-+# never fromFile, and untrusted .pkl / model input must still be refused
-+# before it gets here. The two differ on a protocol < 3 STRING whose bytes are
-+# not printable ASCII (C: str or UnicodeDecodeError, _decode_string: bytes);
-+# the shipped data is protocol 4 and the build compares both paths on it.
-+# Scope by realpath, so ".." or a symlink cannot reach outside $PYMOL_DATA.
++# trust boundary moves: session data still goes only through restricted_loads
++# above. The two differ on a protocol < 3 STRING whose bytes are not printable
++# ASCII (C: str or UnicodeDecodeError, _decode_string: bytes); the shipped
++# data is protocol 4 and the build compares both paths on it. A file counts
++# as under $PYMOL_DATA by its real path.
 +
 +import os as _os
 +
@@ -2022,31 +2012,24 @@ At start-up the worker builds a throw-away peptide (`cmd.fab('AAAA', '_warm')`),
 
 ````diff
 diff --git a/modules/chempy/pkl.py b/modules/chempy/pkl.py
-index aed58aa..dc30cc3 100644
+index aed58aa..75e541a 100644
 --- a/modules/chempy/pkl.py
 +++ b/modules/chempy/pkl.py
-@@ -49,6 +49,178 @@ if True:
+@@ -49,6 +49,169 @@ if True:
      pickle._Pickler.dispatch[str] = save_str
      pickle._Pickler.dispatch[bytes] = save_str
  
-+    # Restricted unpickler for session files (AgDB pymol-wasm patch 0006).
++    # Restricted unpickler for session files.
 +    #
-+    # A session can come from another user, and unpickling calls whatever
-+    # callable the pickle names. Every loads() a session reaches is therefore
-+    # replaced, unconditionally (no setting, argument or message turns it
-+    # off), by one whose find_class resolves only RESTRICTED_GLOBALS:
-+    #   - cPickle.loads below: load_pse -> io.pkl.fromString, set_session on
-+    #     compressed bytes, and the nested session['wizard'] pickle
-+    #     (wizarding.session_restore_wizard -> pkl.fromString);
-+    #   - pickle.loads and pickle._loads in the stdlib module itself: the C++
-+    #     restore path (layer1/PConv.cpp PConvPickleLoads, reached from
-+    #     ObjectCallback) imports the "pickle" module and calls its loads
-+    #     attribute, so a chempy-only replacement leaves it open.
++    # A session can come from another user, so session data is unpickled only
++    # by an unpickler whose find_class resolves RESTRICTED_GLOBALS and nothing
++    # else. It replaces cPickle.loads below and the stdlib pickle.loads and
++    # pickle._loads (the C++ session restore calls the stdlib one), and no
++    # setting, argument or message turns it off.
 +    # cPickle.load (a file) is left alone on purpose: it reads the bundled,
-+    # trusted fragments and mutagenesis data (plus chempy.dictdb's own socket
-+    # client/server, which the viewer never uses). Untrusted .pkl / model input
-+    # must be refused before it reaches cPickle.load, by the viewer frame's load
-+    # guards -- a separate relay step (TN0110 §4.2-6, step 3), not this patch.
++    # trusted fragments and mutagenesis data. Untrusted .pkl / model input is
++    # refused before it reaches cPickle.load by the viewer's own load checks,
++    # not by this patch.
 +
 +    import _compat_pickle
 +    import copyreg
@@ -2077,11 +2060,9 @@ index aed58aa..dc30cc3 100644
 +    ])
 +
 +    # Names that are allowed to be RESOLVED (so a reconstructor can take them as
-+    # an argument) but must never be the callable a pickle invokes directly.
-+    # numpy.ndarray(shape, object-dtype, raw-buffer) makes numpy read the raw
-+    # bytes as object pointers; a crafted session crashed the Pyodide runtime
-+    # with an out-of-bounds access (measured 2026-10-12 in the built wheel).
-+    # A legitimate array never calls ndarray directly: it calls
++    # an argument) but must never be the callable a pickle invokes directly:
++    # called directly, numpy.ndarray is not safe on session data. A legitimate
++    # array never calls ndarray directly: it calls
 +    # numpy._core.multiarray._reconstruct(ndarray, shape, dtype) and then BUILD,
 +    # so ndarray appears only as _reconstruct's first argument, never reduced.
 +    # Matched by (module, qualname); the object here is always one find_class
@@ -2105,10 +2086,10 @@ index aed58aa..dc30cc3 100644
 +            # Map PyMOL 2.x-era names (__builtin__.bytearray,
 +            # copy_reg._reconstructor) with _compat_pickle, THEN check the
 +            # allow-list: checking the as-written name refuses legitimate old
-+            # sessions, and __builtin__.eval maps to builtins.eval and stays
-+            # refused. (stdlib find_class maps only for proto < 3 and when
-+            # fix_imports is set; TN0110 §4.2-6 wants proto < 4 unconditionally,
-+            # which is wider but still ends at the same 18-name check.)
++            # sessions, and a mapped name is held to the same list. (stdlib
++            # find_class maps only for proto < 3 and when fix_imports is set;
++            # this maps for every proto < 4, which is wider but still ends at
++            # the same 18-name check.)
 +            if self.proto < 4:
 +                if (module, name) in _compat_pickle.NAME_MAPPING:
 +                    module, name = _compat_pickle.NAME_MAPPING[(module, name)]
@@ -2204,7 +2185,7 @@ index aed58aa..dc30cc3 100644
      class cPickle:
          dumps = pickle.dumps
          dump = pickle.dump
-@@ -57,7 +229,7 @@ if True:
+@@ -57,7 +220,7 @@ if True:
          def loads(s):
              if not isinstance(s, bytes):
                  s = s.encode(errors='ignore')
@@ -2219,7 +2200,7 @@ index aed58aa..dc30cc3 100644
 
 ##### A failed PNG read builds no image — The picture can differ
 
-`MyPNGRead` (`layer0/MyPNG.cpp`) starts width and height at 0, builds the image only when the read succeeded, checks a data URI's length and every read against the bytes left, and refuses a size whose byte count does not fit `size_t` / `int` before allocating; no size limit is added. A non-PNG `bg_image_filename` (also from a `.pse`) crashed a ray-traced export, and on 32-bit WebAssembly the row-size product could wrap and overrun the buffer.
+`MyPNGRead` (`layer0/MyPNG.cpp`) starts width and height at 0, builds the image only when the read succeeded, checks a data URI's length and every read against the bytes left, and refuses a size whose byte count does not fit `size_t` / `int` before allocating; no size limit is added.
 
 **Effect:** Valid PNGs read as before. A ray trace with a broken background image now draws without it instead of crashing. In `load_png`, a file that is not a PNG, a cut-off PNG, or a data URI that is short, cut off or not valid base64 now raises an error. Upstream gave no error in these cases: a non-PNG file gave an empty image, a cut-off PNG gave a partly garbage image, and the bad data URIs were accepted silently.
 
@@ -2320,11 +2301,11 @@ index aed58aa..dc30cc3 100644
      /* row_bytes is the width x number of channels x (bit-depth / 8) */
      row_bytes = png_get_rowbytes(png_ptr, info_ptr);
 -    if((png_pixels = (png_byte *) malloc(row_bytes * height * sizeof(png_byte))) == nullptr) {
-+    /* Refuse sizes whose byte counts do not fit, before allocating: the
-+     * 32-bit row_bytes * height wraps (size_t is 32-bit on wasm32), and
-+     * png_read_image would then write past a too-small buffer. The Image
-+     * below multiplies width * height in int, 4 bytes per pixel. A check on
-+     * arithmetic only, not a size cap: what fits is still tried. */
++    /* Refuse, before allocating, a size whose byte counts do not fit:
++     * row_bytes * height and the row pointers in size_t (32-bit on
++     * wasm32), and the Image below (width * height pixels of 4 bytes,
++     * counted in int). A check on arithmetic only, not a size cap: what
++     * fits is still tried. */
 +    if((uint64_t) row_bytes * height > SIZE_MAX ||
 +       (uint64_t) height * sizeof(png_bytep) > SIZE_MAX ||
 +       (uint64_t) width * height > INT_MAX ||
@@ -3036,22 +3017,21 @@ Patch 0005's GLSL ES 3.00 rewrite is done with plain string scans in a new `laye
 ````diff
 --- a/modules/chempy/pkl.py
 +++ b/modules/chempy/pkl.py
-@@ -241,11 +241,43 @@
+@@ -232,11 +232,42 @@
                  cls.dump = pickle.dump
  
  
-+# Bundled data through the C unpickler (AgDB pymol-wasm patch 0014).
++# Bundled data through the C unpickler.
 +#
 +# PKL.fromFile reads a file under $PYMOL_DATA (the fragments and mutagenesis
 +# side-chain libraries the wheel ships) with the stdlib C unpickler, which is
 +# much faster than the pure-Python cPickle.load, and every other file with
 +# cPickle.load exactly as before. Both are unrestricted file loaders, so no
-+# trust line moves: session bytes reach loads() / restricted_loads above,
-+# never fromFile, and untrusted .pkl / model input must still be refused
-+# before it gets here. The two differ on a protocol < 3 STRING whose bytes are
-+# not printable ASCII (C: str or UnicodeDecodeError, _decode_string: bytes);
-+# the shipped data is protocol 4 and the build compares both paths on it.
-+# Scope by realpath, so ".." or a symlink cannot reach outside $PYMOL_DATA.
++# trust boundary moves: session data still goes only through restricted_loads
++# above. The two differ on a protocol < 3 STRING whose bytes are not printable
++# ASCII (C: str or UnicodeDecodeError, _decode_string: bytes); the shipped
++# data is protocol 4 and the build compares both paths on it. A file counts
++# as under $PYMOL_DATA by its real path.
 +
 +import os as _os
 +

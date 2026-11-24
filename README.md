@@ -17,6 +17,8 @@
 - **スマホでも PC でも** — 同じファイルが Windows・macOS・Linux・iPhone / iPad（iOS / iPadOS）・Android™ のブラウザで動きます。
 - **メールでアプリと構造を１ファイルで送れる** — 構造を入れたままアプリを保存してメールに添付すれば、受け取った人はすぐに構造を見られます。
 
+<p align="center"><a href="https://agrodesign-studios.github.io/ProteinViewerPack/"><img src="images/badges/live-sample.svg" alt="稼働サンプル（そのままダウンロード可能）" height="44"></a></p>
+
 <p align="center">
 <img src="images/screenshot-phone-3dmol-framed.png" alt="スマホで 25HN を &quot;3Dmol.js&quot; モードで表示" width="260">
 <img src="images/screenshot-phone-pymol-framed.png" alt="スマホで 25HN をフル版の &quot;Includes PyMOL™&quot; モードで表示" width="260">
@@ -32,7 +34,10 @@
 
 ## 稼働サンプル
 
+<p align="center"><a href="https://agrodesign-studios.github.io/ProteinViewerPack/"><img src="images/badges/live-sample.svg" alt="稼働サンプル（そのままダウンロード可能）" height="44"></a></p>
+
 - **ブラウザで開く（稼働サンプル）**: <https://agrodesign-studios.github.io/ProteinViewerPack/>
+- **そのままダウンロード**: 開いたアプリは「エクスポート…」→「HTMLappとして出力（このアプリをコピー）」で、構造を入れたまま 1 ファイルで保存できます。
 
 開くと、PDB エントリ [25HN](https://www.rcsb.org/structure/25HN)（Nitrosospira multiformis の Rubisco のクライオ電子顕微鏡構造）を入れたフル版が "3Dmol.js" モードで表示されます。右上のスイッチ（スマホでは下部バーの「モード」）で "Includes PyMOL™" モードに切り替えられます。スマホでもそのまま試せます。最初に約 21 MB を読み込みます。ほかの構造は「ファイル/PDBを開く…」（スマホでは下部バーの「開く」）で開けます。
 
@@ -137,6 +142,7 @@
 - このアプリ自体は [MIT License](LICENSE)。同梱のオープンソースソフトウェアはそれぞれのライセンスに従い、名前・版・全文は [`NOTICE`](NOTICE) とアプリの「HELP」→「ライセンス表記」にあります。
 - Includes PyMOL™.（PyMOL™ を含みます。）フル版の "Includes PyMOL™" モードは、AgroDesign Studios が Open-Source PyMOL のソースコードをそのライセンスのもとで変更・機能追加し、WebAssembly でブラウザ向けにビルドしたものです。Schrödinger, LLC が配布する PyMOL 製品とは別のものです。
 - Includes 3Dmol.js（BSD 3-Clause License）。論文の引用は上の「引用」の節にあります。
+- フル版の PyMOL の実行環境は [FreeType](https://freetype.org) を使っています。このソフトウェアの一部は FreeType Team の成果にもとづいています（原文: "This software is based in part on the work of the FreeType Team." FreeType License の全文は [`NOTICE`](NOTICE) にあります）。
 - サンプルは RCSB PDB のエントリ 25HN（[DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)）。PDB のデータは CC0 1.0 です。
 - バッジとスマホ・モニターの絵（[`images/`](images)）:
   - Android のロボットは Google の作品を複製・改変したもので、CC BY 3.0 の条件に従って使用しています（原文: "The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the [Creative Commons](https://creativecommons.org/licenses/by/3.0/) 3.0 Attribution License."）。
@@ -171,6 +177,8 @@ A browser app that puts **protein structure data and several viewers in one file
 - **On phones and PCs** — the same file runs in the browser on Windows, macOS, Linux, iPhone / iPad (iOS / iPadOS) and Android™.
 - **Send the app and the structure by e-mail, as one file** — save the app with your structure inside and attach it, and the recipient sees the structure at once.
 
+<p align="center"><a href="https://agrodesign-studios.github.io/ProteinViewerPack/en/"><img src="images/badges/live-sample-en.svg" alt="Live sample (ready to download)" height="44"></a></p>
+
 <p align="center">
 <img src="images/screenshot-phone-3dmol-en-framed.png" alt="25HN shown in &quot;3Dmol.js&quot; mode on a phone" width="260">
 <img src="images/screenshot-phone-pymol-en-framed.png" alt="25HN shown in the full edition's &quot;Includes PyMOL™&quot; mode on a phone" width="260">
@@ -184,7 +192,10 @@ A browser app that puts **protein structure data and several viewers in one file
 
 ## Live sample
 
+<p align="center"><a href="https://agrodesign-studios.github.io/ProteinViewerPack/en/"><img src="images/badges/live-sample-en.svg" alt="Live sample (ready to download)" height="44"></a></p>
+
 - **Open in the browser (live sample)**: <https://agrodesign-studios.github.io/ProteinViewerPack/en/>
+- **Download it as it is**: "Export…" > "Save as HTMLapp (a copy of this app)" saves the app you opened, with its structure, as one file.
 
 It opens the full edition with PDB entry [25HN](https://www.rcsb.org/structure/25HN) (a cryo-EM structure of Rubisco from Nitrosospira multiformis) in "3Dmol.js" mode. The switch at the top right (on a phone, "Mode" in the bottom bar) changes to "Includes PyMOL™" mode. It works on a phone as well. The page loads about 21 MB the first time. Open other structures with "Open file/PDB…" (on a phone, "Open" in the bottom bar).
 
@@ -288,6 +299,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 - This app is under the [MIT License](LICENSE). The open-source software it carries keeps its own licence; names, versions and full texts are in [`NOTICE`](NOTICE) and in the app under "Help" → "Licences".
 - Includes PyMOL™. The full edition's "Includes PyMOL™" mode is built from Open-Source PyMOL source code, which AgroDesign Studios modified and extended under its license and compiled for the browser with WebAssembly. It is distinct from the PyMOL products distributed by Schrödinger, LLC.
 - Includes 3Dmol.js (BSD 3-Clause License). Its paper is under "Citation" above.
+- The full edition's PyMOL runtime uses FreeType: this software is based in part on the work of the FreeType Team ([FreeType](https://freetype.org); the FreeType License's full text is in [`NOTICE`](NOTICE)).
 - The sample is PDB entry 25HN from the RCSB PDB ([DOI 10.2210/pdb25HN/pdb](https://doi.org/10.2210/pdb25HN/pdb)). PDB data are CC0 1.0.
 - Badges, phone and monitor pictures ([`images/`](images)):
   - The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the [Creative Commons](https://creativecommons.org/licenses/by/3.0/) 3.0 Attribution License.
@@ -308,6 +320,17 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## 更新履歴
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
+
+### v1.0.6（2026-11-22）
+- "Includes PyMOL™" モード: 右上の「配列」タグ（下の「Seq」でも同じ）で、配列を画面の上に 1 行で出せるようにしました。文字にマウスを重ねる（スマホでは押す）と、その文字が光り、PyMOL の画面でその残基が一時的に黄色の太い棒で目立ち、左上に「どの構造の、どの鎖の、何番の、何という残基か」が出ます。
+- "Includes PyMOL™" モード: 3Dmol.js モードと同じ「描画」（ペン・消しゴム・色・レーザー・十字）を使えるようにしました。パソコンはメニュー行の「描画」、スマホは表示ツールの「表示・操作」にあります。
+- 「スクリーンショット（PNG）」: 描画した線があるときは「描画した線を含める」で、線を画像に入れるかどうかを選べるようにしました（両方のモード）。
+- "Includes PyMOL™" モード: 下の ▼ ボタンにマウスを重ねると、「左右に揺らす」と「回転」、速さ（1 倍・2 倍・4 倍）を選べるようにしました。使わない F ボタンをなくし、S ボタンを「Seq」にしました。
+- "Includes PyMOL™" モード: マウスモードの表をスマホでは出さず、パソコンでは畳んでおき、上のタグを押すと開くようにしました。
+- "Includes PyMOL™" モード: オブジェクト一覧のつまみにマウスを重ねると、左右に引いて大きさを変えられることを吹き出しで示すようにしました。一覧を大きくしたあと小さく戻すと「スペースがない」と出て戻らないことがある不具合（特にスマホ）を直しました。
+- "Includes PyMOL™" モード: サンプル構造の名前を「Structure」から「Structure_25HN」にしました。
+- スマホ: 日本語/英語の切り替えの国旗を丸いアイコンにして、横の幅を節約しました。
+- README に「稼働サンプル（そのままダウンロード可能）」のボタンを付けました。
 
 ### v1.0.5（2026-11-20）
 - スクリーンショットの解像度を選べるようにしました（画面と同じ〜画面の 4 倍）。「画像出力」→「スクリーンショット（PNG）…」で選び、「画像作成」で作ります。"Includes PyMOL™" モードでは、右側のオブジェクト一覧を画像から外したいときは、一覧を畳んでから「画像作成」を押してください（画面に案内が出ます）。
@@ -347,6 +370,17 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## Release notes
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
+
+### v1.0.6 (2026-11-22)
+- "Includes PyMOL™" mode: the "Sequence" tag at the top right (or "Seq" below) shows the sequence in one row over the view. A residue under the mouse (tapped on a phone) is lit, stands out in PyMOL's view for the moment as thick yellow sticks, and a box at the top left says which structure, chain, number and residue it is.
+- "Includes PyMOL™" mode: the same "Draw" as "3Dmol.js" mode (pen, eraser, colours, laser, crosshair): "Draw" in the menu row on a computer, "View & tools" in the view tools on a phone.
+- "Screenshot (PNG)": with lines drawn, "Include the lines drawn" chooses whether they go into the picture (both modes).
+- "Includes PyMOL™" mode: with the mouse on the ▼ button below, choose "Rock side to side" or "Rotate" and a speed (1×, 2×, 4×). The unused F button is gone, and the S button reads "Seq".
+- "Includes PyMOL™" mode: the mouse-mode table is gone on a phone; on a computer it is folded away, and the tab above it opens it.
+- "Includes PyMOL™" mode: a bubble on the object panel's tab says it pulls left and right to resize the panel. Fixed: after making the panel larger, making it smaller again could say there was no room and stay large (on phones especially).
+- "Includes PyMOL™" mode: the sample structure is named "Structure_25HN" instead of "Structure".
+- Phone: the Japanese/English switch is a round flag, which takes less width.
+- The README has a "Live sample (ready to download)" button.
 
 ### v1.0.5 (2026-11-20)
 - Screenshots at a chosen resolution (the screen's to 4 times it): "Save image" > "Screenshot (PNG)…", then "Create image". In "Includes PyMOL™" mode, fold the object panel on the right before "Create image" to leave it out of the picture (the form says so).

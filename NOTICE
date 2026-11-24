@@ -1,4 +1,4 @@
-AgroDesign Protein Viewer Pack (HTMLapp) ver 1.0.5 (06c140affb)
+AgroDesign Protein Viewer Pack (HTMLapp) ver 1.0.6 (baf8613c64)
 Copyright (c) 2026 AgroDesign Studios
 
 This app's own program is licensed under the MIT License (see LICENSE).
@@ -504,7 +504,7 @@ Third-party code inside the Open-Source PyMOL build
 ====================================================
 
 The in-browser PyMOL (pymol-open-source commit edcda80f3a73ebf0b5922991f85910d17ffbcce5,
-built by AgDB's pymol-wasm/) contains the following code that is not Schrodinger's,
+built by the pymol-wasm/ build scripts) contains the following code that is not Schrodinger's,
 each under its own terms: compiled into the wasm, or shipped as Python source in the
 wheel. Each notice below is copied verbatim from the PyMOL source tree (or, where
 marked, from the upstream project it names; pymol-wasm/notices/README.md says from where).
@@ -1016,7 +1016,7 @@ out.close()
 
 ------------------------------------------------------------------------------
 Mesa (matrix routines MatrixInvertC44f, MatrixMultiplyC44f, rotation_matrix3f)
-Licence: MIT (X11) licence, Mesa's (PT-9275 item 6). Which Mesa release the routines were taken from is not recorded in PyMOL (unconfirmed). All three, with the same comments, and the same permission notice by Brian Paul are in every Mesa release from 3.1 to 4.0 (copyright years 1999 to 1999-2001); Mesa 4.1 rewrote the rotation routine's comment, so the notice below is the one in src/mesa/math/m_matrix.c at Mesa's mesa_4_0 tag
+Licence: MIT (X11) licence, Mesa's. Which Mesa release the routines were taken from is not recorded in PyMOL (unconfirmed). All three, with the same comments, and the same permission notice by Brian Paul are in every Mesa release from 3.1 to 4.0 (copyright years 1999 to 1999-2001); Mesa 4.1 rewrote the rotation routine's comment, so the notice below is the one in src/mesa/math/m_matrix.c at Mesa's mesa_4_0 tag
 In: layer0/Matrix.cpp, layer0/Vector.cpp (rotation_matrix3f, found by this script's scan)
 
 [layer0/Matrix.cpp]
@@ -1063,7 +1063,7 @@ In: layer0/Matrix.cpp, layer0/Vector.cpp (rotation_matrix3f, found by this scrip
 
 ------------------------------------------------------------------------------
 base64 decoding table (cited Stack Overflow answer)
-Licence: CC BY-SA 3.0, the most likely source's (PT-9285 item 2). The comment cites the question, not an answer. The decoder keeps the names and the shape of ryyst's answer (https://stackoverflow.com/a/6782480, by https://stackoverflow.com/users/282635/ryyst, posted 2011-07-21, last edited 2014-01-10, when Stack Overflow published posts under CC BY-SA 3.0): decoded_data, triple, input_length / 4 * 3, (triple >> k * 8) & 0xFF. Its table (indexed from '+') is in none of the question's 21 answers (read 2026-11-15), so that source is not confirmed. The citation came into PyMOL between its 2017-12-21 and 2018-02-28 snapshots, before the 4.0 change
+Licence: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/), the most likely source's. The comment cites the question, not an answer. The decoder keeps the names and the shape of ryyst's answer (https://stackoverflow.com/a/6782480, by https://stackoverflow.com/users/282635/ryyst, posted 2011-07-21, last edited 2014-01-10, when Stack Overflow published posts under CC BY-SA 3.0): decoded_data, triple, input_length / 4 * 3, (triple >> k * 8) & 0xFF. Its table (indexed from '+') is in none of the question's 21 answers (read 2026-11-15), so that source is not confirmed. The citation came into PyMOL between its 2017-12-21 and 2018-02-28 snapshots, before the 4.0 change. This build changes base64_decode (pymol-wasm/patches/0011-mypng-failed-read-builds-no-image.patch: an optional argument that returns the decoded length); the modified function stays under the same terms, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/)
 In: layer0/MyPNG.cpp (base64_decoding_table)
 
 [layer0/MyPNG.cpp]
@@ -3057,7 +3057,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ------------------------------------------------------------------------------
 SQLite 3.39.0 (sqlite3)
 Licence: Public domain (no notice is required; credited here)
-In the core: built by Pyodide from sqlite-autoconf-3390000 (the wasm's source id is 2022-06-25 14:57:57 14e166f4). The dedication below is quoted from SQLite 3.39.4's sqlite3.h (python/cpython-source-deps tag sqlite-3.39.4.0); 3.39.0's own sqlite3.h (sqlite.org's sqlite-autoconf-3390000.tar.gz, source id 2022-06-25 14:57:57 14e166f4) has the same ten lines, word for word (PT-9285 item 3)
+In the core: built by Pyodide from sqlite-autoconf-3390000 (the wasm's source id is 2022-06-25 14:57:57 14e166f4). The dedication below is quoted from SQLite 3.39.4's sqlite3.h (python/cpython-source-deps tag sqlite-3.39.4.0); 3.39.0's own sqlite3.h (sqlite.org's sqlite-autoconf-3390000.tar.gz, source id 2022-06-25 14:57:57 14e166f4) has the same ten lines, word for word
 
 [python/cpython-source-deps sqlite-3.39.4.0 sqlite3.h]
 /*
