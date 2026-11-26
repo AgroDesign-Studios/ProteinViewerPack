@@ -1,0 +1,105 @@
+Port of upstream pymol-open-source commit bebf5f0644ff93cceda045d8676cca9e8d088c0d
+(PR #522, fixes issue #517): size string buffers by UTF-8 byte length instead of
+PyUnicode_GetLength (code points). Only the C++ part (5 files) is taken, verbatim;
+the upstream test files under testing/ are left out. After this patch the 5 files
+are byte-identical to upstream master's.
+
+diff --git a/layer0/os_python.h b/layer0/os_python.h
+index af372db883..c2631ddecd 100644
+--- a/layer0/os_python.h
++++ b/layer0/os_python.h
+@@ -44,8 +44,6 @@ typedef int PyObject;
+ # define PyNumber_Int           PyNumber_Long
+ 
+ # define PyString_Check                 PyUnicode_Check
+-# define PyString_Size                  PyUnicode_GetLength
+-# define PyString_GET_SIZE              PyUnicode_GetLength
+ # define PyString_FromString            PyUnicode_FromString
+ # define PyString_FromStringAndSize     PyUnicode_FromStringAndSize
+ # define PyString_InternFromString      PyUnicode_InternFromString
+diff --git a/layer1/PConv.cpp b/layer1/PConv.cpp
+index ed259f8379..4d00f2deb7 100644
+--- a/layer1/PConv.cpp
++++ b/layer1/PConv.cpp
+@@ -122,10 +122,10 @@ int PConvPyListToStrVLAList(PyObject * obj, char **vla, int *n_str)
+     for(i = 0; i < n_st; i++) {
+       t = PyList_GetItem(obj, i);
+       if(PyString_Check(t)) {
+-        l = PyString_Size(t);
++        auto strval = PyString_AsSomeString(t);
++        l = strval.length();
+         nn_ch = n_ch + l + 1;
+         VLACheck(*vla, char, nn_ch);
+-        auto strval = PyString_AsSomeString(t);
+         UtilNCopy((*vla) + n_ch, strval.c_str(), l + 1);
+         n_ch = nn_ch;
+       } else {
+@@ -1159,7 +1159,8 @@ int PConvPyListToStringVLA(PyObject * obj, char **vla_ptr)
+       for(a = 0; a < l; a++) {
+         i = PyList_GetItem(obj, a);
+         if(PyString_Check(i)) {
+-          ll += PyString_Size(i) + 1;
++          // UTF-8 byte length, not code points (PyUnicode_GetLength)
++          ll += PyString_AsSomeString(i).length() + 1;
+         }
+       }
+       vla = VLAlloc(char, ll);
+diff --git a/layer1/PConv.h b/layer1/PConv.h
+index e3055d62ab..4a556c83b8 100644
+--- a/layer1/PConv.h
++++ b/layer1/PConv.h
+@@ -85,7 +85,6 @@ Z* -------------------------------------------------------------------
+ #define CPythonVal_New_Float(VAL)                       PyFloat_FromDouble(VAL)
+ 
+ #define CPythonVal_PyFloat_AsDouble(PYOBJECT)            PyFloat_AsDouble(PYOBJECT)
+-#define CPythonVal_PyString_Length(PYOBJECT)             PyString_Size(PYOBJECT)
+ #define CPythonVal_PConvPyStrToStr                       PConvPyStrToStr
+ #define CPythonVal_PConvPyBoolToInt                      PConvPyBoolToInt
+ #define CPythonVal_PConvPyFloatToFloat                   PConvPyFloatToFloat
+diff --git a/layer1/Property.cpp b/layer1/Property.cpp
+index dc91d818ef..024bd0b670 100644
+--- a/layer1/Property.cpp
++++ b/layer1/Property.cpp
+@@ -726,7 +726,7 @@ int PropertyFromPyList(PyMOLGlobals* G, PyObject* list)
+           if (!prop_id)
+             prop_id = PropertyGetNewUniqueID(G);
+           pVal = CPythonVal_PyList_GetItem(G, val, 0);
+-          prop_name_len = CPythonVal_PyString_Length(pVal) + 1;
++          prop_name_len = PyString_AsSomeString(pVal).length() + 1;
+           prop_name = pymol::malloc<char>(prop_name_len);
+           CPythonVal_PConvPyStrToStr(pVal, prop_name, prop_name_len);
+           CPythonVal_Free(pVal);
+@@ -752,7 +752,7 @@ int PropertyFromPyList(PyMOLGlobals* G, PyObject* list)
+           } break;
+           case PropertyType::String: {
+             char* prop_value;
+-            int prop_value_len = CPythonVal_PyString_Length(propval) + 1;
++            int prop_value_len = PyString_AsSomeString(propval).length() + 1;
+             prop_value = pymol::malloc<char>(prop_value_len);
+             CPythonVal_PConvPyStrToStr(propval, prop_value, prop_value_len);
+             PropertySet(G, prop_id, prop_name, prop_value);
+diff --git a/layer4/PopUp.cpp b/layer4/PopUp.cpp
+index 0792cdab89..51676a3576 100644
+--- a/layer4/PopUp.cpp
++++ b/layer4/PopUp.cpp
+@@ -186,9 +186,9 @@ Block *PopUpNew(PyMOLGlobals * G, int x, int y, int last_x, int last_y,
+       continue;
+     }
+     elem = PyList_GetItem(item, 1);
+-    l = PyString_Size(elem);
+     str = PyString_AsString(elem);
+-    cl = l;
++    l = strlen(str);             /* buffer size in UTF-8 bytes */
++    cl = PyUnicode_GetLength(elem); /* display width in code points */
+     c = str;
+     while(*c) {
+       if(TextStartsWithColorCode(c)) {  /* discount the markup */
+@@ -214,7 +214,7 @@ Block *PopUpNew(PyMOLGlobals * G, int x, int y, int last_x, int last_y,
+     if (PyList_Size(item) > 2) {
+       PyObject* command = PyList_GetItem(item, 2);
+       if(PyString_Check(command)) {
+-	l = PyString_Size(command);
++	l = strlen(PyString_AsString(command));
+ 	if(l > mx)
+ 	  mx = l;
+       }

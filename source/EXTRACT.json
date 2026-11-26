@@ -1,0 +1,2241 @@
+{
+  "format": 2,
+  "what": "The Protein Viewer Pack source, cut from one commit of AgDB by scripts/viewer_pack_extract.mjs (PT-9911).",
+  "commit": "4a72caeb20f10c746f058cf97fd88a025dcd8bef",
+  "declaration": {
+    "path": "frontend/standalone/structure-viewer/source/extract.json",
+    "sha256": "70a8cad667cc39916cf7ac4ef63a2e37636b7ae960b414aae97bab21758f08c5"
+  },
+  "extractor": {
+    "path": "scripts/viewer_pack_extract.mjs",
+    "sha256": "30d8cb0863cd88a3baf0ddba7fc7a72bd7c77cc7e00973bc6fd747b619a56abe"
+  },
+  "tools": {
+    "node": "v22.22.1",
+    "vite": "8.3.5",
+    "postcss": "8.5.32",
+    "typescript": "5.9.3"
+  },
+  "files": {
+    "LICENSE": {
+      "from": "commit:frontend/standalone/structure-viewer/source/LICENSE",
+      "bytes": 4477,
+      "sha256": "baaa4ed619b95d155b54c407fde4a82868181c3e5d49351ab2ce81bfb32b5be3"
+    },
+    "README.md": {
+      "from": "commit:frontend/standalone/structure-viewer/source/README.md",
+      "bytes": 6606,
+      "sha256": "7aaae8986abb5cd013b52c7822ac246cc4d149cb07258aa971ced1bb005779ce"
+    },
+    "frontend/package-lock.json": {
+      "from": "package",
+      "bytes": 129333,
+      "sha256": "d70ea974fa12e21196bcb5cddc5b7b32ae67f5458f901ab38d3ac8eb0dfd9c09"
+    },
+    "frontend/package.json": {
+      "from": "package",
+      "bytes": 785,
+      "sha256": "2ad952ba4aecd7a407d919af68837a8d8f44cf5319575f88fb4dd8c7f2c1cea3"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/README.md": {
+      "from": "commit",
+      "bytes": 12976,
+      "sha256": "a1310e525fe26872758d2828016128a2cc38756ff5fb02b033801a680cba2dde"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/host.js": {
+      "from": "commit",
+      "bytes": 14778,
+      "sha256": "9fd961dfe45d70c94ab574fc7a5ec6790eab4d920c192ec8950fbf47f713202b"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/COPYRIGHT.musl.txt": {
+      "from": "commit",
+      "bytes": 6204,
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/FTL.freetype.txt": {
+      "from": "commit",
+      "bytes": 6743,
+      "sha256": "08c135755dd589039470f1fdbb400daaabaaa50d0b366d19cebff4d22986baa1"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.cpython.txt": {
+      "from": "commit",
+      "bytes": 13804,
+      "sha256": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.emscripten.txt": {
+      "from": "commit",
+      "bytes": 5093,
+      "sha256": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.freetype.txt": {
+      "from": "commit",
+      "bytes": 2074,
+      "sha256": "2e3bbb7d7c5c396368dd0853a790ec29ce5b8647163dde42a0493fb0d6556b2b"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.glm.txt": {
+      "from": "commit",
+      "bytes": 2865,
+      "sha256": "62d2d642c7d054d4fb4c9b42faad617d6c88fcd91e317f8035aa9f277cc159c3"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.libpng.txt": {
+      "from": "commit",
+      "bytes": 5345,
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.llvm-libcxx.txt": {
+      "from": "commit",
+      "bytes": 16703,
+      "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.numpy.txt": {
+      "from": "commit",
+      "bytes": 1543,
+      "sha256": "1be1df33863f97a7bc1c4d67980bd6c69c9a6fef0a5ee76e6ad6cb91e56e8491"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.pymol.txt": {
+      "from": "commit",
+      "bytes": 2268,
+      "sha256": "a1fd32ff4f11d3b7eedd8dd4ecfcec1bd65374e16ee8a823899dc3c2be13d85e"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.pyodide.txt": {
+      "from": "commit",
+      "bytes": 16725,
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.zlib.txt": {
+      "from": "commit",
+      "bytes": 1002,
+      "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/NOTICES.numpy-bundled.txt": {
+      "from": "commit",
+      "bytes": 48234,
+      "sha256": "dfcdc0b47befc23a5f23f754e8b1bdcd23e6b6b73df348574cb6cae65f662c8d"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/NOTICES.pymol-third-party.txt": {
+      "from": "commit",
+      "bytes": 30831,
+      "sha256": "c6c0a4c00080aac1536653370eb30bf6a6de7b14282bce50b57d76ffdc58c0b7"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/NOTICES.pyodide-core.txt": {
+      "from": "commit",
+      "bytes": 56396,
+      "sha256": "ef329c911a53a078b12cfe4e6813de911b0779430e46f7485248cc8eceb80e5f"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/SOURCE.pyodide.txt": {
+      "from": "commit",
+      "bytes": 2806,
+      "sha256": "a0f868f8eabb00a69aea375132805a6216dabf4dc83abc9c292cac4b26ed5e90"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "from": "commit",
+      "bytes": 2568340,
+      "sha256": "ac2db75025a6dd4ce140c571d60c11f61b0c2010f879865952e513c57ff3d9b0"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0001-memoryusage-emscripten.patch": {
+      "from": "commit",
+      "bytes": 588,
+      "sha256": "f2de151940a75a12844602da0178cd14812ee3b85640d3f65b1727f4bb4dba56"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0002-shaders-webgl1-fragdepth-ext.patch": {
+      "from": "commit",
+      "bytes": 814,
+      "sha256": "4d39a3786f8973f031a81596f707262f9fd9c073e5f37e6635d419d2309d40fc"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0003-glgenbuffer-clear-stale-errors.patch": {
+      "from": "commit",
+      "bytes": 581,
+      "sha256": "e102018098f2e5cee2a40fd6b0a0aa5c0bf9eb6ecd935b9f96a48764efc3753c"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0004-replabel-es2-use-label-shader.patch": {
+      "from": "commit",
+      "bytes": 628,
+      "sha256": "ef1faae2bd563b072b378a150393b50c342af9dbaccb5f4f6e738d5a4fe75c19"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0005-shadermgr-webgl2-glsl-es300.patch": {
+      "from": "commit",
+      "bytes": 2089,
+      "sha256": "9da42f2613c4b675341219e222cec01424af51b87a131581990ab249a44d20cc"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0006-chempy-restricted-unpickler.patch": {
+      "from": "commit",
+      "bytes": 8309,
+      "sha256": "4bd9a865d00ecc519fb600d530b96f92561a4395341e18b54b1be86245337822"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0007-typeface-truetype-modules-only.patch": {
+      "from": "commit",
+      "bytes": 2063,
+      "sha256": "15f40cb59c4f74e7e9658c3f83a8d6367d610ac94c25d455eda949a54a6c1e07"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0008-repsurface-empty-va-is-null.patch": {
+      "from": "commit",
+      "bytes": 580,
+      "sha256": "93bb80457d48fbad27dace18d92abdd8fdb459ac53e4a35553aceb7fa1ebd870"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0009-map-express-two-pass-triangle-start.patch": {
+      "from": "commit",
+      "bytes": 7116,
+      "sha256": "df1a4abd87ee74af912f67cc81d5c72794682bbcdfff8af787ea12134be4ce18"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0010-utf8-byte-lengths-upstream-522.patch": {
+      "from": "commit",
+      "bytes": 4804,
+      "sha256": "d87a9c61ea4a22ecc125b9c3fbca7a75343600d9f426d4714eeef441a11914a4"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0011-mypng-failed-read-builds-no-image.patch": {
+      "from": "commit",
+      "bytes": 3609,
+      "sha256": "96447b68a65806ecb57aca9f2245481cb728ecc547e1b52dd00b5ecc8c628aa2"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0012-text-sans-four-fonts-fallback.patch": {
+      "from": "commit",
+      "bytes": 2133,
+      "sha256": "5a4ede8ef91f4340f73118bf938aebcbe97114e0b8c18967b37e9aa3ed6b224a"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0013-shadermgr-es300-without-regex.patch": {
+      "from": "commit",
+      "bytes": 11292,
+      "sha256": "6bb333d602603fd3e01833952b68e37b0aa86fa0bcaebd7be061a2cee21aae4b"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/patches/0014-chempy-pkl-bundled-c-unpickler.patch": {
+      "from": "commit",
+      "bytes": 1618,
+      "sha256": "df6c5c537cb1920d054bc1bc820342beb9a002cb33f41cf935bcabf73a02d612"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pymol-3.2.0a-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "from": "commit",
+      "bytes": 4261268,
+      "sha256": "45f41f18b403ecdc9713bfef26e6194ae7483dbbdcf3cd95fe6022a7f98585fd"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pyodide-lock.json": {
+      "from": "commit",
+      "bytes": 933,
+      "sha256": "dd2b7f7699c5d5fa99a4dfdc8d4f20f2db69940f698047e989828f62e179df44"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pyodide.asm.mjs": {
+      "from": "commit",
+      "bytes": 1250344,
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pyodide.asm.wasm": {
+      "from": "commit",
+      "bytes": 9598218,
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pyodide.js": {
+      "from": "commit",
+      "bytes": 18912,
+      "sha256": "3141b814715a72e59b51b1b18b9ceae5bf19f7c852417e431bb0a34feadf825c"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/python_stdlib.zip": {
+      "from": "commit",
+      "bytes": 2961852,
+      "sha256": "26a668c6cefb4a4aa3cb653727e23cbc5baeeff5332be8d1f017fd8eeeebdfbf"
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/worker.js": {
+      "from": "commit",
+      "bytes": 118320,
+      "sha256": "3378e2be8217b3d57094245f146677ebb059edd9fc0465daf9f56489b41cf18c"
+    },
+    "frontend/src/components/DialogBars.tsx": {
+      "from": "commit",
+      "bytes": 2583,
+      "sha256": "6047c2e1d9f71151766e23c9446ae142078d670e30ea3c2bdcd791ff8deee4cd"
+    },
+    "frontend/src/components/Modal.test.tsx": {
+      "from": "commit",
+      "bytes": 68690,
+      "sha256": "5f117a03cf5e493e277c06a5ba2dc811b4b6aafed58cdf65ffe4e32db5066922"
+    },
+    "frontend/src/components/Modal.tsx": {
+      "from": "commit",
+      "bytes": 28068,
+      "sha256": "a02590545333e75bf7a99e3781a435d7e190411d1ee85b235c53b7525c7dbb93"
+    },
+    "frontend/src/components/Mol3dNotice.test.tsx": {
+      "from": "commit",
+      "bytes": 3187,
+      "sha256": "9f286ad51f6bb4d437f7a5234b3c54916382505508419e63c0127651a0daba54"
+    },
+    "frontend/src/components/Mol3dNotice.tsx": {
+      "from": "commit",
+      "bytes": 2802,
+      "sha256": "2bcd736260a190986caea04233e27e4591a8599e0339109f288c9a248eddc0ad"
+    },
+    "frontend/src/components/PymolContainsLabel.css": {
+      "from": "commit",
+      "bytes": 1162,
+      "sha256": "14900041b30957cb5b7888a55d7693cbe04859826d85011a1b78acd52470d7ad"
+    },
+    "frontend/src/components/PymolContainsLabel.test.tsx": {
+      "from": "commit",
+      "bytes": 3395,
+      "sha256": "2827b094e008366140c3ec8dd60fa45b1a6bf8274785cb856be87b2927fbfe9b"
+    },
+    "frontend/src/components/PymolContainsLabel.tsx": {
+      "from": "commit",
+      "bytes": 3793,
+      "sha256": "1e2028cec7336e1f7cb11f40f0bf8bf629d4c3a6c66e803f6ca54490d809be0d"
+    },
+    "frontend/src/components/PymolNotice.css": {
+      "from": "commit",
+      "bytes": 1479,
+      "sha256": "ba712666811df18cb85da457adf02878fdec44dc83f33d1332b779cb326ea0e5"
+    },
+    "frontend/src/components/PymolNotice.test.tsx": {
+      "from": "commit",
+      "bytes": 1634,
+      "sha256": "939d6d26219e8f18edcdc8cd9e6219f8e9f53ed55be378f5ce095029b8052d67"
+    },
+    "frontend/src/components/PymolNotice.tsx": {
+      "from": "commit",
+      "bytes": 1018,
+      "sha256": "50d71d9fbd38fa6cadcb210648ebfbe492793592863a1ce7a510da5057985fae"
+    },
+    "frontend/src/components/ToggleSwitch.css": {
+      "from": "commit",
+      "bytes": 1851,
+      "sha256": "8f8d18b942e3cff3374e3117ca619ef694f932dfbfae4ec83558f59134e6f535"
+    },
+    "frontend/src/components/ToggleSwitch.test.tsx": {
+      "from": "commit",
+      "bytes": 3955,
+      "sha256": "d0d2c6c87b74e39513c88c42160c127c563b5c0e109dc72cf5a870652f21226b"
+    },
+    "frontend/src/components/ToggleSwitch.tsx": {
+      "from": "commit",
+      "bytes": 2506,
+      "sha256": "e22bdab2741f8fb4a24789237430231262805ef4142ef32554c2507ef3099d90"
+    },
+    "frontend/src/components/modalStack.test.ts": {
+      "from": "commit",
+      "bytes": 4082,
+      "sha256": "f5e18862626febcd1bba5f376ddcfed50d35b80867f0764a9a07933e0e5027b7"
+    },
+    "frontend/src/components/modalStack.ts": {
+      "from": "commit",
+      "bytes": 21310,
+      "sha256": "80c01209b29c1d68785040c063cc3f19410d658f4feb7ecc5efa5f8c1a784242"
+    },
+    "frontend/src/components/structure-viewer/DepthCueBar.test.tsx": {
+      "from": "commit",
+      "bytes": 42475,
+      "sha256": "7fbfe73c5f1c1394b92470c58c4fef81efa0cf5f250cbca1f4a92f40e1dfbb8d"
+    },
+    "frontend/src/components/structure-viewer/DepthCueBar.tsx": {
+      "from": "commit",
+      "bytes": 20546,
+      "sha256": "3ca688c56021cb0b3e46f8eb2cb449af2d9398b33f4350b58ab6ce1df102b0cf"
+    },
+    "frontend/src/components/structure-viewer/Mol3dToolbar.test.tsx": {
+      "from": "commit",
+      "bytes": 21302,
+      "sha256": "59c9d969dbd39c0ed06a4c071ea5ae25b594f3ec6499f40d429c7f5501ad281e"
+    },
+    "frontend/src/components/structure-viewer/Mol3dToolbar.tsx": {
+      "from": "commit",
+      "bytes": 32574,
+      "sha256": "b5d32ce511529c64d9ee433174bd30920b9adfab4ad7392ebcce74783bcb0a2e"
+    },
+    "frontend/src/components/structure-viewer/SurfaceTypeChips.tsx": {
+      "from": "commit",
+      "bytes": 5211,
+      "sha256": "15fcd00ab73c150539678b877055d4ca279e8703f6ec004cf20edf53959cfcfc"
+    },
+    "frontend/src/components/structure-viewer/ToolbarPopover.test.tsx": {
+      "from": "commit",
+      "bytes": 2576,
+      "sha256": "9168571803ef91219eacea5efeb8cfdb1acd38abbebce45120760f1cd470a43c"
+    },
+    "frontend/src/components/structure-viewer/ToolbarPopover.tsx": {
+      "from": "commit",
+      "bytes": 2925,
+      "sha256": "95d736dd18156959a2f81ddc1b1a411c592c04572b6370382801d49d727c4237"
+    },
+    "frontend/src/components/structure-viewer/ViewerAnnotationLayer.test.tsx": {
+      "from": "commit",
+      "bytes": 14537,
+      "sha256": "2aa6a9ba5bc9c13d947967ed2d4bf34883639f7a8d89a977e72499cc7ccc24f9"
+    },
+    "frontend/src/components/structure-viewer/ViewerAnnotationLayer.tsx": {
+      "from": "commit",
+      "bytes": 17764,
+      "sha256": "e258877de78d5b45860ef8b171cc60d502514ffd334f97ce000b648866c52abc"
+    },
+    "frontend/src/components/structure-viewer/ViewerToolChips.tsx": {
+      "from": "commit",
+      "bytes": 4718,
+      "sha256": "f2c97a4a7b37fa12481af760036f2f0defe5236744fa6ff6b12b03218280168e"
+    },
+    "frontend/src/components/structure-viewer/annotationModel.test.ts": {
+      "from": "commit",
+      "bytes": 6591,
+      "sha256": "ea36b4e01bc4998436abe853f5a5b53905ec0beb6c6e6b4f1971c8b967b2a13d"
+    },
+    "frontend/src/components/structure-viewer/annotationModel.ts": {
+      "from": "commit",
+      "bytes": 6336,
+      "sha256": "52f0fd8a03087b35d57c68113437e106eb78ef5233ce58b4c83be5fdef1ba7ae"
+    },
+    "frontend/src/components/structure-viewer/capGeometry.test.ts": {
+      "from": "commit",
+      "bytes": 16563,
+      "sha256": "50a3a4a26e61e76fbdfa1749a44c9cf3aa6bc54e03213f0c2fe62b7d1e36c952"
+    },
+    "frontend/src/components/structure-viewer/capGeometry.ts": {
+      "from": "commit",
+      "bytes": 31479,
+      "sha256": "0f896378644a1c5c03108e8d9d73b654e02b42751f6e9529fcbc773bf9f86695"
+    },
+    "frontend/src/components/structure-viewer/compositeScreenshot.test.ts": {
+      "from": "commit",
+      "bytes": 15350,
+      "sha256": "3aac289828be5973ea30763d5d9c276e8a86507e761029233108b3a081b9b4b9"
+    },
+    "frontend/src/components/structure-viewer/compositeScreenshot.ts": {
+      "from": "commit",
+      "bytes": 11559,
+      "sha256": "3a90bbd026ba98eb786f805c5713136c20ccc74aa95950d968767e04fe1bb5a8"
+    },
+    "frontend/src/components/structure-viewer/depthCue.test.ts": {
+      "from": "commit",
+      "bytes": 25356,
+      "sha256": "11e1cc56d0624a37e3a1aa6f0c1291c35e97babdecb0a8f7e85abeecfbd57d5f"
+    },
+    "frontend/src/components/structure-viewer/depthCue.ts": {
+      "from": "commit",
+      "bytes": 30223,
+      "sha256": "d0adb2f07451ee74870ab5d3220a29a25ff80ec1e6b29a526cb51a475441d0af"
+    },
+    "frontend/src/components/structure-viewer/inkCursor.ts": {
+      "from": "commit",
+      "bytes": 2154,
+      "sha256": "46e6068bfcda1524658c8b5c66b0361c8c6f94f1294b275f138310d6bbb6f4fb"
+    },
+    "frontend/src/components/structure-viewer/inkPalette.ts": {
+      "from": "commit",
+      "bytes": 2080,
+      "sha256": "67b18eaf5a92c7bffd2897c2d060e5a28966e23d773b0796e6b84a4fe1870195"
+    },
+    "frontend/src/components/structure-viewer/orthoFraming.test.ts": {
+      "from": "commit",
+      "bytes": 6634,
+      "sha256": "ee4649be2a031716f65a687ab4b05ae57189fbaa80fc51ed7e4fa24e6a40dc9a"
+    },
+    "frontend/src/components/structure-viewer/orthoFraming.ts": {
+      "from": "commit",
+      "bytes": 6117,
+      "sha256": "b33e82a2028832549b59a1e6093e2db616d5c836a19d5584fd7502c581175b4f"
+    },
+    "frontend/src/components/structure-viewer/safeModelText.test.ts": {
+      "from": "commit",
+      "bytes": 18269,
+      "sha256": "f88d47b3acf5e864d88dfeaf7435c2a5213c86e60a3bc5f86feda15fb940a90a"
+    },
+    "frontend/src/components/structure-viewer/safeModelText.ts": {
+      "from": "commit",
+      "bytes": 4999,
+      "sha256": "6574ed9816969ce38d60fd60850e0bb1898fc093c1afb4e4caa1640875805abd"
+    },
+    "frontend/src/components/structure-viewer/sceneStyles.test.ts": {
+      "from": "commit",
+      "bytes": 38786,
+      "sha256": "5d5fbc46500ad65bf2b89651b3965d85db897ef2d49d4fd15ab8f8901e6be4cf"
+    },
+    "frontend/src/components/structure-viewer/sceneStyles.ts": {
+      "from": "commit",
+      "bytes": 27487,
+      "sha256": "d9caeec81ac45021a342e0b8b42f2d9fb87ab0d530c350465a72c147cd554cfe"
+    },
+    "frontend/src/components/structure-viewer/sectionCap.test.ts": {
+      "from": "commit",
+      "bytes": 38981,
+      "sha256": "32ebc283c9b86c1d8bac3b3c86e3f54ef45f3585dbc4d310690a21e7f6e077f9"
+    },
+    "frontend/src/components/structure-viewer/sectionCap.ts": {
+      "from": "commit",
+      "bytes": 40517,
+      "sha256": "506c4afe8507de0bdabef8aad1080eb93305e3ecc505c40918873777d4d715cd"
+    },
+    "frontend/src/components/structure-viewer/shapeBoundingSphere.ts": {
+      "from": "commit",
+      "bytes": 1434,
+      "sha256": "62a7f859ba0a2744270f1659755420de6bb533d2898b2e80708ed7840ba7df77"
+    },
+    "frontend/src/components/structure-viewer/sliderRelease.ts": {
+      "from": "commit",
+      "bytes": 2627,
+      "sha256": "d8f3134f83a6c7277c7203b34f1e207cfe949a232a8e91b7839a73f6e961f96e"
+    },
+    "frontend/src/components/structure-viewer/structureViewer.css": {
+      "from": "commit",
+      "bytes": 44869,
+      "sha256": "ff92bef684347c1cd2b58fa1eeed645d87e8cae8bec331f9e67b1fc0cc4cf9e1"
+    },
+    "frontend/src/components/structure-viewer/surfaceController.test.ts": {
+      "from": "commit",
+      "bytes": 53688,
+      "sha256": "b393235b2e88aee791acca1bb74e319e1e38e3c50205efe1837e5bf4efc04165"
+    },
+    "frontend/src/components/structure-viewer/surfaceController.ts": {
+      "from": "commit",
+      "bytes": 43903,
+      "sha256": "1485ecd5758a04363c4ebc0c92b475ea9a4dbdf4f19b396b79b2da34a83e9db7"
+    },
+    "frontend/src/components/structure-viewer/surfaceFailure.test.ts": {
+      "from": "commit",
+      "bytes": 3059,
+      "sha256": "6b066b72f6c8999a4c9bc15d1f66cca331a8a2e49a543d89814f41e62945b2de"
+    },
+    "frontend/src/components/structure-viewer/surfaceFailure.ts": {
+      "from": "commit",
+      "bytes": 2905,
+      "sha256": "412bba4b6a54a8096b48dc037688c51cb6d1067b2d132717d80462d5525735cc"
+    },
+    "frontend/src/components/structure-viewer/surfaceType.test.ts": {
+      "from": "commit",
+      "bytes": 17401,
+      "sha256": "7da7bbd56e2e540e3bed6d95d93019a18db99740a33454eecbee279999060755"
+    },
+    "frontend/src/components/structure-viewer/surfaceType.ts": {
+      "from": "commit",
+      "bytes": 8996,
+      "sha256": "7bfde59c4949512a7191561644268ffb9ada5c307587e00ed50a8283387ea1ca"
+    },
+    "frontend/src/components/structure-viewer/symmetryMates.test.ts": {
+      "from": "commit",
+      "bytes": 13792,
+      "sha256": "573819e393175fdbb2b8bc9258ddeae7f8a72f480f110cf479ba683cb8f3304e"
+    },
+    "frontend/src/components/structure-viewer/symmetryMates.ts": {
+      "from": "commit",
+      "bytes": 18397,
+      "sha256": "cf126abd80a4fc1dd28085997fa650107222e8edf1ca9bcb567e4c26129a6d77"
+    },
+    "frontend/src/components/structure-viewer/useDepthCue.test.ts": {
+      "from": "commit",
+      "bytes": 14691,
+      "sha256": "d5fcfe5de81158a6de8e62f698cd34ee54df16cf5621b6797d08fa3a8bb0dd54"
+    },
+    "frontend/src/components/structure-viewer/useDepthCue.ts": {
+      "from": "commit",
+      "bytes": 14384,
+      "sha256": "2472888d38871418ff15afdfc477e5c7ce7592ad09aa4c4aeddefe2777cf199e"
+    },
+    "frontend/src/components/structure-viewer/useResiduePicking.test.tsx": {
+      "from": "commit",
+      "bytes": 8402,
+      "sha256": "9d5751134381ce34c335d878f8305136a14c1a3c081f7d78a8bd40065841db8c"
+    },
+    "frontend/src/components/structure-viewer/useResiduePicking.ts": {
+      "from": "commit",
+      "bytes": 4533,
+      "sha256": "676891d513542c931e058ff0affb5f4f5db9ffb43851abef531c06a20c921344"
+    },
+    "frontend/src/components/structure-viewer/useViewerAnnotation.ts": {
+      "from": "commit",
+      "bytes": 5682,
+      "sha256": "c4067eea61f6e91da0408c782c6719c1adc37a6bfdf3a7a63e1bcf33625a1484"
+    },
+    "frontend/src/components/structure-viewer/viewChangeMux.test.ts": {
+      "from": "commit",
+      "bytes": 4945,
+      "sha256": "cd3e256e3c620d51f7db57cb6529e9aa2d3245ef9839e94fd749a4447c345103"
+    },
+    "frontend/src/components/structure-viewer/viewChangeMux.ts": {
+      "from": "commit",
+      "bytes": 4736,
+      "sha256": "8b4e1e17ed74a3989197a0cb7eb7ab4aba7c8d6c9f078ce1e60ce6343f8e0cc8"
+    },
+    "frontend/src/components/structure-viewer/viewerColorScheme.test.ts": {
+      "from": "commit",
+      "bytes": 5877,
+      "sha256": "81a4e51f0171a8431a83787d5472a753b740376ef4102d087e5121b59322b88f"
+    },
+    "frontend/src/components/structure-viewer/viewerColorScheme.ts": {
+      "from": "commit",
+      "bytes": 5519,
+      "sha256": "16f58581e80b2078692656c06ac77d87ea5f8aa4c7f2d28f12db96f2a12198bd"
+    },
+    "frontend/src/components/structure-viewer/viewerRecovery.test.ts": {
+      "from": "commit",
+      "bytes": 5573,
+      "sha256": "07c3f998f41b639d09127a9579f7519cbd0b2820c4a00aa46a3d4bd856314ace"
+    },
+    "frontend/src/components/structure-viewer/viewerRecovery.ts": {
+      "from": "commit",
+      "bytes": 4573,
+      "sha256": "c2425d7e3908da27143a8d65a36a62d7b08fab138bb3bc279fb02310f5803f87"
+    },
+    "frontend/src/earcut.d.ts": {
+      "from": "commit",
+      "bytes": 1029,
+      "sha256": "620fee2e4a6bd691a46524c53f04ef9d82957108d2c13e9c3035e0d0763f1ec7"
+    },
+    "frontend/src/hooks/useMatchMedia.test.tsx": {
+      "from": "commit",
+      "bytes": 3643,
+      "sha256": "c9bdf7839b9616678b3be8f828268b86c1269e172276f168b74ff032906dc16b"
+    },
+    "frontend/src/hooks/useMatchMedia.ts": {
+      "from": "commit",
+      "bytes": 924,
+      "sha256": "a9c7bd131d8cbe759717952cc29c81b7cfb9307a2f4e88cb490d9d71b9426b4c"
+    },
+    "frontend/src/i18n/locales/en/common.json": {
+      "from": "strings",
+      "bytes": 49,
+      "sha256": "4ee84c4dd9860a9d9d51c648983da01eb4ba3fcb2152cae9f2c7320d5e71504c"
+    },
+    "frontend/src/i18n/locales/en/htmlExport.json": {
+      "from": "strings",
+      "bytes": 41395,
+      "sha256": "bf46d0b950d00cde5912eb1c507c83bc3d8c220a751ed8e2dc0e1d88e0813ff2"
+    },
+    "frontend/src/i18n/locales/en/proteindb.json": {
+      "from": "strings",
+      "bytes": 12326,
+      "sha256": "4a191b93f565ad0773b188c2f445938b1e2038ba0fbb74817cf5af6138ccef75"
+    },
+    "frontend/src/i18n/locales/en/pymol.json": {
+      "from": "strings",
+      "bytes": 16799,
+      "sha256": "1d8851b9f5c0ab4bda4fcc9fc9849403087465a6543d4e660d7145a35aaca5fe"
+    },
+    "frontend/src/i18n/locales/en/pymolNotice.json": {
+      "from": "strings",
+      "bytes": 810,
+      "sha256": "92f2acad830726232e23807d555d533c2e3bd3ad5295b6dd520867c869ef5f97"
+    },
+    "frontend/src/i18n/locales/ja/common.json": {
+      "from": "strings",
+      "bytes": 65,
+      "sha256": "f736d168999849da7af9e5d692ad0c3b9e99f336abb65d332291bb14ae41cdbc"
+    },
+    "frontend/src/i18n/locales/ja/htmlExport.json": {
+      "from": "strings",
+      "bytes": 52229,
+      "sha256": "c9e459b980c16d1f7b1a76af390a9990bb0e1bc017da871dcb9db8f26d4b1357"
+    },
+    "frontend/src/i18n/locales/ja/proteindb.json": {
+      "from": "strings",
+      "bytes": 14129,
+      "sha256": "060ede39eab1f4282f02c9ee7d3fca9188fbae352c592e42fbd508e161b8753c"
+    },
+    "frontend/src/i18n/locales/ja/pymol.json": {
+      "from": "strings",
+      "bytes": 20932,
+      "sha256": "f56b8fca6b338f1309bc43c7446d4f7b93581dc2631057b0e93708727b80e06e"
+    },
+    "frontend/src/i18n/locales/ja/pymolNotice.json": {
+      "from": "strings",
+      "bytes": 968,
+      "sha256": "66584b6605c331bfb269909c5d9d74218cd64f17f8bff48061b118be2a99ea67"
+    },
+    "frontend/src/i18n/numberFormatter.ts": {
+      "from": "commit",
+      "bytes": 3036,
+      "sha256": "b721122e781e6537297910229bd545a830019ae0ad7083d73fe097ad0f99d6ba"
+    },
+    "frontend/src/index.css": {
+      "from": "css-prune",
+      "bytes": 15435,
+      "sha256": "b418719f6a030303a5bc98b8be43293c86d247014b799a2810ab9d581fcd9067"
+    },
+    "frontend/src/lib/saveBlobFile.test.ts": {
+      "from": "commit",
+      "bytes": 2138,
+      "sha256": "e5f3dd38f861a48474df32ff8ae133428030ec78d7c2b002e3ee40803290eff2"
+    },
+    "frontend/src/lib/saveBlobFile.ts": {
+      "from": "commit",
+      "bytes": 650,
+      "sha256": "4d1edb5168e6724ef0f921923eb0a346f8c8bc4d619cc79e597b7d73ec61659b"
+    },
+    "frontend/src/lib/saveTextFile.ts": {
+      "from": "commit",
+      "bytes": 983,
+      "sha256": "408b9b021027db9fd6a3266ff55ff11605381e1cc716ce2c5e96e3debfa3a056"
+    },
+    "frontend/src/pages/pymol-viewer/PymolAboutDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 2563,
+      "sha256": "e44d149b94035b6b20be6c52715315d92d3a666a813190dc3506c2920e634ef8"
+    },
+    "frontend/src/pages/pymol-viewer/PymolAboutDialog.tsx": {
+      "from": "commit",
+      "bytes": 2634,
+      "sha256": "99492af451680334e6353088c62934b743323b4c9834445565752814c520ceab"
+    },
+    "frontend/src/pages/pymol-viewer/PymolBusyBar.test.tsx": {
+      "from": "commit",
+      "bytes": 4387,
+      "sha256": "8aa2a2614a1469f4818222a43212c365851bea98bc76148d352f0acf0d960c95"
+    },
+    "frontend/src/pages/pymol-viewer/PymolBusyBar.tsx": {
+      "from": "commit",
+      "bytes": 3260,
+      "sha256": "3eae2aea4d5702aca004e8174115c568266cf5f7debd4fb38605dd18563224e9"
+    },
+    "frontend/src/pages/pymol-viewer/PymolCommandLine.test.tsx": {
+      "from": "commit",
+      "bytes": 12161,
+      "sha256": "ffe60c727f0be51533b9236dea7f0fd3971ea74f306bcfc025c8d88acaf4215c"
+    },
+    "frontend/src/pages/pymol-viewer/PymolCommandLine.tsx": {
+      "from": "commit",
+      "bytes": 9551,
+      "sha256": "872d4086f5abbd93d4a8bfd3f1b6b0ae5115d47d11682f3890309d9f042e9978"
+    },
+    "frontend/src/pages/pymol-viewer/PymolExportDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 34645,
+      "sha256": "68f3287aae194b9cd9d4d0588207c498779ed39042d70d7773cce884f59b7235"
+    },
+    "frontend/src/pages/pymol-viewer/PymolExportDialog.tsx": {
+      "from": "commit",
+      "bytes": 21208,
+      "sha256": "03a15f71b78744e57b24de3595fab610428c009dea3183a00a53faffba5b31a8"
+    },
+    "frontend/src/pages/pymol-viewer/PymolMeasureChip.test.tsx": {
+      "from": "commit",
+      "bytes": 3028,
+      "sha256": "955d9f64e2070c38bdbc79ed3d3dd62622558f9f178f1c571f211027a3bafbda"
+    },
+    "frontend/src/pages/pymol-viewer/PymolMeasureChip.tsx": {
+      "from": "commit",
+      "bytes": 2984,
+      "sha256": "62c92afb1f7cb9787daa82017a74a016d51edd0e34abe1c5dfd0334d7f5e985b"
+    },
+    "frontend/src/pages/pymol-viewer/PymolMenuBar.test.tsx": {
+      "from": "commit",
+      "bytes": 35237,
+      "sha256": "c5f701d53263c0fa6f496b2a191c49c8f71884d4249d689575790b25c4a11230"
+    },
+    "frontend/src/pages/pymol-viewer/PymolMenuBar.tsx": {
+      "from": "commit",
+      "bytes": 25818,
+      "sha256": "1be7a0b7a2247bb2b586402775084074d66ba753146a3e44e86833ec8bc01671"
+    },
+    "frontend/src/pages/pymol-viewer/PymolMenuMessage.test.tsx": {
+      "from": "commit",
+      "bytes": 3433,
+      "sha256": "dc55334f331d285487ce065f184db7aff2d4b89fed3dcedfcd1c435fb0bf65e3"
+    },
+    "frontend/src/pages/pymol-viewer/PymolMenuMessage.tsx": {
+      "from": "commit",
+      "bytes": 3079,
+      "sha256": "d3f8a9d677f48365ec165ce0c7e68e46de92ea4292b951368c639755296cbad3"
+    },
+    "frontend/src/pages/pymol-viewer/PymolObjectDrawerTab.test.tsx": {
+      "from": "commit",
+      "bytes": 25995,
+      "sha256": "da61035a5fa396b9690dc938df5647750886122659aa2b42ccfcbaf9e97603c0"
+    },
+    "frontend/src/pages/pymol-viewer/PymolObjectDrawerTab.tsx": {
+      "from": "commit",
+      "bytes": 20914,
+      "sha256": "428aaf23be463f2d2b67be46a3c8acaab01d7cb1c2abe9079990c92d2b572f98"
+    },
+    "frontend/src/pages/pymol-viewer/PymolPseExportDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 13540,
+      "sha256": "7f51a00269779e7eb72824f11b88268a9e8bce56e887af45053eaf83bcbbf5d3"
+    },
+    "frontend/src/pages/pymol-viewer/PymolPseExportDialog.tsx": {
+      "from": "commit",
+      "bytes": 14767,
+      "sha256": "1ff685a523f2582b31552dd228a8e378183a9eeee4da3cedd6d6a3692d10033b"
+    },
+    "frontend/src/pages/pymol-viewer/PymolRayDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 7612,
+      "sha256": "c0b8892bc1b2e1b72e22f57afbb7610f0f123a091aede7f9fc9f5b1c7029fbb6"
+    },
+    "frontend/src/pages/pymol-viewer/PymolRayDialog.tsx": {
+      "from": "commit",
+      "bytes": 15499,
+      "sha256": "eba086e409a01894ecfd9aee4b72a7a93e9b21707f70c7318e6b45a93f06436e"
+    },
+    "frontend/src/pages/pymol-viewer/PymolSettingsDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 6702,
+      "sha256": "5f59db478705ae319f97b08c0fe141b281a55f3225c00537584b9a00785c03d6"
+    },
+    "frontend/src/pages/pymol-viewer/PymolSettingsDialog.tsx": {
+      "from": "commit",
+      "bytes": 8471,
+      "sha256": "8865acb9089a68a8908b3515e4d11600a4e735675018834c21773285e6d320f0"
+    },
+    "frontend/src/pages/pymol-viewer/pymolBusy.ts": {
+      "from": "commit",
+      "bytes": 1449,
+      "sha256": "9f0fd4bfb55ea951c44e42985a036152f80a512951d8dd742d21f7229eb476f6"
+    },
+    "frontend/src/pages/pymol-viewer/pymolCommandText.ts": {
+      "from": "commit",
+      "bytes": 2952,
+      "sha256": "4f120d1477b23b036e2fafecea468385c1aa015c1d7511b11e5eee85155b2e3d"
+    },
+    "frontend/src/pages/pymol-viewer/pymolCommands.test.ts": {
+      "from": "commit",
+      "bytes": 3078,
+      "sha256": "4f7687086849530ae78094fd134122619428770f114376646763963b7d5bc297"
+    },
+    "frontend/src/pages/pymol-viewer/pymolCommands.ts": {
+      "from": "commit",
+      "bytes": 3570,
+      "sha256": "e2cc263d983dcc9fdfce086a9874baa19bf121b028d732767e9b1be0cdc5cf1a"
+    },
+    "frontend/src/pages/pymol-viewer/pymolDisplayScale.test.ts": {
+      "from": "commit",
+      "bytes": 6679,
+      "sha256": "fb4fabfd5cc36a9c8bd7570c55d76bd8f0c1750bbe618a6a8da2e531378cf66b"
+    },
+    "frontend/src/pages/pymol-viewer/pymolDisplayScale.ts": {
+      "from": "commit",
+      "bytes": 4453,
+      "sha256": "74f7f4219235e91ce7fccd282fe824cbd064872b4c4035acb7306adf314287be"
+    },
+    "frontend/src/pages/pymol-viewer/pymolExport.ts": {
+      "from": "commit",
+      "bytes": 9255,
+      "sha256": "f73f007c5d510d87e79b2d7bdfd96c3c081c3a2107b27ea698ab858f023f8c99"
+    },
+    "frontend/src/pages/pymol-viewer/pymolExportFrame.ts": {
+      "from": "commit",
+      "bytes": 1085,
+      "sha256": "08e22956385365def2416495c1929c3c2b79291a5bc74273937abed03f8338d4"
+    },
+    "frontend/src/pages/pymol-viewer/pymolFrameError.ts": {
+      "from": "commit",
+      "bytes": 342,
+      "sha256": "4580f06accfafe02e2b22e62e21e8f294ecd6eff374a729c147c5bc9a7a5e41a"
+    },
+    "frontend/src/pages/pymol-viewer/pymolFrameProtocol.test.ts": {
+      "from": "commit",
+      "bytes": 52153,
+      "sha256": "9af73183dab841072b2c25d78cd418d42588136afd0614bf86138e87025cdcfc"
+    },
+    "frontend/src/pages/pymol-viewer/pymolFrameProtocol.ts": {
+      "from": "commit",
+      "bytes": 46676,
+      "sha256": "d244f81587815335176f56b6c784c808d2a406a59f52153ecc0c3f9c29e6d23b"
+    },
+    "frontend/src/pages/pymol-viewer/pymolKeys.ts": {
+      "from": "commit",
+      "bytes": 3026,
+      "sha256": "00ac31e16636204974902c2b19581c6fa2392a91eb9c0b1a3abe582a620365f0"
+    },
+    "frontend/src/pages/pymol-viewer/pymolLook.test.ts": {
+      "from": "commit",
+      "bytes": 13137,
+      "sha256": "f3231f840805e23a58427edaebd70ce1aca3c5ba440b15399032062a47c1dbb5"
+    },
+    "frontend/src/pages/pymol-viewer/pymolLook.ts": {
+      "from": "commit",
+      "bytes": 12438,
+      "sha256": "44a4a75b10f3789d18333428c3966f03da664b90118e058b159f4d35be8686d9"
+    },
+    "frontend/src/pages/pymol-viewer/pymolMenuData.ts": {
+      "from": "commit",
+      "bytes": 71090,
+      "sha256": "ad8792442a3b18151c6f1eca44ffb704542945c34ccac02fc68aedae3103243a"
+    },
+    "frontend/src/pages/pymol-viewer/pymolPresets.test.ts": {
+      "from": "commit",
+      "bytes": 13933,
+      "sha256": "9230465b77e3461c779e11a62b2beb739fa775f5523a820cb045ef50fbd2c6e5"
+    },
+    "frontend/src/pages/pymol-viewer/pymolPresets.ts": {
+      "from": "commit",
+      "bytes": 14810,
+      "sha256": "22a27a6a1bbfbe53f674bf7da327eb2ff332aece75117db769437c75fa98801c"
+    },
+    "frontend/src/pages/pymol-viewer/pymolRayOptions.test.ts": {
+      "from": "commit",
+      "bytes": 6778,
+      "sha256": "1c9a15d295dcd555ef6e1117fd1ea546eadc8a033b64d076159a5f43b77b179b"
+    },
+    "frontend/src/pages/pymol-viewer/pymolRayOptions.ts": {
+      "from": "commit",
+      "bytes": 10118,
+      "sha256": "e6f602c98f9198cd66d3f024abeab5580f2a49264b8c5d99eaf6706efb9348ed"
+    },
+    "frontend/src/pages/pymol-viewer/pymolRuntimeManifest.ts": {
+      "from": "commit",
+      "bytes": 2380,
+      "sha256": "9ff814735ee8c6922b0d3c2fdbf3f8f27e30df3eae583f8b38d23f5226c3fce6"
+    },
+    "frontend/src/pages/pymol-viewer/pymolSettingsData.test.ts": {
+      "from": "commit",
+      "bytes": 2959,
+      "sha256": "00f7c9b5debefc6a5d1d2c03e3bfac0b3e6115351669f554dd0d172c43ee85c4"
+    },
+    "frontend/src/pages/pymol-viewer/pymolSettingsData.ts": {
+      "from": "commit",
+      "bytes": 87667,
+      "sha256": "0a77448b93ff7cc9241acdd6116378b66a16fb886fe4f1601051b54bdedf21a0"
+    },
+    "frontend/src/pages/pymol-viewer/pymolViewer.css": {
+      "from": "commit",
+      "bytes": 28629,
+      "sha256": "67660ef9d807cc9ccac3701d87c5be903f4c26791b56a004aca2f63180308571"
+    },
+    "frontend/src/pages/structure-detail/Viewer3dHeader.tsx": {
+      "from": "commit",
+      "bytes": 10552,
+      "sha256": "80c4104b1d059e2a52bc6aaa6a675386a6843ef6e988b662a2f1d9270c82f933"
+    },
+    "frontend/src/pages/structure-detail/usePymolInkRegister.ts": {
+      "from": "commit",
+      "bytes": 2443,
+      "sha256": "c3d06679a513b7f518dee4012ab6ddf6d3b7b99a5ee974df2cba945790cf4c9e"
+    },
+    "frontend/src/pages/structure-detail/useViewerEngine.ts": {
+      "from": "commit",
+      "bytes": 5586,
+      "sha256": "9757037c4c818b04ae86ec8a905c94be80ef6a9b0711122567fed4af5517c25c"
+    },
+    "frontend/src/pages/structure-detail/viewer3dHeader.css": {
+      "from": "commit",
+      "bytes": 11934,
+      "sha256": "d8c9ab591477b2708e5ce0042caaa0278f835f63a20336c4731f2b5442c75b31"
+    },
+    "frontend/src/pages/structure-html-export/PackFileNameField.tsx": {
+      "from": "commit",
+      "bytes": 2293,
+      "sha256": "a263bbe8d760f45c0fef9b0939fa3f0b0bb931b60a5425885462f46c03fe3ce2"
+    },
+    "frontend/src/pages/structure-html-export/__fixtures__/1crn.cif": {
+      "from": "commit",
+      "bytes": 69506,
+      "sha256": "23787562c427d7c1abe5420e86d5f1d0a6c7007dec1e8ce85645a6d69c32e8ba"
+    },
+    "frontend/src/pages/structure-html-export/mol3dLook.test.ts": {
+      "from": "commit",
+      "bytes": 8188,
+      "sha256": "177ddf6adf834f45d2cb9e17612ff81c0e46982a3cd7400abcce4d67d4295b7c"
+    },
+    "frontend/src/pages/structure-html-export/mol3dLook.ts": {
+      "from": "commit",
+      "bytes": 10102,
+      "sha256": "37cd73899de118888f2880a4f7037db93364e0b219ab6df097957adcc83fbb5c"
+    },
+    "frontend/src/pages/structure-html-export/packFileName.css": {
+      "from": "commit",
+      "bytes": 625,
+      "sha256": "5fcd71e35983c2bd47fa94a8aab0c19a6413289a99b7dd6c0ecca1f06e0d579a"
+    },
+    "frontend/src/pages/structure-html-export/standaloneFormat.ts": {
+      "from": "commit",
+      "bytes": 9215,
+      "sha256": "9530ad972bef6291a9a969a214ab14b349b4ecce9069338b8e39396b533f9aa0"
+    },
+    "frontend/src/pages/structure-html-export/viewerPackFileName.test.ts": {
+      "from": "commit",
+      "bytes": 3253,
+      "sha256": "50feb30d64e683a77479ed7910f1cdc4ac78e8f59b9c733f99cb976ff34bd1c8"
+    },
+    "frontend/src/pages/structure-html-export/viewerPackFileName.ts": {
+      "from": "commit",
+      "bytes": 1788,
+      "sha256": "738954b6dead0c36945fc7fd455f4b4a7bb8f60d4f192bc689f80d8d242860dd"
+    },
+    "frontend/src/pages/tools/gantt/ganttSelfFrame.test.ts": {
+      "from": "commit",
+      "bytes": 3921,
+      "sha256": "0095e7b59e955e681c8c796490aa15f9671c12f4c8d2728e39e77175664b8316"
+    },
+    "frontend/src/pages/tools/gantt/ganttSelfFrame.ts": {
+      "from": "commit",
+      "bytes": 3354,
+      "sha256": "2fefebba446d616c1d158b124aa9214e03b126cb3e75ace5f2231d0e2e2b0a92"
+    },
+    "frontend/src/test/domSetup.ts": {
+      "from": "commit",
+      "bytes": 8358,
+      "sha256": "64b9104a893a418a9c7a51513866af772a40fd1d13210496cbfc98cd62321b10"
+    },
+    "frontend/src/test/surfaceDouble.ts": {
+      "from": "commit",
+      "bytes": 6378,
+      "sha256": "35549bec7baf33889900bb6cbfabb7485c5c8e7d5ffa33dbf0269cc4417fa291"
+    },
+    "frontend/src/utils/displayTimeZone.test.ts": {
+      "from": "commit",
+      "bytes": 4037,
+      "sha256": "9bc6a377e099e461dbe8fb3dcd00a3ff91828ef162a85dd5d393dd3d44988936"
+    },
+    "frontend/src/utils/displayTimeZone.ts": {
+      "from": "commit",
+      "bytes": 2706,
+      "sha256": "3028fe5d2563524f9e3c91186cd02cbbeadef0de3b9db60086eee55574e1c7f8"
+    },
+    "frontend/src/utils/errorCapture.ts": {
+      "from": "shim",
+      "bytes": 317,
+      "sha256": "54beca2597b9a1687b10f3d91622b1b85ad779b1604b8cb548997483c8cba467"
+    },
+    "frontend/src/utils/formatDate.test.ts": {
+      "from": "commit",
+      "bytes": 11700,
+      "sha256": "0ccdc59f51cfc6f095a9f877cab43e838c17ca2711d2e6e4b793dab0b483be34"
+    },
+    "frontend/src/utils/formatDate.ts": {
+      "from": "commit",
+      "bytes": 13315,
+      "sha256": "3ce74a30985362b0ddcf2b7f74290f5831843360701df8b3ddcbd5528857b7b0"
+    },
+    "frontend/src/utils/formatSI.test.ts": {
+      "from": "commit",
+      "bytes": 7280,
+      "sha256": "250af1e1c295bc56ba6c6e0174ea7fed9a208a47d72a25f3a3e6f364860a18a4"
+    },
+    "frontend/src/utils/formatSI.ts": {
+      "from": "commit",
+      "bytes": 5714,
+      "sha256": "31d4fffc12b70354ca6556c4d5d26a642a95c74c1bd99b2687872b2f6d222a63"
+    },
+    "frontend/src/utils/numberFormatStyle.test.ts": {
+      "from": "commit",
+      "bytes": 4422,
+      "sha256": "6d88800aeeab56b15780d565f39cb40ffcb1d530d411217821d59ce5a12252d8"
+    },
+    "frontend/src/utils/numberFormatStyle.ts": {
+      "from": "commit",
+      "bytes": 5340,
+      "sha256": "4cc0a237198029cb3b6c590c4fc9a05794a58029bd48b992ed394f8eff89bc7e"
+    },
+    "frontend/src/vite-env.d.ts": {
+      "from": "commit",
+      "bytes": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    "frontend/src/vitest.d.ts": {
+      "from": "commit",
+      "bytes": 392,
+      "sha256": "a67c26fd5b2b3f520ab45878f370928b83848cbebd73ad7728fc27821c9dbcf4"
+    },
+    "frontend/standalone/structure-viewer/AppCopyDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 21598,
+      "sha256": "61a7a3997a451257493ad6215652250602b198602d878702ec43e7869de07655"
+    },
+    "frontend/standalone/structure-viewer/AppCopyDialog.tsx": {
+      "from": "commit",
+      "bytes": 17394,
+      "sha256": "7ba6f6b074e0e5f5cd90accea46b6da1823f7918dfbc01370c2de80ddcf79cdf"
+    },
+    "frontend/standalone/structure-viewer/CODE-CHANGES.md": {
+      "from": "commit",
+      "bytes": 159859,
+      "sha256": "05a879865ae708a185bc159f49f7a14cb940b3fb401fa0ac518cf2458c5bc198"
+    },
+    "frontend/standalone/structure-viewer/ExportDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 13705,
+      "sha256": "2525715cd6e7f989a306abed1637e0669cedd4baf0ce521a4b69b921a43c51d0"
+    },
+    "frontend/standalone/structure-viewer/ExportDialog.tsx": {
+      "from": "commit",
+      "bytes": 7225,
+      "sha256": "f87cc840396782d8988c00f50b7a56659248ad67798290ed2c7068676a8dd107"
+    },
+    "frontend/standalone/structure-viewer/ExportHub.test.tsx": {
+      "from": "commit",
+      "bytes": 22828,
+      "sha256": "ce6dccbba14d6fec62419f1ce77a7be32195d64c203764ceb998d01061fe0439"
+    },
+    "frontend/standalone/structure-viewer/ExportHub.tsx": {
+      "from": "commit",
+      "bytes": 8512,
+      "sha256": "8275f47f4f31a2b31e464c8ed4bcf491c60408119977ac3e159a3ae8f16486ec"
+    },
+    "frontend/standalone/structure-viewer/ExportHubForms.test.tsx": {
+      "from": "commit",
+      "bytes": 7050,
+      "sha256": "2373691cbf5848f82a4fd40f501c0a3c5253a1760ff5373f450e3e61f564a391"
+    },
+    "frontend/standalone/structure-viewer/ExportHubSession.test.tsx": {
+      "from": "commit",
+      "bytes": 3892,
+      "sha256": "c93dea8543e39fa6203f43a4104fe731eec7ab10da068c7b09c223173dd848e3"
+    },
+    "frontend/standalone/structure-viewer/FirstRunGuide.test.tsx": {
+      "from": "commit",
+      "bytes": 8909,
+      "sha256": "e9f2e023262ffac2af5d74b1e4d3711afb00e53152004b481f394f9671d1c146"
+    },
+    "frontend/standalone/structure-viewer/FirstRunGuide.tsx": {
+      "from": "commit",
+      "bytes": 10175,
+      "sha256": "85fc3ab3d985aabc6786877573eb22620d79f6801cc4d91ee0f28649b9ee38c7"
+    },
+    "frontend/standalone/structure-viewer/HeadDetails.test.tsx": {
+      "from": "commit",
+      "bytes": 3529,
+      "sha256": "e5655b7eacdca54033e98e7d0ef81dd89a182bdf96d3d81fb96032dca81d945d"
+    },
+    "frontend/standalone/structure-viewer/HeadDetails.tsx": {
+      "from": "commit",
+      "bytes": 4503,
+      "sha256": "112196b726e55a317314c14aa3f01ce159bb9779d8820c1e190c900c7789565c"
+    },
+    "frontend/standalone/structure-viewer/HelpChanges.test.tsx": {
+      "from": "commit",
+      "bytes": 2298,
+      "sha256": "d6f4b8d434ed358aa76bcf0d912cf16c1b464ebe52457cb2c9d91a3472f1b7db"
+    },
+    "frontend/standalone/structure-viewer/HelpChanges.tsx": {
+      "from": "commit",
+      "bytes": 3119,
+      "sha256": "1e65b578708d6dd9651996ff9b2feb5102c1167476b1d33c3a56f55de9f1ebf4"
+    },
+    "frontend/standalone/structure-viewer/HelpDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 35337,
+      "sha256": "17c7e9ce3b202beb1580d6c8e87200f44052b459ee8558df2d50269b104956c0"
+    },
+    "frontend/standalone/structure-viewer/HelpDialog.tsx": {
+      "from": "commit",
+      "bytes": 9837,
+      "sha256": "d310567035804455e360e5c235b077bf4ca541408d80da0ad55135a8ef6bf371"
+    },
+    "frontend/standalone/structure-viewer/ImageOutput.test.tsx": {
+      "from": "commit",
+      "bytes": 5669,
+      "sha256": "50bc11d7145f6e1c17257a78777e3314df5178d9855c23516f32af1724528441"
+    },
+    "frontend/standalone/structure-viewer/ImageOutput.tsx": {
+      "from": "commit",
+      "bytes": 5848,
+      "sha256": "7611208befcb9e7ada957058145d3cf52d1c9c5cce61ff29847989a359fe28c7"
+    },
+    "frontend/standalone/structure-viewer/LatestPanel.test.tsx": {
+      "from": "commit",
+      "bytes": 25644,
+      "sha256": "8bda8de371152754a73be95afb7e0a4876805fb938625708e43d6c7938a530a7"
+    },
+    "frontend/standalone/structure-viewer/LatestPanel.tsx": {
+      "from": "commit",
+      "bytes": 21148,
+      "sha256": "899ee1c9065ff031fcc7aecaa4e81032531c5e42607d36f59199b0e783af9f11"
+    },
+    "frontend/standalone/structure-viewer/LicenceDialog.tsx": {
+      "from": "commit",
+      "bytes": 16223,
+      "sha256": "690e26a869bc61624ea75933d0ba9760d0370286848cb36375f2ee95e27cf9e4"
+    },
+    "frontend/standalone/structure-viewer/MobileBar.test.tsx": {
+      "from": "commit",
+      "bytes": 13871,
+      "sha256": "ae823b9cb64ab185c269a38ec7d5f0085847c473f38f3f4a63ff4dace0e964f4"
+    },
+    "frontend/standalone/structure-viewer/MobileBar.tsx": {
+      "from": "commit",
+      "bytes": 19293,
+      "sha256": "8ae7a4c4f1cb06501e64270263293cbb1ee18c09e727d360d2c378fbc3f463c6"
+    },
+    "frontend/standalone/structure-viewer/Mol3dExportDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 5217,
+      "sha256": "e76ab4fb1ee9ddd6a992464776b72b37a57b3005c40582c0f2f0c4ae68fdc8aa"
+    },
+    "frontend/standalone/structure-viewer/Mol3dExportDialog.tsx": {
+      "from": "commit",
+      "bytes": 5551,
+      "sha256": "dce081f95e4b11edc6dfab23020ef0fe0a3b1476073e3495474e2f9ebb4f3b07"
+    },
+    "frontend/standalone/structure-viewer/Mol3dPane.test.tsx": {
+      "from": "commit",
+      "bytes": 17919,
+      "sha256": "40d42be70f9a6e115b683f7dc7244ef5f2d8c6e884df467de2efc5409b2cb768"
+    },
+    "frontend/standalone/structure-viewer/Mol3dPane.tsx": {
+      "from": "commit",
+      "bytes": 26172,
+      "sha256": "394a9d6014baf351c0b5c4c28a734b6bb3db26302ccd10da8be8423403499086"
+    },
+    "frontend/standalone/structure-viewer/NoticeBanner.tsx": {
+      "from": "commit",
+      "bytes": 2484,
+      "sha256": "184a287ae639c113203184da31d2ed878433d12c7c0ef9215215107460f39131"
+    },
+    "frontend/standalone/structure-viewer/OpenDialog.test.tsx": {
+      "from": "commit",
+      "bytes": 30911,
+      "sha256": "f905bb2ced192c016038caa237895abfddc5b2582eeafb467149b6f3ae1e2754"
+    },
+    "frontend/standalone/structure-viewer/OpenDialog.tsx": {
+      "from": "commit",
+      "bytes": 22579,
+      "sha256": "037edf43b342168818e706598d5dc0bebfccabe4f5e7d5e6197b38afacc0761d"
+    },
+    "frontend/standalone/structure-viewer/OriginalPanelSetting.tsx": {
+      "from": "commit",
+      "bytes": 1297,
+      "sha256": "aa592f24445dc60f7f15bd0b9ef2f80a3e2ec713e4e1a6a5eb857c68f9bdc9db"
+    },
+    "frontend/standalone/structure-viewer/PymolControlTail.test.tsx": {
+      "from": "commit",
+      "bytes": 12023,
+      "sha256": "b9d7c7b33ccfa4a73325cf52ace5b57ffd145769198e14b78a03fa3ff10a4b88"
+    },
+    "frontend/standalone/structure-viewer/PymolControlTail.tsx": {
+      "from": "commit",
+      "bytes": 14629,
+      "sha256": "ae541cb3b9e42743911f2f860cab76a163d2e141fc0f886d30b4791a431d20a5"
+    },
+    "frontend/standalone/structure-viewer/PymolLoadOverlay.test.tsx": {
+      "from": "commit",
+      "bytes": 3066,
+      "sha256": "a03b06c99319bd7074096e919c87ea1294e42b8623fbb00b9162124fa47f6246"
+    },
+    "frontend/standalone/structure-viewer/PymolLoadOverlay.tsx": {
+      "from": "commit",
+      "bytes": 1341,
+      "sha256": "d1339b7f2e6ffeace0a9d75660450a5e3de7bbcc964f386b2b33796a6dba4a1e"
+    },
+    "frontend/standalone/structure-viewer/PymolMeasureCard.tsx": {
+      "from": "commit",
+      "bytes": 3156,
+      "sha256": "49f08c39f0a2ba3121af03735886dd34f7aec435cd597b5c9740ba61d5f75755"
+    },
+    "frontend/standalone/structure-viewer/PymolMouseGuide.test.tsx": {
+      "from": "commit",
+      "bytes": 3373,
+      "sha256": "9928c2654c8339ef82cd451add4a5cff8ade8067e66c539b4d4421ba3ebee228"
+    },
+    "frontend/standalone/structure-viewer/PymolMouseGuide.tsx": {
+      "from": "commit",
+      "bytes": 5891,
+      "sha256": "1e317e970986875c75f5f004b87fcef33601fc2ad43ec1716f3f72ad61304842"
+    },
+    "frontend/standalone/structure-viewer/PymolMouseLid.tsx": {
+      "from": "commit",
+      "bytes": 4369,
+      "sha256": "d112e145d7e46a18ab00e2e6151a7a68cf4f0cd66a90ba68923e712e8107c035"
+    },
+    "frontend/standalone/structure-viewer/PymolObjectSheet.test.tsx": {
+      "from": "commit",
+      "bytes": 10472,
+      "sha256": "d444b6beaa97b221137b3e3b8adfe3b0af8f25725ccb226cd45b9dc00781b5b3"
+    },
+    "frontend/standalone/structure-viewer/PymolObjectSheet.tsx": {
+      "from": "commit",
+      "bytes": 15326,
+      "sha256": "8b1bd376112fe7ba2f11a2fd33b62bcac4eadfcd148ddd780afb71f5b6f6eb7d"
+    },
+    "frontend/standalone/structure-viewer/PymolPane.test.tsx": {
+      "from": "commit",
+      "bytes": 54785,
+      "sha256": "12fdca081e0e3c28bdaa1258e02df07d4176e37591edb30f010b0881b11893ce"
+    },
+    "frontend/standalone/structure-viewer/PymolPane.tsx": {
+      "from": "commit",
+      "bytes": 54193,
+      "sha256": "21851b9364ae1bf9f8c7799aaaee31ac4e5e79c7678248c55e5af23610c443a5"
+    },
+    "frontend/standalone/structure-viewer/PymolSeqStrip.test.tsx": {
+      "from": "commit",
+      "bytes": 5412,
+      "sha256": "4ac2499b1cf1a60cacdbfdfc67e979f02563fd2098c43a7c8d75b696d1fe241c"
+    },
+    "frontend/standalone/structure-viewer/PymolSeqStrip.tsx": {
+      "from": "commit",
+      "bytes": 6575,
+      "sha256": "333858ce0141265afda87e5db879d28da18e5e494b2a203369352fd66ca36c9c"
+    },
+    "frontend/standalone/structure-viewer/SaveStep.test.tsx": {
+      "from": "commit",
+      "bytes": 20524,
+      "sha256": "7dae6d4e5d0fe7192b129ec8ebf056a4305a539954e2e33ee4bd91bbf5ba89ae"
+    },
+    "frontend/standalone/structure-viewer/SaveStep.tsx": {
+      "from": "commit",
+      "bytes": 11334,
+      "sha256": "d91b2d003a98998a376cbe7601e8bc9faacff4938eb9b87233d5649d45148b68"
+    },
+    "frontend/standalone/structure-viewer/ScreenshotDialog.tsx": {
+      "from": "commit",
+      "bytes": 8870,
+      "sha256": "18da182fc1bb78fe71a38fcc5b301931da1a40690e44badd12dcb30208ceb81e"
+    },
+    "frontend/standalone/structure-viewer/StandaloneApp.test.tsx": {
+      "from": "commit",
+      "bytes": 22891,
+      "sha256": "48f8cfd62326edcefcd06677dd3c250870677c072e367203e5d314804a776a24"
+    },
+    "frontend/standalone/structure-viewer/StandaloneApp.tsx": {
+      "from": "commit",
+      "bytes": 51706,
+      "sha256": "7d9fe11489957965d5650ec503caa7ade68b8691006a844ada80d89203b82343"
+    },
+    "frontend/standalone/structure-viewer/TouchControlsSetting.test.tsx": {
+      "from": "commit",
+      "bytes": 2393,
+      "sha256": "c48c60c8393c152fea1b3adc91566ff5bd86a34766b01f9c0c2eba4bc95cbe4f"
+    },
+    "frontend/standalone/structure-viewer/TouchControlsSetting.tsx": {
+      "from": "commit",
+      "bytes": 1405,
+      "sha256": "62cd27cd39405c8823cde9f139ebb3d3e6b7fa39826816934fdda40c832fb248"
+    },
+    "frontend/standalone/structure-viewer/aliases.ts": {
+      "from": "commit",
+      "bytes": 714,
+      "sha256": "41eedd92d550f72671e79bb6dea6c25d266ff3f4930fa5953a4072e74dd20d4b"
+    },
+    "frontend/standalone/structure-viewer/appLicence.ts": {
+      "from": "commit",
+      "bytes": 4812,
+      "sha256": "79389410970090b3926905ad1d80b138dfbc30e4b7d6be406318b34134a9021c"
+    },
+    "frontend/standalone/structure-viewer/appVersion.test.ts": {
+      "from": "commit",
+      "bytes": 3081,
+      "sha256": "2a678a2e1264f35c98627ad25d7ab99ec531e6b23846849a822c2ee97711bf1a"
+    },
+    "frontend/standalone/structure-viewer/blocks.ts": {
+      "from": "commit",
+      "bytes": 6337,
+      "sha256": "2e4d81805fb8a23813db6429130b1fd56fb2af62664da14dccb0ab62c9d26717"
+    },
+    "frontend/standalone/structure-viewer/boundary.test.ts": {
+      "from": "commit",
+      "bytes": 7194,
+      "sha256": "cf40d01b192218fab1508b8a4152505e03891c14164780713d8b676d2f10622b"
+    },
+    "frontend/standalone/structure-viewer/buildSha.ts": {
+      "from": "commit",
+      "bytes": 1244,
+      "sha256": "1620570007e79ecdfaebc9aa529bab60226d21f663244cf18226ac18bb61ce5e"
+    },
+    "frontend/standalone/structure-viewer/codeChanges.test.ts": {
+      "from": "commit",
+      "bytes": 4244,
+      "sha256": "66e210e9282fd5ac8ae48034164e4ffc105428f6e32a7a83aa312e113da37a33"
+    },
+    "frontend/standalone/structure-viewer/dmolShot.test.ts": {
+      "from": "commit",
+      "bytes": 3514,
+      "sha256": "b533c69a88426624dbf9d761266830ab0853656756822ce630f34bf67a5f4889"
+    },
+    "frontend/standalone/structure-viewer/dmolShot.ts": {
+      "from": "commit",
+      "bytes": 3215,
+      "sha256": "e54c521f49cd602ca09f072f4fd02fb1bdde59900ac20bb66be5cd68870e5e45"
+    },
+    "frontend/standalone/structure-viewer/docOpener.test.ts": {
+      "from": "commit",
+      "bytes": 6878,
+      "sha256": "a66e26db75cdc2d814afdcc12cc6d3a627b111bdefb35c2eb1360ecb9c8f4632"
+    },
+    "frontend/standalone/structure-viewer/docOpener.ts": {
+      "from": "commit",
+      "bytes": 3884,
+      "sha256": "2a02ab748dce3a231b824caa381a69b64e5720d2f506477ce7454cc660c35431"
+    },
+    "frontend/standalone/structure-viewer/entryGraph.ts": {
+      "from": "commit",
+      "bytes": 4029,
+      "sha256": "83c8cf0d39494e0a231fb25f984b7b8771ea65780f76cc7dd3c4885757f8f016"
+    },
+    "frontend/standalone/structure-viewer/exportItems.ts": {
+      "from": "commit",
+      "bytes": 5806,
+      "sha256": "61d0d584a4c9e27b3d8cf6384e555773dd4f2a6b92c2561d30e55b106dae6a7d"
+    },
+    "frontend/standalone/structure-viewer/exportedLook3d.test.ts": {
+      "from": "commit",
+      "bytes": 9489,
+      "sha256": "fb78ff31b9324c259ed02277423fafe8313d2a229529905f5c9313f502ad39c8"
+    },
+    "frontend/standalone/structure-viewer/exportedLook3d.ts": {
+      "from": "commit",
+      "bytes": 11907,
+      "sha256": "1616f943df149690149a112b73b0d0a86559781e9f371b16180e41268b4e661e"
+    },
+    "frontend/standalone/structure-viewer/fileOnIos.test.ts": {
+      "from": "commit",
+      "bytes": 2417,
+      "sha256": "da98774d3c1a0bbb582fb714e4c110c6b312b1ba8a45c301a90aa7ddc980860f"
+    },
+    "frontend/standalone/structure-viewer/fileOnIos.ts": {
+      "from": "commit",
+      "bytes": 1419,
+      "sha256": "9c89e0b4e325c965e002bd9f37be41777079a39f483ea1d6277c81c539ae5a98"
+    },
+    "frontend/standalone/structure-viewer/i18n.test.ts": {
+      "from": "commit",
+      "bytes": 1428,
+      "sha256": "ea3eceb7c0be4f601d96ee54920e7a3b65334c62082fa35051c93972f0987619"
+    },
+    "frontend/standalone/structure-viewer/i18n.ts": {
+      "from": "commit",
+      "bytes": 3358,
+      "sha256": "e5e9bf04773e12c3dd46168a87ab5806712a710612d63faa278204488296f052"
+    },
+    "frontend/standalone/structure-viewer/index.html": {
+      "from": "commit",
+      "bytes": 936,
+      "sha256": "92a795fb379ca386690fa79c78df7e1a710557db3dc01e9f26b07fb3cac0bb05"
+    },
+    "frontend/standalone/structure-viewer/latestFetch.test.ts": {
+      "from": "commit",
+      "bytes": 8467,
+      "sha256": "ea60f8f226b11b3566093a7692c79a9bb4291d4a781a4b97fabaea9e23827bef"
+    },
+    "frontend/standalone/structure-viewer/latestFetch.ts": {
+      "from": "commit",
+      "bytes": 8529,
+      "sha256": "c1716dd4b24438590b820e61d282b5418f4637431ac92a72404f9e0c4658e8ce"
+    },
+    "frontend/standalone/structure-viewer/latestRelease.test.ts": {
+      "from": "commit",
+      "bytes": 13280,
+      "sha256": "1bcaceddb744d9f37059d84d3a9cde75dff552e5daccafa569aef106c756e5a7"
+    },
+    "frontend/standalone/structure-viewer/latestRelease.ts": {
+      "from": "commit",
+      "bytes": 10345,
+      "sha256": "c3ec565380c96cc2e1a5bcaca029163d411c55be544cfa0146f0a0a12646f70d"
+    },
+    "frontend/standalone/structure-viewer/latestShell.test.ts": {
+      "from": "commit",
+      "bytes": 22939,
+      "sha256": "4a5fe42541d136932db7efae45ad65bc680ab7ca98599d966ef913a0d829ff68"
+    },
+    "frontend/standalone/structure-viewer/latestShell.ts": {
+      "from": "commit",
+      "bytes": 14790,
+      "sha256": "01025f3e9ab2e1ce91399cbbdf68b773a066c2263fc90a5953908a1bef760693"
+    },
+    "frontend/standalone/structure-viewer/latestUpdate.test.ts": {
+      "from": "commit",
+      "bytes": 8964,
+      "sha256": "22dbe5ff0931d60ee6bd39e69b091ee47447c9f23c099b7b6c146fcc7f5bf3dd"
+    },
+    "frontend/standalone/structure-viewer/latestUpdate.ts": {
+      "from": "commit",
+      "bytes": 12631,
+      "sha256": "f359a739d260b32e1093fd775df2a06bd759fd9bb589b853a9e7ef99ef6f9a95"
+    },
+    "frontend/standalone/structure-viewer/localFile.test.ts": {
+      "from": "commit",
+      "bytes": 7761,
+      "sha256": "515a5c0671bd74dc9cb1d946f468899be9316ec823e5f3a2a082252e01d36a60"
+    },
+    "frontend/standalone/structure-viewer/localFile.ts": {
+      "from": "commit",
+      "bytes": 11411,
+      "sha256": "fd83be442bfddda7c9b9f223fa40bff88e6daf883196dfa7d7d7cab81ce76891"
+    },
+    "frontend/standalone/structure-viewer/main.tsx": {
+      "from": "commit",
+      "bytes": 6204,
+      "sha256": "53e84df81584fca4b62f7783904b715ae2c8d0305717a97a6103eaf55eb97e38"
+    },
+    "frontend/standalone/structure-viewer/movableHost.ts": {
+      "from": "commit",
+      "bytes": 1226,
+      "sha256": "b43b267b78ebaab4d0a6040886317dd68491d9e35923eef0e1aff744a41dbae3"
+    },
+    "frontend/standalone/structure-viewer/noGl.ts": {
+      "from": "commit",
+      "bytes": 6067,
+      "sha256": "f1362de3299f4d573dcd3c433e25a4b771b4170ffa0da44e1b1d2c25dc8344cd"
+    },
+    "frontend/standalone/structure-viewer/offlineErrorCapture.ts": {
+      "from": "commit",
+      "bytes": 384,
+      "sha256": "258b710cfcc52b95ad0d039f831cd7167eaf6d59516104115dce1935a4c7ce09"
+    },
+    "frontend/standalone/structure-viewer/offlineParts.test.ts": {
+      "from": "commit",
+      "bytes": 7235,
+      "sha256": "5a89977c81087123ef650811cbbd7240afed208d4e185d36523e046c9571add2"
+    },
+    "frontend/standalone/structure-viewer/originalPanel.ts": {
+      "from": "commit",
+      "bytes": 2130,
+      "sha256": "ed5140a34d30e1481cefd381c0eaccc59596b73f27a1960d4f5c4f6aa1792b7d"
+    },
+    "frontend/standalone/structure-viewer/pageChrome.test.tsx": {
+      "from": "commit",
+      "bytes": 7029,
+      "sha256": "2d7d42d8e94815045d7b41324541aa17d6bf2bba8257be4bce706d65ddc996ec"
+    },
+    "frontend/standalone/structure-viewer/pageIcons.test.tsx": {
+      "from": "commit",
+      "bytes": 1421,
+      "sha256": "723c82b4cc33cfaf92a091aaca60105a01453ffd89afcca4991b209d35f29321"
+    },
+    "frontend/standalone/structure-viewer/pageIcons.tsx": {
+      "from": "commit",
+      "bytes": 3251,
+      "sha256": "19d89daedf42212967d8e6951a5e69cf710de62f2bb8ed3b88f1138b7b166fdf"
+    },
+    "frontend/standalone/structure-viewer/panelGeometry.test.ts": {
+      "from": "commit",
+      "bytes": 10021,
+      "sha256": "aaf3b0d760e4f710df70a099530e03e03a439f6b17f8d0ef724a8b89b1d70cf1"
+    },
+    "frontend/standalone/structure-viewer/panelGeometry.ts": {
+      "from": "commit",
+      "bytes": 11807,
+      "sha256": "50b79905c8da834608bf9a33ea27785249aa04ffa63f664f58e0c3604e8c97b7"
+    },
+    "frontend/standalone/structure-viewer/pdbLink.test.ts": {
+      "from": "commit",
+      "bytes": 1578,
+      "sha256": "78520f4be05bb674753402c2eee69971b59a3278c79291d81bbc30f2b480af53"
+    },
+    "frontend/standalone/structure-viewer/pdbLink.ts": {
+      "from": "commit",
+      "bytes": 1597,
+      "sha256": "dd6bbae4375b8141d56dcbb77ef78a4ab3a7b2cfc5976cca0eea1d0f68f56032"
+    },
+    "frontend/standalone/structure-viewer/pictureSave.ts": {
+      "from": "commit",
+      "bytes": 5644,
+      "sha256": "acbd159bc5dcc8730ef6c719b8c47aaddeec3d71b655b00bc5200aa3599e5935"
+    },
+    "frontend/standalone/structure-viewer/probe.test.ts": {
+      "from": "commit",
+      "bytes": 1713,
+      "sha256": "4192278ce78913b1f925576b1826f1540c453fc6c4b4973600eb9ba63e618a86"
+    },
+    "frontend/standalone/structure-viewer/probe.ts": {
+      "from": "commit",
+      "bytes": 957,
+      "sha256": "99a4b0ec30db1cc43476e684949a6fd5c043c5ead2c00c1cb3da6dca8a6a4158"
+    },
+    "frontend/standalone/structure-viewer/pymolBridge.test.ts": {
+      "from": "commit",
+      "bytes": 79886,
+      "sha256": "2a2d355e4f6d005205c6e0026999a827515a6cfd80054ef865e894f96721ac5d"
+    },
+    "frontend/standalone/structure-viewer/pymolBridge.ts": {
+      "from": "commit",
+      "bytes": 71548,
+      "sha256": "6f9157778b7ec9ae7588499bc03dade273743129d0ded9a46c6c16d0f5bc366f"
+    },
+    "frontend/standalone/structure-viewer/pymolCrashMark.ts": {
+      "from": "commit",
+      "bytes": 4994,
+      "sha256": "a995e9f037b8ca0e4f6e6cc9f407f0fc022c7320aec16a06115f31dda1d5a4c2"
+    },
+    "frontend/standalone/structure-viewer/pymolFailureMessage.test.ts": {
+      "from": "commit",
+      "bytes": 1848,
+      "sha256": "4e46e1c177cf3cf1a604658ca06e33a4bf07ed094bb5715e2ee09aa106507eab"
+    },
+    "frontend/standalone/structure-viewer/pymolInk.test.ts": {
+      "from": "commit",
+      "bytes": 5594,
+      "sha256": "2b1dc0928573b2c171f787132ce32ad67b945073cbb7eede73d1cd59b6180f9a"
+    },
+    "frontend/standalone/structure-viewer/pymolInk.ts": {
+      "from": "commit",
+      "bytes": 4874,
+      "sha256": "acea8cf789f5f1cff5a243dd6c4329ce652b3ac115f2242412693c2238550371"
+    },
+    "frontend/standalone/structure-viewer/pymolObjects.test.ts": {
+      "from": "commit",
+      "bytes": 3543,
+      "sha256": "20c9bb1fc2b7b0cf4604267c1481d62ea07ccc4e8cb875b84e26ffe0d23374b3"
+    },
+    "frontend/standalone/structure-viewer/pymolObjects.ts": {
+      "from": "commit",
+      "bytes": 5073,
+      "sha256": "453ce54f543066c9555c090a26e70e3892cc35e90ee3eb08ef74195ac3d9354d"
+    },
+    "frontend/standalone/structure-viewer/pymolSeq.test.ts": {
+      "from": "commit",
+      "bytes": 2240,
+      "sha256": "78593c07dc1f4bfec1c05000936ddd09ad7fda848b29af8675c5250139dd8979"
+    },
+    "frontend/standalone/structure-viewer/pymolSeq.ts": {
+      "from": "commit",
+      "bytes": 3939,
+      "sha256": "9e11ba59c23234e9508101ce62f9d6f147e79f3e81a261c7b3a8b310e103bba3"
+    },
+    "frontend/standalone/structure-viewer/pymolStartGuards.test.tsx": {
+      "from": "commit",
+      "bytes": 11482,
+      "sha256": "eb1c706a1afd1e13797a8285ac220733cd34ee08cf638674c74839c08aae61b6"
+    },
+    "frontend/standalone/structure-viewer/pymolWords.en.json": {
+      "from": "commit",
+      "bytes": 9861,
+      "sha256": "c35dc400ff021f52478a55f5112b8fbda19b56e8e217da2e64c6aa09ac09f889"
+    },
+    "frontend/standalone/structure-viewer/pymolWords.ja.json": {
+      "from": "commit",
+      "bytes": 12753,
+      "sha256": "17e33b061e1441523aa17806e20ac25326c6a62a5d1fb70dfb224ef18020ea22"
+    },
+    "frontend/standalone/structure-viewer/rcsb.test.ts": {
+      "from": "commit",
+      "bytes": 8043,
+      "sha256": "8ff1c2059fc5a32ed94e9e0df5db0c40010337ad7c10698a0d11ad04c51d8ca6"
+    },
+    "frontend/standalone/structure-viewer/rcsb.ts": {
+      "from": "commit",
+      "bytes": 7521,
+      "sha256": "b784bd60437431e62e2c22ec0e6a35bff3a10957f36ac51f8c0ac85bc78e6f41"
+    },
+    "frontend/standalone/structure-viewer/releaseSignature.test.ts": {
+      "from": "commit",
+      "bytes": 3788,
+      "sha256": "efc9c55e5f7f06c95527056baf7c97a90a8d1f72f0a0a1cb9996e038efd2585b"
+    },
+    "frontend/standalone/structure-viewer/releaseSignature.ts": {
+      "from": "commit",
+      "bytes": 5062,
+      "sha256": "ae670dd939e8a824ba28433fdf54b4494dd2387b862bdafb4622f47d59a4dc99"
+    },
+    "frontend/standalone/structure-viewer/releaseSigning.testkit.ts": {
+      "from": "commit",
+      "bytes": 1698,
+      "sha256": "6ce84f85d3d794059bc24909ee648910dd76f93c19c52dd0cad5fec6fde3e627"
+    },
+    "frontend/standalone/structure-viewer/saveFile.ts": {
+      "from": "commit",
+      "bytes": 6949,
+      "sha256": "9bca2948f59d640f07580cb310e16818dd18fa1f49643165936fcfa1431ce3cf"
+    },
+    "frontend/standalone/structure-viewer/selfCopy.test.ts": {
+      "from": "commit",
+      "bytes": 16915,
+      "sha256": "62f09f7de766ea0e5694519910f9dd68a93b7be0c58fe77dded7e2f3372fae03"
+    },
+    "frontend/standalone/structure-viewer/selfCopy.ts": {
+      "from": "commit",
+      "bytes": 21377,
+      "sha256": "854ab1168ab94e29b0a1b264fc305a61b941ddaced0ff2d86b96190182c8fd9a"
+    },
+    "frontend/standalone/structure-viewer/sheetDialogFocus.test.tsx": {
+      "from": "commit",
+      "bytes": 2780,
+      "sha256": "fa2becc6e27b52a24758930de4927790b847d2f45f5d6c8389a18379afb1c449"
+    },
+    "frontend/standalone/structure-viewer/source/extract.json": {
+      "from": "commit",
+      "bytes": 26559,
+      "sha256": "70a8cad667cc39916cf7ac4ef63a2e37636b7ae960b414aae97bab21758f08c5"
+    },
+    "frontend/standalone/structure-viewer/source/extract.test.ts": {
+      "from": "commit",
+      "bytes": 13912,
+      "sha256": "21bc8eff2e3727b1db34428d04a257284447f58687c78c272dd040a43775bd68"
+    },
+    "frontend/standalone/structure-viewer/source/scan-reviewed.json": {
+      "from": "commit",
+      "bytes": 6437,
+      "sha256": "f39d94c75f6cf7a8b55919a2a9f6f5560661c53709e2bcad28cab2a933a93435"
+    },
+    "frontend/standalone/structure-viewer/source/sourceTests.ts": {
+      "from": "commit",
+      "bytes": 702,
+      "sha256": "689bd1b9399ecd1e09cfc0a7ddcab66277faf869fea2985e0e26251408a32945"
+    },
+    "frontend/standalone/structure-viewer/source/vitest.config.ts": {
+      "from": "commit",
+      "bytes": 1256,
+      "sha256": "c244d953de4b468f12f00c586fafda27398aeeb83eb46ea66c6ee69e454e291f"
+    },
+    "frontend/standalone/structure-viewer/standalone.css": {
+      "from": "commit",
+      "bytes": 79274,
+      "sha256": "775d56894522d55ed46aa788a3293c243c55d7abd3c28bd4d79d718038a9faa5"
+    },
+    "frontend/standalone/structure-viewer/standaloneMenu.test.ts": {
+      "from": "commit",
+      "bytes": 4017,
+      "sha256": "e158e589aa23a369c8ce61f79fce18e22cd3f45ff4d331b60b3fd59987c8dcaf"
+    },
+    "frontend/standalone/structure-viewer/storedFlag.ts": {
+      "from": "commit",
+      "bytes": 693,
+      "sha256": "bc34caffba785bb9e62ae5d07d2721d8b8cb4dcbe7ff36d7f6c76d4dcfce1971"
+    },
+    "frontend/standalone/structure-viewer/stringFilters.ts": {
+      "from": "commit",
+      "bytes": 1770,
+      "sha256": "ee9d19f825ae051e65ffd4f6aa81dd01e4e7b580edc78c6ddd599c5b41e182fa"
+    },
+    "frontend/standalone/structure-viewer/strings.test.ts": {
+      "from": "commit",
+      "bytes": 7974,
+      "sha256": "8f73a02758559c3afa5c1c424b056251ac2e57f83639b02b4b8fe1d8865d3519"
+    },
+    "frontend/standalone/structure-viewer/touchControls.ts": {
+      "from": "commit",
+      "bytes": 2555,
+      "sha256": "29b16d6c41bf3f206c9a231ac96512da92746f8700331df158ec64992c3304e5"
+    },
+    "frontend/standalone/structure-viewer/touchMouse.test.ts": {
+      "from": "commit",
+      "bytes": 6547,
+      "sha256": "c05919063cb9f0ac57ece59e5abc8a2be0d52dcedb620afef5e3cd6f77d1a15d"
+    },
+    "frontend/standalone/structure-viewer/touchMouse.ts": {
+      "from": "commit",
+      "bytes": 6163,
+      "sha256": "68550c68f1acb08c03d78ea856244dfbf95aca5f09cf6f1dd40caa45193788a8"
+    },
+    "frontend/standalone/structure-viewer/twoFingerPan.test.ts": {
+      "from": "commit",
+      "bytes": 3677,
+      "sha256": "e438bd1b17879c14d10eafdc0bbad60de2968730340ec82496bf09c658829fa8"
+    },
+    "frontend/standalone/structure-viewer/twoFingerPan.ts": {
+      "from": "commit",
+      "bytes": 5471,
+      "sha256": "567d422dffdad7d905dd9f4cc5f5f03337b10ca4bfa8648097c0abc178899967"
+    },
+    "frontend/standalone/structure-viewer/useFullscreen.ts": {
+      "from": "commit",
+      "bytes": 3728,
+      "sha256": "59be56a872e8f0554ca4815551891808c6c6317023e403335814d55e1c46d1f8"
+    },
+    "frontend/standalone/structure-viewer/useMobile.ts": {
+      "from": "commit",
+      "bytes": 2836,
+      "sha256": "11ebc246afb2ece9993620d1e0f2c6d2d8b00964c8c73fdf8dbcecbec8e65415"
+    },
+    "frontend/standalone/structure-viewer/virtual.d.ts": {
+      "from": "commit",
+      "bytes": 602,
+      "sha256": "f149dbf2dba6d758313d19fb8c5cda7256a1a874032874c93f1af67d4d8d4773"
+    },
+    "frontend/standalone/structure-viewer/vrmlExport.test.ts": {
+      "from": "commit",
+      "bytes": 2859,
+      "sha256": "126cc4036ef13ab12ab469a05f024c4e68529690716b9efe7dc8e167e3b7dceb"
+    },
+    "frontend/standalone/structure-viewer/vrmlExport.ts": {
+      "from": "commit",
+      "bytes": 3267,
+      "sha256": "b02993d5066950de97a14db6a26d50d20e8b3b71cf857b960a4d0be2f14ebd30"
+    },
+    "frontend/standalone/structure-viewer/workerGl.test.ts": {
+      "from": "commit",
+      "bytes": 8672,
+      "sha256": "41225962a159f41232085eccec395a6e04768b7abd0fd05154487aefb6842373"
+    },
+    "frontend/tsconfig.json": {
+      "from": "commit",
+      "bytes": 524,
+      "sha256": "faf9dff81984453a80ed0354fbfc00582679c34b4605557bd7d2fa5159091483"
+    },
+    "frontend/vite-plugins/derived-pages.ts": {
+      "from": "commit",
+      "bytes": 1180,
+      "sha256": "98d3922392408505d920b5daf10f0a14d4f2552ec4b157b18c6eecba888ec6e2"
+    },
+    "frontend/vite-plugins/gantt-css-prune.test.ts": {
+      "from": "commit",
+      "bytes": 10889,
+      "sha256": "99dd0dc61a9f44975faf5dbe4dbf404fc0790046b7bf6bf7cb7889d0aa228a62"
+    },
+    "frontend/vite-plugins/gantt-css-prune.ts": {
+      "from": "commit",
+      "bytes": 15582,
+      "sha256": "ce3f2786c7c75e7cef9555156df6b0c15f2241205fc2b5cf31fbf2808a6cf893"
+    },
+    "frontend/vite-plugins/gantt-licenses.ts": {
+      "from": "commit",
+      "bytes": 13592,
+      "sha256": "41bc8e3793bd54ab9de36334837bd466c421dbd5a037fa4ca2c9a4bfc26e17af"
+    },
+    "frontend/vite-plugins/gantt-strings-only.test.ts": {
+      "from": "commit",
+      "bytes": 4097,
+      "sha256": "ff9b51bd5f671336003305bbb7960af4b660db23916b3776655a85873d3bd8df"
+    },
+    "frontend/vite-plugins/gantt-strings-only.ts": {
+      "from": "commit",
+      "bytes": 3154,
+      "sha256": "1fb4de5f51fff36ef9669bba604c37a4e3e932f2c8b7db0febf93b0ac860cfb3"
+    },
+    "frontend/vite-plugins/protein-viewer-pages.ts": {
+      "from": "commit",
+      "bytes": 9408,
+      "sha256": "2fb94b964fe325496bfadfac2d22185b060014fb1cc95bed3889b8cebf403d1e"
+    },
+    "frontend/vite-plugins/singlefile.ts": {
+      "from": "commit",
+      "bytes": 5983,
+      "sha256": "f5534fc011f733d7fa18797faa66fc08953526a039b0a20426c97aec1577cd25"
+    },
+    "frontend/vite.structure-viewer.config.ts": {
+      "from": "commit",
+      "bytes": 4681,
+      "sha256": "efbca0cdcda13e12f2c6b94591a27ca5f6c0391e85f0ceeec35c96957f64c6ab"
+    },
+    "pymol-wasm/Dockerfile": {
+      "from": "commit",
+      "bytes": 1678,
+      "sha256": "a1431f7621d301be2ba539afe2892ab43a43a9d93e0c234373499a4c47596e8e"
+    },
+    "pymol-wasm/INPUTS.sha256": {
+      "from": "commit",
+      "bytes": 2430,
+      "sha256": "7d94f2418d4b04d386d65583f2df32d0320441d7da9310bf5f8eca0bc90029cd"
+    },
+    "pymol-wasm/MANIFEST.sha256": {
+      "from": "commit",
+      "bytes": 1744,
+      "sha256": "d2d3895f62e16d4b754f030404ba7d06ed57023ade29a2b81ce7134ca9036042"
+    },
+    "pymol-wasm/README.md": {
+      "from": "commit",
+      "bytes": 33730,
+      "sha256": "4cfc738aebe7c4ead89dc1a50b3a26ea5d8d671cf08139c022dec03208306a6e"
+    },
+    "pymol-wasm/bench/lib/guard_host.mjs": {
+      "from": "commit",
+      "bytes": 2648,
+      "sha256": "00fa9e93a3a2d1693bc716bdd1f608ff111362b1d09b8b2cf89abcf889f9630b"
+    },
+    "pymol-wasm/bench/lib/guard_preload.mjs": {
+      "from": "commit",
+      "bytes": 326,
+      "sha256": "fe55035909bdf8ecaf9aa03c9790fff69f29284cfaae0fbffb1fc0c7a93016c2"
+    },
+    "pymol-wasm/bench/lib/repo.mjs": {
+      "from": "commit",
+      "bytes": 1839,
+      "sha256": "ba676ea5295b4fa5eec28c443e15a6e8322ec880f1287ff39e860544f72b75c8"
+    },
+    "pymol-wasm/bench/render/lib_inputs.mjs": {
+      "from": "commit",
+      "bytes": 8142,
+      "sha256": "cfbb131a7a26ed5858f7eab068da6954c769f7b29341edfea62514fda0fa3c55"
+    },
+    "pymol-wasm/build-in-docker.sh": {
+      "from": "commit",
+      "bytes": 5538,
+      "sha256": "cf1f75d039eabfd698c87012c7721da0856f88640c4ddcd70a3e087e1aee617b"
+    },
+    "pymol-wasm/build.sh": {
+      "from": "commit",
+      "bytes": 30136,
+      "sha256": "48a4df0396ed041fc0baf7ca225580e9c66bc483cf6747fd49fa8d6ee5bae34a"
+    },
+    "pymol-wasm/check_no_emjs.py": {
+      "from": "commit",
+      "bytes": 9331,
+      "sha256": "ba2c5c95b257b1b4419670973e4434296e3c4a2a0f856686bc2cefe5bfe17d96"
+    },
+    "pymol-wasm/cmyk_refilter.py": {
+      "from": "commit",
+      "bytes": 8249,
+      "sha256": "ae36e21333a0b4f5604d2b544a3d938883a884d7b9a35abd585e0fb2557c567f"
+    },
+    "pymol-wasm/compile.sh": {
+      "from": "commit",
+      "bytes": 4398,
+      "sha256": "2afa781f2d8603a41b5225d24664d3f4c0ddc4ef567c00133fb39b7311c17cfa"
+    },
+    "pymol-wasm/env.sh": {
+      "from": "commit",
+      "bytes": 2274,
+      "sha256": "6615db4fd67cc8db87329be7b732ec3cedb75805753955efb372c6170c1463b6"
+    },
+    "pymol-wasm/link.sh": {
+      "from": "commit",
+      "bytes": 2115,
+      "sha256": "e93e5459f0650609e74eff1458a580ce1e939efe30ae6292196fe8e5b7c9dab9"
+    },
+    "pymol-wasm/make_wheel.py": {
+      "from": "commit",
+      "bytes": 8699,
+      "sha256": "580466a1c8b76a1156c7baa8f27b892a8018b5e825c92864c83864b28074cf6d"
+    },
+    "pymol-wasm/notices/README.md": {
+      "from": "commit",
+      "bytes": 1481,
+      "sha256": "5daa987fb6b52103d0bec6cb6d71fc7c82624efe6c811fdcb4e4a1b8a503e6c4"
+    },
+    "pymol-wasm/notices/ilastik-marching_cubes.LICENSE": {
+      "from": "commit",
+      "bytes": 1494,
+      "sha256": "dd3d81364d8acf8ffd1db0e138c77b68ebba3c79232c45682dc593e68f22595a"
+    },
+    "pymol-wasm/notices/mesa-m_matrix.LICENSE": {
+      "from": "commit",
+      "bytes": 1169,
+      "sha256": "2e25eba0dae7dfbfb245e51ed9e8aab529e9b0eb9e3e14b6d9f933d3cecde9ca"
+    },
+    "pymol-wasm/notices/pymol-psico.LICENSE": {
+      "from": "commit",
+      "bytes": 1682,
+      "sha256": "75650e8f0ea2e1da2200e43f4d1bf64de3055e67867073702f99da4f369df129"
+    },
+    "pymol-wasm/numpy_drop.json": {
+      "from": "commit",
+      "bytes": 8927,
+      "sha256": "b4c70fedad6f99e7b52282f9c22e9964aef7db3b4ac11ef4d77a9fd65f8de505"
+    },
+    "pymol-wasm/numpy_trim.py": {
+      "from": "commit",
+      "bytes": 22763,
+      "sha256": "41a32275f0399ba9b6b234cb0e54bf2738f41728c2171d1b86a0bee1e93cdbc8"
+    },
+    "pymol-wasm/patches/0001-memoryusage-emscripten.patch": {
+      "from": "commit",
+      "bytes": 588,
+      "sha256": "f2de151940a75a12844602da0178cd14812ee3b85640d3f65b1727f4bb4dba56"
+    },
+    "pymol-wasm/patches/0002-shaders-webgl1-fragdepth-ext.patch": {
+      "from": "commit",
+      "bytes": 814,
+      "sha256": "4d39a3786f8973f031a81596f707262f9fd9c073e5f37e6635d419d2309d40fc"
+    },
+    "pymol-wasm/patches/0003-glgenbuffer-clear-stale-errors.patch": {
+      "from": "commit",
+      "bytes": 581,
+      "sha256": "e102018098f2e5cee2a40fd6b0a0aa5c0bf9eb6ecd935b9f96a48764efc3753c"
+    },
+    "pymol-wasm/patches/0004-replabel-es2-use-label-shader.patch": {
+      "from": "commit",
+      "bytes": 628,
+      "sha256": "ef1faae2bd563b072b378a150393b50c342af9dbaccb5f4f6e738d5a4fe75c19"
+    },
+    "pymol-wasm/patches/0005-shadermgr-webgl2-glsl-es300.patch": {
+      "from": "commit",
+      "bytes": 2089,
+      "sha256": "9da42f2613c4b675341219e222cec01424af51b87a131581990ab249a44d20cc"
+    },
+    "pymol-wasm/patches/0006-chempy-restricted-unpickler.patch": {
+      "from": "commit",
+      "bytes": 8309,
+      "sha256": "4bd9a865d00ecc519fb600d530b96f92561a4395341e18b54b1be86245337822"
+    },
+    "pymol-wasm/patches/0007-typeface-truetype-modules-only.patch": {
+      "from": "commit",
+      "bytes": 2063,
+      "sha256": "15f40cb59c4f74e7e9658c3f83a8d6367d610ac94c25d455eda949a54a6c1e07"
+    },
+    "pymol-wasm/patches/0008-repsurface-empty-va-is-null.patch": {
+      "from": "commit",
+      "bytes": 580,
+      "sha256": "93bb80457d48fbad27dace18d92abdd8fdb459ac53e4a35553aceb7fa1ebd870"
+    },
+    "pymol-wasm/patches/0009-map-express-two-pass-triangle-start.patch": {
+      "from": "commit",
+      "bytes": 7116,
+      "sha256": "df1a4abd87ee74af912f67cc81d5c72794682bbcdfff8af787ea12134be4ce18"
+    },
+    "pymol-wasm/patches/0010-utf8-byte-lengths-upstream-522.patch": {
+      "from": "commit",
+      "bytes": 4804,
+      "sha256": "d87a9c61ea4a22ecc125b9c3fbca7a75343600d9f426d4714eeef441a11914a4"
+    },
+    "pymol-wasm/patches/0011-mypng-failed-read-builds-no-image.patch": {
+      "from": "commit",
+      "bytes": 3609,
+      "sha256": "96447b68a65806ecb57aca9f2245481cb728ecc547e1b52dd00b5ecc8c628aa2"
+    },
+    "pymol-wasm/patches/0012-text-sans-four-fonts-fallback.patch": {
+      "from": "commit",
+      "bytes": 2133,
+      "sha256": "5a4ede8ef91f4340f73118bf938aebcbe97114e0b8c18967b37e9aa3ed6b224a"
+    },
+    "pymol-wasm/patches/0013-shadermgr-es300-without-regex.patch": {
+      "from": "commit",
+      "bytes": 11292,
+      "sha256": "6bb333d602603fd3e01833952b68e37b0aa86fa0bcaebd7be061a2cee21aae4b"
+    },
+    "pymol-wasm/patches/0014-chempy-pkl-bundled-c-unpickler.patch": {
+      "from": "commit",
+      "bytes": 1618,
+      "sha256": "df6c5c537cb1920d054bc1bc820342beb9a002cb33f41cf935bcabf73a02d612"
+    },
+    "pymol-wasm/pyc_assemble.py": {
+      "from": "commit",
+      "bytes": 21239,
+      "sha256": "f9c4d94f9f8090addedd98116787033f8ee7217d61bf46e4636f1339fc2502ee"
+    },
+    "pymol-wasm/pyc_compile.mjs": {
+      "from": "commit",
+      "bytes": 9124,
+      "sha256": "9d2af0f6766d326d1f71b6814daf9c685447e8179475393b442dc45c1d10141f"
+    },
+    "pymol-wasm/pyc_targets.json": {
+      "from": "commit",
+      "bytes": 6127,
+      "sha256": "a5fb2a027b76f117d2c0eb129f722317bbfce1584b0ff63f2da262f1eaa1a97b"
+    },
+    "pymol-wasm/repickle.mjs": {
+      "from": "commit",
+      "bytes": 7248,
+      "sha256": "3fb4c436dc1cd8acd5cecdbaadc2827fe398f94842185335d82c88c9488b24d3"
+    },
+    "pymol-wasm/runtime_notices.py": {
+      "from": "commit",
+      "bytes": 11584,
+      "sha256": "61665948b84c79c2d672af4395a491754fe9199cd81f1210f302628ddc5d10da"
+    },
+    "pymol-wasm/s1_drop.json": {
+      "from": "commit",
+      "bytes": 4767,
+      "sha256": "e3706fe9ede9be78e3dd8b17905b61d4455b0336bc2b8f48cb068ad6d1817651"
+    },
+    "pymol-wasm/shim/gl_legacy_stub.h": {
+      "from": "commit",
+      "bytes": 2976,
+      "sha256": "2b0c949fe83fe1c22cf62afd7a0c6d03a7a193de1615c1c672e0055445d26ccc"
+    },
+    "pymol-wasm/shim/os_gl_es.h": {
+      "from": "commit",
+      "bytes": 2843,
+      "sha256": "687f4f7388065c9033d55848f08a9a99818736d50b9ea04e46c4e3ba4a6f63e7"
+    },
+    "pymol-wasm/tests/bg_image_probe.mjs": {
+      "from": "commit",
+      "bytes": 20594,
+      "sha256": "e99e39bf697c98f6b0bfe322501cb2f5265e44e4defd65e41afcfe140a106e24"
+    },
+    "pymol-wasm/tests/bundled_pkl_probe.mjs": {
+      "from": "commit",
+      "bytes": 21879,
+      "sha256": "9af7325b21ea10417a14f381916dde1e047454923afe3f7728cad8d0955df983"
+    },
+    "pymol-wasm/tests/check_pyc.py": {
+      "from": "commit",
+      "bytes": 13809,
+      "sha256": "32cec93ddd362cf0cbc19ccad7b5f062b2a0c5197bb2d80f02ed443e37169b12"
+    },
+    "pymol-wasm/tests/check_side_modules.py": {
+      "from": "commit",
+      "bytes": 22972,
+      "sha256": "6ef7d453693d390d83ec34eceb62512588f31ffd9e9d77357adf746a61353a98"
+    },
+    "pymol-wasm/tests/cmyk_table.mjs": {
+      "from": "commit",
+      "bytes": 9412,
+      "sha256": "7f0a1b7e6be74fc5c4137013728d32a1fb4d482712f9ea06ec65285e84dbbaa0"
+    },
+    "pymol-wasm/tests/emjs_negative.c": {
+      "from": "commit",
+      "bytes": 193,
+      "sha256": "f75e8db8e1b82b354eb1ad9306d304a8a361094c836fd06945591b56ff2ba95a"
+    },
+    "pymol-wasm/tests/emjs_positive.c": {
+      "from": "commit",
+      "bytes": 617,
+      "sha256": "5276d0465d347df6c6d3480b2cf0eba12c07f943c678341684d727591ee0cddc"
+    },
+    "pymol-wasm/tests/es300_rewrite_test.cpp": {
+      "from": "commit",
+      "bytes": 30308,
+      "sha256": "a900a9f6f96b0a43d6c213bcb1268a21af84f258293ebf433cbf367760e6cfa2"
+    },
+    "pymol-wasm/tests/fetch_pyodide_core.sh": {
+      "from": "commit",
+      "bytes": 3753,
+      "sha256": "acd9b89a2834be6cd8c92c616cdba31eb6ceb646b3535bead551260c3a00db05"
+    },
+    "pymol-wasm/tests/font_fallback_probe.mjs": {
+      "from": "commit",
+      "bytes": 22616,
+      "sha256": "67a9b5cd4bd246e94bf03b32edec07821735f9aa29b29090c0e1d93fa9f3682d"
+    },
+    "pymol-wasm/tests/frame_auto_color.mjs": {
+      "from": "commit",
+      "bytes": 8505,
+      "sha256": "75def2dd6e381c3824908fd40d4850f2b3eaf2010cd3e5f7fac0f4463301e170"
+    },
+    "pymol-wasm/tests/frame_fatal_cpp_exception.mjs": {
+      "from": "commit",
+      "bytes": 15082,
+      "sha256": "73efbe9cca19e49c3d779f317190da267d5d3ea3cb110b299a77dbf3aeb879ff"
+    },
+    "pymol-wasm/tests/frame_gl_defaults.mjs": {
+      "from": "commit",
+      "bytes": 5716,
+      "sha256": "69e913fa684f6f04e812d3341dc9e64d78bd7714facceb26a0f1bde63e5f47df"
+    },
+    "pymol-wasm/tests/frame_guard_loads.mjs": {
+      "from": "commit",
+      "bytes": 12102,
+      "sha256": "9ca982e98d09aed3f3e13c817771a60974b16b33a8665d2691eeb4b11ac7941f"
+    },
+    "pymol-wasm/tests/frame_lazy_numpy.mjs": {
+      "from": "commit",
+      "bytes": 23518,
+      "sha256": "a506492087adb062e265f625731f0bee6c540306b58e6fc1d526695e3bc36bef"
+    },
+    "pymol-wasm/tests/frame_load_formats.mjs": {
+      "from": "commit",
+      "bytes": 13755,
+      "sha256": "9a38103670fc2af0976834706965beab63dec09e9b72787b175321f5ff32c217"
+    },
+    "pymol-wasm/tests/frame_restore_compressed.mjs": {
+      "from": "commit",
+      "bytes": 11324,
+      "sha256": "3adc53483edadd51f13aeccd821c3d1f6c14a3842a263022b8adaea8cdfb7c10"
+    },
+    "pymol-wasm/tests/frame_s2_defaults.mjs": {
+      "from": "commit",
+      "bytes": 30759,
+      "sha256": "d672c28bc87abde6204812b6dcf44d5b8fd481b8a587f0e37b321a29c1aaff07"
+    },
+    "pymol-wasm/tests/interrupt_probe.mjs": {
+      "from": "commit",
+      "bytes": 9833,
+      "sha256": "6779037e5535bcbd44a8d9ec1725071a9934f44e01a94653c85490518ca1a3d7"
+    },
+    "pymol-wasm/tests/map_compare.py": {
+      "from": "commit",
+      "bytes": 4906,
+      "sha256": "6f28936f26fd3fcb5802edeb7a33cb96de74111015d44417e030e7a8c78c650a"
+    },
+    "pymol-wasm/tests/map_equality.mjs": {
+      "from": "commit",
+      "bytes": 25126,
+      "sha256": "3bc63733c84642b0af9cb869ade981bb7251f813ac92d574703242a6bc373969"
+    },
+    "pymol-wasm/tests/map_worker.mjs": {
+      "from": "commit",
+      "bytes": 4202,
+      "sha256": "34da7b7de1453197701d7e9e8e12f235aa67de790e1be5dad4f5bac283c55730"
+    },
+    "pymol-wasm/tests/npy_abi_probe.cpp": {
+      "from": "commit",
+      "bytes": 1198,
+      "sha256": "1664a03b1b7b367fd214353ae08b1ae4160afd79f34c435cb60707bc34d8adfa"
+    },
+    "pymol-wasm/tests/numpy_import_probe.mjs": {
+      "from": "commit",
+      "bytes": 18255,
+      "sha256": "4fee85a66a8e02f2cdff6ff7ed741da5adccb63474b2aa10279f8298f15d9f96"
+    },
+    "pymol-wasm/tests/pickle_identity.mjs": {
+      "from": "commit",
+      "bytes": 14537,
+      "sha256": "5da8e504d88cc9d8691ed6730de12cdb24d4e9fd857dacb36d7e06c3c1b5fbd2"
+    },
+    "pymol-wasm/tests/pt2891_frame_defences.mjs": {
+      "from": "commit",
+      "bytes": 15282,
+      "sha256": "6384a33679f774735003095a5bd4c0fd153fbe4ca38170408704d04ee1cef812"
+    },
+    "pymol-wasm/tests/run_es300_rewrite_test.sh": {
+      "from": "commit",
+      "bytes": 5886,
+      "sha256": "26080934b5cfced42af7dedcbd037bb68c9b2e8d5682e19b18466d49eb10bec6"
+    },
+    "pymol-wasm/tests/run_runtime_tests.sh": {
+      "from": "commit",
+      "bytes": 6847,
+      "sha256": "18ca425b20bf5823c9d938b31da237fb7934465c544e1fa1ac2c4a6c6188a374"
+    },
+    "pymol-wasm/tests/side_module_controls.py": {
+      "from": "commit",
+      "bytes": 13555,
+      "sha256": "eb51c54b1d9b34fce0a7a694a74888ee2a70ebccdb956f08f86e203e96dc51f9"
+    },
+    "pymol-wasm/tests/smoke_wheel.mjs": {
+      "from": "commit",
+      "bytes": 9222,
+      "sha256": "a745d49d0fecf0c4d3d3b3a8a3de2e18727c1ba3935f586a22713a8511e9622c"
+    },
+    "pymol-wasm/tests/test_check_no_emjs.py": {
+      "from": "commit",
+      "bytes": 10953,
+      "sha256": "44edf9ba8863bafd9a7d183c391700744d4532972355ac37bcfe6d727bf328a4"
+    },
+    "pymol-wasm/tests/test_check_pyc.py": {
+      "from": "commit",
+      "bytes": 14409,
+      "sha256": "77e043724db140131ca3fa07a2dfc2478e071a85db2f84c6cab7767adddb2b8d"
+    },
+    "pymol-wasm/tests/test_check_side_modules.py": {
+      "from": "commit",
+      "bytes": 20232,
+      "sha256": "51a6a41164be4390751d30655d75d732ae2d36c13b5d2f5009aff58758d6ec9d"
+    },
+    "pymol-wasm/tests/test_cmyk_refilter.py": {
+      "from": "commit",
+      "bytes": 7390,
+      "sha256": "e65ef88886e8c0b176c13788cb2e6406c5b77623286628ccf7e70a91f0a28bbe"
+    },
+    "pymol-wasm/tests/test_make_wheel.py": {
+      "from": "commit",
+      "bytes": 13235,
+      "sha256": "fe5e1732e7c0c197d3bdaff55589b1b9abaa4829bc8bd8fe5828a76d97ff6abb"
+    },
+    "pymol-wasm/tests/test_numpy_trim.py": {
+      "from": "commit",
+      "bytes": 19636,
+      "sha256": "1368a9d9bd9e9c1c4d8c44525b5920b7aebf9394683660cf20d9540001b770a7"
+    },
+    "pymol-wasm/tests/test_pyc_assemble.py": {
+      "from": "commit",
+      "bytes": 21184,
+      "sha256": "26098ba3f8caa27a8c30a32e1415d4b4df6d3fb6928688d42373e987544db968"
+    },
+    "pymol-wasm/tests/test_restricted_unpickler.py": {
+      "from": "commit",
+      "bytes": 34391,
+      "sha256": "ef17a1d3a59730b4ff1d039bc57345e30abe6312d5487852c3b40a802f20de30"
+    },
+    "pymol-wasm/tests/test_tests_summary.py": {
+      "from": "commit",
+      "bytes": 7196,
+      "sha256": "2fd557bc874f428a0ce6e588d49d082dc567e4086ce5cb4359bcc485748eb752"
+    },
+    "pymol-wasm/tests/test_third_party_notices.py": {
+      "from": "commit",
+      "bytes": 23604,
+      "sha256": "e769d2c80965104c54470aa71782ce9a6bb2f4e4a6672fcdea98696d3c1d7a62"
+    },
+    "pymol-wasm/tests/tests_summary.py": {
+      "from": "commit",
+      "bytes": 6115,
+      "sha256": "1aeb452c13095a0ae7a2754aed27e55a9fd554a025e8dc39f27ebfa56fe24236"
+    },
+    "pymol-wasm/tests/utf8_probe.mjs": {
+      "from": "commit",
+      "bytes": 16694,
+      "sha256": "0df3893dfde68671039cdcf6538b88b9dffacf023650441b39a6d8739f678c4f"
+    },
+    "pymol-wasm/third_party_notices.py": {
+      "from": "commit",
+      "bytes": 35960,
+      "sha256": "45078cf26018810bfd099a2d2d0fe0025b9021540ae1574756529bba2a7ec1e0"
+    },
+    "pymol-wasm/wheel.sh": {
+      "from": "commit",
+      "bytes": 4087,
+      "sha256": "1087bd42d0cb239d5bf65d6391d27693c6f8a4aab046b59593c7afff8115bb3a"
+    },
+    "scripts/viewer_pack_release.mjs": {
+      "from": "commit",
+      "bytes": 24425,
+      "sha256": "c5748053d30d37221d4930f2e989b21f93e59c7992c80146616e9e23c3b0f205"
+    },
+    "scripts/viewer_pack_reproduce.mjs": {
+      "from": "commit",
+      "bytes": 15241,
+      "sha256": "e6e12b71b010963d18564bac2145683be2c80a1f4d9a520ced1ad09a49587010"
+    },
+    "scripts/viewer_pack_signing.mjs": {
+      "from": "commit",
+      "bytes": 13355,
+      "sha256": "bbb717a56539b19449a2fbe514154c7bbfc1e33c7f7500c568a50cb4b837b973"
+    },
+    "scripts/viewer_pack_source_build.sh": {
+      "from": "commit",
+      "bytes": 10656,
+      "sha256": "a63ed9d24a404dd4b0e22f6f698e9c540781afcd111cc5d9c3c6b26af1056bff"
+    }
+  }
+}

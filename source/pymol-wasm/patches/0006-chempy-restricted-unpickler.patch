@@ -1,0 +1,183 @@
+diff --git a/modules/chempy/pkl.py b/modules/chempy/pkl.py
+index aed58aa..75e541a 100644
+--- a/modules/chempy/pkl.py
++++ b/modules/chempy/pkl.py
+@@ -49,6 +49,169 @@ if True:
+     pickle._Pickler.dispatch[str] = save_str
+     pickle._Pickler.dispatch[bytes] = save_str
+ 
++    # Restricted unpickler for session files.
++    #
++    # A session can come from another user, so session data is unpickled only
++    # by an unpickler whose find_class resolves RESTRICTED_GLOBALS and nothing
++    # else. It replaces cPickle.loads below and the stdlib pickle.loads and
++    # pickle._loads (the C++ session restore calls the stdlib one), and no
++    # setting, argument or message turns it off.
++    # cPickle.load (a file) is left alone on purpose: it reads the bundled,
++    # trusted fragments and mutagenesis data. Untrusted .pkl / model input is
++    # refused before it reaches cPickle.load by the viewer's own load checks,
++    # not by this patch.
++
++    import _compat_pickle
++    import copyreg
++    import io as _io
++    import sys as _sys
++
++    # (module, name) pairs a session needs: measured on real sessions, and on
++    # PyMOL 2.x-era names after the _compat_pickle mapping below.
++    RESTRICTED_GLOBALS = frozenset([
++        ('pymol', 'Session_Storage'),
++        ('_codecs', 'encode'),
++        ('chempy', 'Storage'),
++        ('chempy', 'Atom'),
++        ('chempy', 'Bond'),
++        ('chempy.models', 'Indexed'),
++        ('chempy.models', 'Connected'),
++        ('builtins', 'bytearray'),
++        ('builtins', 'bytes'),
++        ('builtins', 'complex'),
++        ('collections', 'OrderedDict'),
++        ('copyreg', '_reconstructor'),
++        ('numpy', 'dtype'),
++        ('numpy', 'ndarray'),
++        ('numpy.core.multiarray', '_reconstruct'),
++        ('numpy._core.multiarray', '_reconstruct'),
++        ('numpy._core.multiarray', 'scalar'),
++        ('numpy.core.multiarray', 'scalar'),
++    ])
++
++    # Names that are allowed to be RESOLVED (so a reconstructor can take them as
++    # an argument) but must never be the callable a pickle invokes directly:
++    # called directly, numpy.ndarray is not safe on session data. A legitimate
++    # array never calls ndarray directly: it calls
++    # numpy._core.multiarray._reconstruct(ndarray, shape, dtype) and then BUILD,
++    # so ndarray appears only as _reconstruct's first argument, never reduced.
++    # Matched by (module, qualname); the object here is always one find_class
++    # already resolved from RESTRICTED_GLOBALS, so these attributes are genuine.
++    _NEVER_CALLED_DIRECTLY = frozenset([
++        ('numpy', 'ndarray'),
++    ])
++
++    class RestrictedUnpickler(pickle._Unpickler):
++        '''
++        The Python-implementation unpickler (so the string decoding above
++        still applies), refusing every global outside RESTRICTED_GLOBALS.
++        '''
++
++        def __init__(self, *args, **kwargs):
++            super().__init__(*args, **kwargs)
++            self._globals_handed_out = []
++
++        def find_class(self, module, name):
++            _sys.audit('pickle.find_class', module, name)
++            # Map PyMOL 2.x-era names (__builtin__.bytearray,
++            # copy_reg._reconstructor) with _compat_pickle, THEN check the
++            # allow-list: checking the as-written name refuses legitimate old
++            # sessions, and a mapped name is held to the same list. (stdlib
++            # find_class maps only for proto < 3 and when fix_imports is set;
++            # this maps for every proto < 4, which is wider but still ends at
++            # the same 18-name check.)
++            if self.proto < 4:
++                if (module, name) in _compat_pickle.NAME_MAPPING:
++                    module, name = _compat_pickle.NAME_MAPPING[(module, name)]
++                elif module in _compat_pickle.IMPORT_MAPPING:
++                    module = _compat_pickle.IMPORT_MAPPING[module]
++            if (module, name) not in RESTRICTED_GLOBALS:
++                raise pickle.UnpicklingError(
++                    'PyMOL session refused: global %s.%s is not allowed'
++                    % (module, name))
++            # One plain attribute of an imported module, never the dotted
++            # walk pickle._Unpickler.find_class does from protocol 4 on.
++            __import__(module, level=0)
++            obj = getattr(_sys.modules[module], name)
++            self._globals_handed_out.append(obj)
++            return obj
++
++        def get_extension(self, code):
++            # Skips pickle's process-wide _extension_cache: an entry another
++            # unpickler cached would come back without passing find_class.
++            key = copyreg._inverted_registry.get(code)
++            if not key:
++                raise pickle.UnpicklingError(
++                    'PyMOL session refused: unregistered extension code %r'
++                    % (code,))
++            self.append(self.find_class(*key))
++
++        def persistent_load(self, pid):
++            raise pickle.UnpicklingError(
++                'PyMOL session refused: persistent IDs are not allowed')
++
++        def load_build(self):
++            # BUILD sets attributes on the object under the state. On a class
++            # or function find_class handed out, that would rewrite it for
++            # the whole process.
++            stack = self.stack
++            if len(stack) >= 2 and any(stack[-2] is obj
++                                       for obj in self._globals_handed_out):
++                raise pickle.UnpicklingError(
++                    'PyMOL session refused: BUILD on a global object')
++            pickle._Unpickler.load_build(self)
++
++        def _refuse_direct_call(self, func):
++            module = getattr(func, '__module__', None)
++            qualname = getattr(func, '__qualname__', None) \
++                or getattr(func, '__name__', None)
++            if (module, qualname) in _NEVER_CALLED_DIRECTLY:
++                raise pickle.UnpicklingError(
++                    'PyMOL session refused: %s.%s may only be an argument to a '
++                    'reconstructor, not called directly' % (module, qualname))
++
++        def load_reduce(self):
++            # Stack at entry: [..., func, argtuple].
++            self._refuse_direct_call(self.stack[-2])
++            pickle._Unpickler.load_reduce(self)
++
++        def load_newobj(self):
++            # Stack at entry: [..., cls, argtuple]. cls.__new__(cls, *args)
++            # reaches the same C constructor as a direct call.
++            self._refuse_direct_call(self.stack[-2])
++            pickle._Unpickler.load_newobj(self)
++
++        def load_newobj_ex(self):
++            # Stack at entry: [..., cls, argtuple, kwargdict].
++            self._refuse_direct_call(self.stack[-3])
++            pickle._Unpickler.load_newobj_ex(self)
++
++        def _instantiate(self, klass, args):
++            # INST / OBJ (protocol 0/1) both call klass(*args) through here.
++            self._refuse_direct_call(klass)
++            return pickle._Unpickler._instantiate(self, klass, args)
++
++        dispatch = dict(pickle._Unpickler.dispatch)
++        dispatch[pickle.BUILD[0]] = load_build
++        dispatch[pickle.REDUCE[0]] = load_reduce
++        dispatch[pickle.NEWOBJ[0]] = load_newobj
++        dispatch[pickle.NEWOBJ_EX[0]] = load_newobj_ex
++
++    def restricted_loads(s, /, *, fix_imports=True, encoding="ASCII",
++                         errors="strict", buffers=None):
++        '''
++        Drop-in for pickle.loads and pickle._loads that unpickles with
++        RestrictedUnpickler.
++        '''
++        if isinstance(s, str):
++            raise TypeError("Can't load pickle from unicode string")
++        return RestrictedUnpickler(_io.BytesIO(s), fix_imports=fix_imports,
++                                   buffers=buffers, encoding=encoding,
++                                   errors=errors).load()
++
++    pickle.loads = restricted_loads
++    pickle._loads = restricted_loads
++
+     class cPickle:
+         dumps = pickle.dumps
+         dump = pickle.dump
+@@ -57,7 +220,7 @@ if True:
+         def loads(s):
+             if not isinstance(s, bytes):
+                 s = s.encode(errors='ignore')
+-            return pickle._loads(s)
++            return restricted_loads(s)
+ 
+         @classmethod
+         def configure_legacy_dump(cls, py2=False):

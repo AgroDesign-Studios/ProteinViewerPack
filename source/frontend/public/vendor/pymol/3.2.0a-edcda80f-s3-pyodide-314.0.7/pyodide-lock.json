@@ -1,0 +1,43 @@
+{
+ "info": {
+  "abi_version": "2026_0",
+  "arch": "wasm32",
+  "platform": "emscripten_5_0_3",
+  "python": "3.14.2"
+ },
+ "packages": {
+  "numpy": {
+   "depends": [],
+   "file_name": "numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+   "imports": [
+    "numpy"
+   ],
+   "install_dir": "site",
+   "name": "numpy",
+   "package_type": "package",
+   "sha256": "ac2db75025a6dd4ce140c571d60c11f61b0c2010f879865952e513c57ff3d9b0",
+   "tool": {},
+   "unvendored_tests": false,
+   "version": "2.4.6"
+  },
+  "pymol": {
+   "depends": [
+    "numpy"
+   ],
+   "file_name": "pymol-3.2.0a-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+   "imports": [
+    "chempy",
+    "pymol",
+    "pymol2"
+   ],
+   "install_dir": "site",
+   "name": "pymol",
+   "package_type": "package",
+   "sha256": "45f41f18b403ecdc9713bfef26e6194ae7483dbbdcf3cd95fe6022a7f98585fd",
+   "tool": {},
+   "unvendored_tests": false,
+   "version": "3.2.0a"
+  }
+ },
+ "tool": {}
+}

@@ -1,0 +1,51 @@
+diff --git a/layer0/ShaderMgr.cpp b/layer0/ShaderMgr.cpp
+index 6ac9fc1f..b41ad2b7 100644
+--- a/layer0/ShaderMgr.cpp
++++ b/layer0/ShaderMgr.cpp
+@@ -89,8 +89,46 @@ Z* -------------------------------------------------------------------
+   } \
+ }
+ 
++#ifdef __EMSCRIPTEN__
++#include <regex>
++/**
++ * WebGL2 rejects GL_EXT_frag_depth in GLSL ES 1.00 shaders, so on a WebGL2
++ * context rewrite PyMOL's ES2 shaders to GLSL ES 3.00 (pymolweb spike).
++ */
++static std::string pymolweb_to_es300(GLuint shad, const std::string& src)
++{
++  static int is_es3 = -1;
++  if (is_es3 < 0) {
++    auto v = (const char*) glGetString(GL_VERSION);
++    is_es3 = v && std::strstr(v, "OpenGL ES 3") ? 1 : 0;
++  }
++  if (!is_es3)
++    return src;
++  GLint type = 0;
++  glGetShaderiv(shad, GL_SHADER_TYPE, &type);
++  bool frag = (type == GL_FRAGMENT_SHADER);
++  std::string s = std::regex_replace(src, std::regex(R"(^[ \t]*#(version|extension)[^\n]*)", std::regex::multiline), "");
++  s = std::regex_replace(s, std::regex(R"(^[ \t]*#define[ \t]+texture[ \t]+texture2D[^\n]*)", std::regex::multiline), "");
++  s = std::regex_replace(s, std::regex(R"(\btexture2D\s*\()"), "texture(");
++  s = std::regex_replace(s, std::regex(R"(\btextureCube\s*\()"), "texture(");
++  s = std::regex_replace(s, std::regex(R"(\bvarying\b)"), frag ? "in" : "out");
++  if (frag) {
++    s = std::regex_replace(s, std::regex(R"(\bgl_FragColor\b|\bgl_FragData\s*\[\s*0\s*\])"), "pymolweb_FragColor");
++    s = std::regex_replace(s, std::regex(R"(\bgl_FragDepthEXT\b)"), "gl_FragDepth");
++    return "#version 300 es\nprecision highp float;\nout vec4 pymolweb_FragColor;\n" + s;
++  }
++  s = std::regex_replace(s, std::regex(R"(\battribute\b)"), "in");
++  return "#version 300 es\n" + s;
++}
++#endif
++
+ static void glShaderSource1String(GLuint shad, const std::string &strobj){
++#ifdef __EMSCRIPTEN__
++  std::string conv = pymolweb_to_es300(shad, strobj);
++  const GLchar *str = (const GLchar *)conv.c_str();
++#else
+   const GLchar *str = (const GLchar *)strobj.c_str();
++#endif
+   glShaderSource(shad, 1, (const GLchar **)&str, nullptr);
+ }
+ 

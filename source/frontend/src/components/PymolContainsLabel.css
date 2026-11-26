@@ -1,0 +1,53 @@
+/*
+ * "Includes PyMOL™" in two tiers (`PymolContainsLabel.tsx`):
+ * the first tier small, then PyMOL™ large with the rest small on one line.
+ * The engine switch's option is `md`, a brand bar `lg`.
+ * No colour here: the label takes its container's.
+ */
+.pymol-contains {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 1.1;
+}
+
+.pymol-contains-small,
+.pymol-contains-line {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.pymol-contains-line {
+  white-space: nowrap;
+}
+
+.pymol-contains-big {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pymol-contains--lg .pymol-contains-big {
+  font-size: 16px;
+}
+
+/* Three lines (`stacked`): the large part a line of its own between the two
+   small ones, centred, in the room the two-tier label took. */
+.pymol-contains--stacked {
+  align-items: center;
+  text-align: center;
+  line-height: 1;
+}
+
+.pymol-contains--stacked .pymol-contains-small,
+.pymol-contains--stacked .pymol-contains-line {
+  font-size: 9.5px;
+}
+
+.pymol-contains--stacked .pymol-contains-big {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}

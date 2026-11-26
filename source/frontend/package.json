@@ -1,0 +1,29 @@
+{
+  "name": "agrodesign-protein-viewer-pack",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build -c vite.structure-viewer.config.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run -c standalone/structure-viewer/source/vitest.config.ts"
+  },
+  "dependencies": {
+    "3dmol": "2.5.5",
+    "earcut": "2.2.4",
+    "i18next": "26.6.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-i18next": "17.1.10"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.8",
+    "@vitejs/plugin-react": "6.1.2",
+    "jsdom": "25.0.1",
+    "postcss": "8.5.32",
+    "typescript": "5.9.3",
+    "vite": "8.3.5",
+    "vitest": "4.1.12"
+  }
+}

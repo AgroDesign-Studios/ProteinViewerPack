@@ -1,0 +1,200 @@
+--- a/layer0/Map.cpp
++++ b/layer0/Map.cpp
+@@ -453,78 +453,104 @@
+ }
+ 
+ int MapSetupExpress(MapType* I)
+-{ /* setup a list of neighbors for each square */
++{
++  /* For every cell, EList gets the points of the 27 cells around it (the cell
++   * itself included): the cells in d, e, f order (f fastest), the points of
++   * one cell in Head/Link order, then -1. EHead holds where that list starts;
++   * 0 means no point is near the cell (EList[0] is never a start).
++   *
++   * Three passes: count the points of every cell that is read, give each cell
++   * its start from the counts of its 27 cells, then allocate EList once at its
++   * final size and write the lists into it. */
+   PyMOLGlobals* G = I->G;
+-  int n = 0;
+-  int c, d, e, f, i, cm1, cp2, D1D2 = I->D1D2, D2 = I->Dim[2];
+-  int mx2 = I->iMax[2];
+-  int* link = I->Link.data();
+-  int st, flag;
+-  int *i_ptr3, *i_ptr4, *i_ptr5;
+-  int mx0 = I->iMax[0], mx1 = I->iMax[1], a, am1, ap2, *i_ptr1, b, bm1, bp2,
+-      *i_ptr2;
+-  int ok = true;
++  const int D1D2 = I->D1D2, D2 = I->Dim[2];
++  const int* head = I->Head.data();
++  const int* link = I->Link.data();
+ 
+   PRINTFD(G, FB_Map)
+   " MapSetupExpress-Debug: entered.\n" ENDFD;
+ 
+   auto mapSize = I->Dim[0] * I->Dim[1] * I->Dim[2];
+   I->EHead.assign(mapSize, 0);
+-  std::vector<int> e_list;
+-  e_list.reserve(1000);
++  int* ehead = I->EHead.data();
+ 
+-  e_list.push_back(0);
+-  n = 1;
+-  for (a = (I->iMin[0] - 1); ok && a <= mx0; a++) {
+-    am1 = a - 1;
+-    ap2 = a + 2;
+-    i_ptr1 = I->Head.data() + am1 * D1D2;
+-    for (b = (I->iMin[1] - 1); ok && b <= mx1; b++) {
+-      bm1 = b - 1;
+-      bp2 = b + 2;
+-      i_ptr2 = i_ptr1 + bm1 * D2;
+-      for (c = (I->iMin[2] - 1); ok && c <= mx2; c++) {
+-        st = n;
+-        cm1 = c - 1;
+-        cp2 = c + 2;
+-        flag = false;
+-        i_ptr5 = (i_ptr4 = (i_ptr3 = i_ptr2 + cm1));
+-
+-        for (d = am1; ok && d < ap2; d++) {
+-          for (e = bm1; ok && e < bp2; e++) {
+-            for (f = cm1; ok && f < cp2; f++) {
+-              /*i=*MapFirst(I,d,e,f); */
+-              if ((i = *(i_ptr5++)) >= 0) {
+-                flag = true;
+-                do {
+-                  e_list.push_back(i);
+-                  n++;
+-                  /*i=MapNext(I,i); */
+-                } while (ok && (i = link[i]) >= 0);
+-              }
+-              ok &= !G->Interrupt;
++  /* cells that get a list; the cells read reach one further on every side */
++  const int a0 = I->iMin[0] - 1, a1 = I->iMax[0];
++  const int b0 = I->iMin[1] - 1, b1 = I->iMax[1];
++  const int c0 = I->iMin[2] - 1, c1 = I->iMax[2];
++  const bool any_cell = (a0 <= a1) && (b0 <= b1) && (c0 <= c1);
++
++  int n = 1; /* size of EList: slot 0 plus every list and its -1 */
++
++  std::vector<int> count;
++  if (any_cell) {
++    /* pass 1: number of points in each cell that is read */
++    count.assign(mapSize, 0);
++    for (int d = a0 - 1; d <= a1 + 1; d++) {
++      for (int e = b0 - 1; e <= b1 + 1; e++) {
++        for (int f = c0 - 1; f <= c1 + 1; f++) {
++          const int cell = d * D1D2 + e * D2 + f;
++          int k = 0;
++          for (int i = head[cell]; i >= 0; i = link[i])
++            k++;
++          count[cell] = k;
++        }
++      }
++    }
++
++    /* pass 2: a cell with points around it gets the next free start */
++    for (int a = a0; a <= a1; a++) {
++      for (int b = b0; b <= b1; b++) {
++        for (int c = c0; c <= c1; c++) {
++          int total = 0;
++          for (int d = a - 1; d <= a + 1; d++) {
++            for (int e = b - 1; e <= b + 1; e++) {
++              const int* row = count.data() + d * D1D2 + e * D2 + c;
++              total += row[-1] + row[0] + row[1];
+             }
+-            if (ok)
+-              i_ptr5 = (i_ptr4 += D2);
+           }
+-          if (ok)
+-            i_ptr5 = (i_ptr4 = (i_ptr3 += D1D2));
++          if (total) {
++            ehead[a * D1D2 + b * D2 + c] = n;
++            n += total + 1;
++          }
+         }
+-        if (ok) {
+-          if (flag) {
+-            *(MapEStart(I, a, b, c)) = st;
+-            e_list.push_back(-1);
+-            n++;
+-          } else {
+-            *(MapEStart(I, a, b, c)) = 0;
++      }
++    }
++  }
++
++  /* pass 3: allocate once, then write each list at its start */
++  std::vector<int> e_list(n, 0);
++  if (any_cell) {
++    for (int a = a0; a <= a1; a++) {
++      for (int b = b0; b <= b1; b++) {
++        for (int c = c0; c <= c1; c++) {
++          const int start = ehead[a * D1D2 + b * D2 + c];
++          if (!start)
++            continue;
++          int* p = e_list.data() + start;
++          for (int d = a - 1; d <= a + 1; d++) {
++            for (int e = b - 1; e <= b + 1; e++) {
++              for (int f = c - 1; f <= c + 1; f++) {
++                for (int i = head[d * D1D2 + e * D2 + f]; i >= 0; i = link[i])
++                  *(p++) = i;
++              }
++            }
+           }
++          *p = -1;
+         }
+       }
+     }
+   }
++
++  /* The flag is looked at only when there were cells to visit, as before.
++   * When it is set, nothing is kept: EList stays as it was and EHead goes back
++   * to all 0, so a caller that ignores the return value (MapEIter among them)
++   * finds no neighbours instead of starts into a list that was never stored. */
++  int ok = !(any_cell && G->Interrupt);
+   if (ok) {
+     I->EList = std::move(e_list);
+-    I->EList.shrink_to_fit();
++  } else {
++    I->EHead.assign(mapSize, 0);
+   }
+   PRINTFD(G, FB_Map)
+   " MapSetupExpress-Debug: leaving...n=%d\n", n ENDFD;
+--- a/layer0/Triangle.cpp
++++ b/layer0/Triangle.cpp
+@@ -1642,7 +1642,10 @@
+       minDist2 = I->maxEdgeLenSq;
+ 
+       for(a = 0; a < n; a++) {
+-        if(!I->edgeStatus[a]) {
++        /* Only a vertex whose vertActive is -1 can start a triangle here.
++           Nothing in this loop body writes vertActive, so the test is made
++           once per vertex instead of once per neighbour. */
++        if(!I->edgeStatus[a] && I->vertActive[a] == -1) {
+           v0 = v + a * 3;
+           n0 = vn + 3 * a;
+ 
+@@ -1655,16 +1658,15 @@
+               if(j != a) {
+                 float dif2 = diffsq3f(v + 3 * j, v0);
+                 if(dif2 < minDist2)
+-                  if(I->vertActive[a] == -1)
+-                    if(TriangleEdgeStatus(I, a, j) >= 0) {      /* can we put a triangle here? */
+-                      n1 = vn + 3 * j;
+-                      if(dot_product3f(n0, n1) > 0.5) { /* start with vertices pointing the same way */
+-                        minDist2 = dif2;
+-                        i1 = a;
+-                        i2 = j;
+-                        first_vert_used = first_vert;
+-                      }
++                  if(TriangleEdgeStatus(I, a, j) >= 0) {      /* can we put a triangle here? */
++                    n1 = vn + 3 * j;
++                    if(dot_product3f(n0, n1) > 0.5) { /* start with vertices pointing the same way */
++                      minDist2 = dif2;
++                      i1 = a;
++                      i2 = j;
++                      first_vert_used = first_vert;
+                     }
++                  }
+               }
+               j = map->EList[i++];
+             }

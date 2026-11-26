@@ -1,0 +1,121 @@
+{
+  "$comment": [
+    "Files of this source whose generic scan hits were read and accepted (the publisher's scan, not published; PT-9911).",
+    "A file is accepted at the SHA-256 given and for the kinds given only: a changed file, or a kind not listed, is refused until it is read again. Site values, secrets, gitleaks findings and partial reads are never accepted."
+  ],
+  "format": 1,
+  "files": {
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/FTL.freetype.txt": {
+      "sha256": "08c135755dd589039470f1fdbb400daaabaaa50d0b366d19cebff4d22986baa1",
+      "kinds": [
+        "email"
+      ],
+      "why": "The FreeType Project License, upstream text: the project's own mailing-list addresses."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/LICENSE.zlib.txt": {
+      "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243",
+      "kinds": [
+        "email"
+      ],
+      "why": "The zlib licence, upstream text: its two authors' addresses as zlib publishes them."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/NOTICES.numpy-bundled.txt": {
+      "sha256": "dfcdc0b47befc23a5f23f754e8b1bdcd23e6b6b73df348574cb6cae65f662c8d",
+      "kinds": [
+        "email"
+      ],
+      "why": "NumPy's bundled licence files, read out of the vendored wheel: their authors' addresses as published upstream."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/NOTICES.pymol-third-party.txt": {
+      "sha256": "c6c0a4c00080aac1536653370eb30bf6a6de7b14282bce50b57d76ffdc58c0b7",
+      "kinds": [
+        "email"
+      ],
+      "why": "Notices quoted verbatim from the Open-Source PyMOL tree: upstream authors' and the PyMOL users' list addresses."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/licenses/NOTICES.pyodide-core.txt": {
+      "sha256": "ef329c911a53a078b12cfe4e6813de911b0779430e46f7485248cc8eceb80e5f",
+      "kinds": [
+        "email"
+      ],
+      "why": "Licences of what Pyodide links into its core, from pinned upstream files: their authors' addresses as published."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "sha256": "ac2db75025a6dd4ce140c571d60c11f61b0c2010f879865952e513c57ff3d9b0",
+      "kinds": [
+        "email",
+        "host_path"
+      ],
+      "why": "Pyodide's NumPy wheel, trimmed: upstream authors' addresses, and example home-folder paths and the upstream CI runner's build folder in NumPy's own code."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pymol-3.2.0a-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "sha256": "45f41f18b403ecdc9713bfef26e6194ae7483dbbdcf3cd95fe6022a7f98585fd",
+      "kinds": [
+        "email",
+        "host_path",
+        "internal_hostname"
+      ],
+      "why": "Open-Source PyMOL's wheel built by pymol-wasm/: upstream authors' addresses, PyMOL's own data folders (chempy, structures, biounit, the BLOSUM blocks) under its data root, and its Python module `internal` in the `pymol` package, not a host name. Its compiled module, over the scan's 5 MB cap, is read by this check and has no hit."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pyodide.asm.mjs": {
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+      "kinds": [
+        "host_path"
+      ],
+      "why": "Pyodide 314.0.7's core, unmodified: the home folder of Emscripten's virtual file system inside the browser, not a host."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pyodide.asm.wasm": {
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+      "kinds": [
+        "email",
+        "host_path"
+      ],
+      "why": "Pyodide 314.0.7's core, unmodified: CPython's and bzip2's authors' addresses, byte runs of the binary that look like addresses, and the root user's folder of Emscripten's virtual file system."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/pyodide.js": {
+      "sha256": "3141b814715a72e59b51b1b18b9ceae5bf19f7c852417e431bb0a34feadf825c",
+      "kinds": [
+        "host_path"
+      ],
+      "why": "Pyodide 314.0.7's core, unmodified: the home folder of Pyodide's virtual file system inside the browser, not a host."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/python_stdlib.zip": {
+      "sha256": "26a668c6cefb4a4aa3cb653727e23cbc5baeeff5332be8d1f017fd8eeeebdfbf",
+      "kinds": [
+        "email",
+        "host_path",
+        "internal_hostname",
+        "private_ip"
+      ],
+      "why": "CPython's standard library as Pyodide ships it: upstream authors' addresses, the RFC 1918 and RFC 6598 example networks of the ipaddress and urllib modules, the root user's folder in the build's sysconfig data, and the `local` class of the `threading` module, not a host."
+    },
+    "frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/worker.js": {
+      "sha256": "3378e2be8217b3d57094245f146677ebb059edd9fc0465daf9f56489b41cf18c",
+      "kinds": [
+        "internal_hostname"
+      ],
+      "why": "AgroDesign's PyMOL worker: the worker's guard code imports Open-Source PyMOL's Python module `internal` (in the `pymol` package), not a host name."
+    },
+    "pymol-wasm/tests/es300_rewrite_test.cpp": {
+      "sha256": "a900a9f6f96b0a43d6c213bcb1268a21af84f258293ebf433cbf367760e6cfa2",
+      "kinds": [
+        "host_path"
+      ],
+      "why": "A test of patch 0013's shader rewrite: its usage line names the shaders folder inside the PyMOL source tree's data folder, not a host path."
+    },
+    "pymol-wasm/tests/frame_guard_loads.mjs": {
+      "sha256": "9ca982e98d09aed3f3e13c817771a60974b16b33a8665d2691eeb4b11ac7941f",
+      "kinds": [
+        "internal_hostname"
+      ],
+      "why": "A test of the worker's load guard: it imports Open-Source PyMOL's Python module `internal` (in the `pymol` package), not a host name."
+    },
+    "pymol-wasm/tests/test_make_wheel.py": {
+      "sha256": "fe5e1732e7c0c197d3bdaff55589b1b9abaa4829bc8bd8fe5828a76d97ff6abb",
+      "kinds": [
+        "host_path"
+      ],
+      "why": "A test of the wheel writer: an absolute member path (in a data folder) that the test expects the writer to refuse, not a host path."
+    }
+  }
+}

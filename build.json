@@ -1,0 +1,62 @@
+{
+  "app": "AgroDesign Protein Viewer Pack (HTMLapp)",
+  "version": "1.0.7",
+  "sha": "4a72caeb20",
+  "made": "2026-11-26T16:47:31.000Z",
+  "timeZone": "Asia/Tokyo",
+  "node": "v22.22.1",
+  "releasePublicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEfnpNAr2hVsTzRX5uxO48b/SLbksThP3KgwJ4Raw9tSDiS/6RHNVi+GZ2qU3aRCvQBwhdrON2uTe8KNhFwF0i4Q==",
+  "signed": true,
+  "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEfnpNAr2hVsTzRX5uxO48b/SLbksThP3KgwJ4Raw9tSDiS/6RHNVi+GZ2qU3aRCvQBwhdrON2uTe8KNhFwF0i4Q==",
+  "sample": {
+    "code": "25HN",
+    "title": "Cryo-EM structure of native Rubisco from Nitrosospira multiformis",
+    "sha256": "83d859fc9a8e3a32866daf58208d89f361328c90f130cba72880d579e38ae05d"
+  },
+  "logo": {
+    "bytes": 5341,
+    "sha256": "1b0d43ec9c04eacd7b34eac4313ef02080f160b4b2de48ab11390ebcc914511e"
+  },
+  "files": {
+    "LICENSE": {
+      "bytes": 1075,
+      "sha256": "b672b58d85be0944e225cee5d91aecb0dd315e65054ed6e2a4bab2fd95eab3da"
+    },
+    "NOTICE": {
+      "bytes": 238847,
+      "sha256": "2f94637b57fbeeda59e4e6fe68156d3c2e213385386142437c9bed68f9072f3e"
+    },
+    "en/index.html": {
+      "bytes": 20665287,
+      "sha256": "51421edca464d2f83e23ee05fade8980ca76e504eb96a3e4dd5aaae5e63944bd"
+    },
+    "index.html": {
+      "bytes": 20665291,
+      "sha256": "8f689d4ea396ac908fc3d1543f5fcbab5ce2087d27845f46ac594bec8bfc0101"
+    },
+    "latest/AgroDesign-ProteinViewerPack_full.html": {
+      "bytes": 19365656,
+      "sha256": "72353c2d90a830d945bda4e90dcf7a50be61f8203605c2c7baed8dfb46e0a471",
+      "blank": true,
+      "unsignedSha256": "8a23b48503bfdc3c1c726814d7a59348b20169b3561488015fa86534a2883127"
+    },
+    "latest/AgroDesign-ProteinViewerPack_light.html": {
+      "bytes": 1185592,
+      "sha256": "4aa7f9129c0e444263d361cb0af72dce1270f145a222d54466eeb45e0260b3e2",
+      "blank": true,
+      "unsignedSha256": "f8a82c51f056196edfe7a061687713a03c068a4bd5805bc80929696c16cf9f97"
+    },
+    "release/AgroDesign-ProteinViewerPack-v1.0.7_full_20261127.html": {
+      "bytes": 19365656,
+      "sha256": "72353c2d90a830d945bda4e90dcf7a50be61f8203605c2c7baed8dfb46e0a471",
+      "blank": true,
+      "unsignedSha256": "8a23b48503bfdc3c1c726814d7a59348b20169b3561488015fa86534a2883127"
+    },
+    "release/AgroDesign-ProteinViewerPack-v1.0.7_light_20261127.html": {
+      "bytes": 1185592,
+      "sha256": "4aa7f9129c0e444263d361cb0af72dce1270f145a222d54466eeb45e0260b3e2",
+      "blank": true,
+      "unsignedSha256": "f8a82c51f056196edfe7a061687713a03c068a4bd5805bc80929696c16cf9f97"
+    }
+  }
+}

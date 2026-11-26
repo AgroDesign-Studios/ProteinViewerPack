@@ -1,0 +1,60 @@
+--- a/layer1/TypeFace.cpp
++++ b/layer1/TypeFace.cpp
+@@ -24,6 +24,28 @@
+ 
+ #include <ft2build.h>
+ #include FT_FREETYPE_H
++#include FT_MODULE_H
++#include <cstdlib>
++
++/* Only the four FreeType modules the built-in TrueType fonts use.
++ * FT_Init_FreeType registers every module in ftmodule.h (Type 1, CFF, CID,
++ * PFR, Type 42, WinFNT, PCF, BDF, psaux, psnames, pshinter, raster1, sdf,
++ * svg), which keeps all of them in the link. The driver / renderer classes
++ * start with an FT_Module_Class; FreeType's own ftinit.c takes their
++ * addresses as FT_Module_Class pointers in the same way. */
++extern "C" {
++extern const FT_Module_Class autofit_module_class;
++extern const FT_Module_Class tt_driver_class;
++extern const FT_Module_Class sfnt_module_class;
++extern const FT_Module_Class ft_smooth_renderer_class;
++}
++static void* TypeFTAlloc(FT_Memory, long size) { return malloc(size); }
++static void TypeFTFree(FT_Memory, void* block) { free(block); }
++static void* TypeFTRealloc(FT_Memory, long, long new_size, void* block)
++{
++  return realloc(block, new_size);
++}
++static FT_MemoryRec_ TypeFTMemory = {nullptr, TypeFTAlloc, TypeFTFree, TypeFTRealloc};
+ 
+ struct _CType {
+   FT_Library library;
+@@ -130,7 +152,18 @@
+ {
+   CType *I;
+   if((I = (G->Type = pymol::calloc<CType>(1)))) {
+-    FT_Error error = FT_Init_FreeType(&I->library);
++    /* same order as ftmodule.h: autofit, truetype, sfnt, smooth */
++    FT_Error error = FT_New_Library(&TypeFTMemory, &I->library);
++    if(!error)
++      error = FT_Add_Module(I->library, &autofit_module_class);
++    if(!error)
++      error = FT_Add_Module(I->library, &tt_driver_class);
++    if(!error)
++      error = FT_Add_Module(I->library, &sfnt_module_class);
++    if(!error)
++      error = FT_Add_Module(I->library, &ft_smooth_renderer_class);
++    if(!error)
++      FT_Set_Default_Properties(I->library);
+     return !error;
+   }
+   return 0;
+@@ -139,7 +172,7 @@
+ void TypeFree(PyMOLGlobals * G)
+ {
+   CType *I = G->Type;
+-  FT_Done_FreeType(I->library);
++  FT_Done_Library(I->library);
+   FreeP(G->Type);
+ }
+ 

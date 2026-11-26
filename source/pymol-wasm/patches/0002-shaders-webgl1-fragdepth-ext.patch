@@ -1,0 +1,32 @@
+diff --git a/data/shaders/cylinder.fs b/data/shaders/cylinder.fs
+index 4ada6fbc..4751067e 100644
+--- a/data/shaders/cylinder.fs
++++ b/data/shaders/cylinder.fs
+@@ -167,7 +167,11 @@ void main(void)
+     if (depth <= 0.0)
+       discard;
+ 
++#ifdef PYMOL_WEBGL_IOS
++    gl_FragDepthEXT = depth;
++#else
+     gl_FragDepth = depth;
++#endif
+ 
+   if (!isPicking && lighting_enabled){
+     color = ApplyColorEffects(color, depth);
+diff --git a/data/shaders/sphere.fs b/data/shaders/sphere.fs
+index 4cbec8cf..89bc6bc6 100644
+--- a/data/shaders/sphere.fs
++++ b/data/shaders/sphere.fs
+@@ -71,7 +71,11 @@ void main(void)
+     if (depth <= 0.0 || depth >= 1.0)
+       discard;
+ 
++#ifdef PYMOL_WEBGL_IOS
++    gl_FragDepthEXT = depth;
++#else
+     gl_FragDepth = depth;
++#endif
+ 
+     if (!isPicking){
+       if (lighting_enabled){

@@ -1,0 +1,1243 @@
+/*
+ * The PyMOL page, and the offline file's PyMOL pane.
+ *
+ * A full-screen layer over the rest of the page. A light bar on top, and under
+ * it a stage the sandboxed frame fills. Everything inside the stage is
+ * PyMOL's own drawing — the frame document paints itself black and lays out
+ * PyMOL's built-in panels — so DESIGN.md §6.2.1-§6.2.7 (the 3Dmol rules) do not
+ * reach in, and this file sizes only the iframe element (TN0113 §4.1-7: the
+ * frame measures its own canvas, devicePixelContentBox included).
+ *
+ * No colour is declared here: every value is an existing `:root` token.
+ */
+
+.pymolv {
+  position: fixed;
+  inset: 0;
+  /* Over the rest of the page; under the toasts (10001). */
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: var(--blue-pane-bg);
+}
+
+.pymolv-bar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+  min-width: 0;
+}
+
+/* The back link keeps its one line, and its hover colour is pinned: the
+   global `a:hover` out-specifies `.btn-secondary`. */
+.pymolv-bar > .btn {
+  flex: none;
+  white-space: nowrap;
+}
+
+.pymolv-bar > .btn:hover {
+  color: var(--text);
+}
+
+/* The app's mark, smaller than the header's (32 px logo, 22 px name) in the
+   same ratio; always first on the bar's first line. */
+.pymolv-brand {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.pymolv-brand-logo {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: calc(var(--radius-sm) / 2);
+}
+
+.pymolv-brand .agdb-wordmark {
+  font-size: 16px;
+}
+
+/* The tool beside the name: its size, but plain grey and past a thin rule,
+   which forced colours keep when both words turn one colour. */
+.pymolv-brand-engine {
+  padding-left: 8px;
+  margin-left: 2px;
+  border-left: 1px solid var(--border-light);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* "Includes PyMOL™" beside it is the shared PymolContainsLabel (lg). */
+
+.pymolv-title {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pymolv-title-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* `--text-light` on white is 5.9:1; `--text-muted` would miss AA here. */
+.pymolv-status {
+  margin: 0;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* `--danger-dark`, never `--pink-dark` (2.74:1 on white). */
+.pymolv-error {
+  margin: 0;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--danger-dark);
+}
+
+.pymolv-stage {
+  flex: 1 1 0;
+  min-height: 0;
+  position: relative;
+  /* What shows before the frame paints its own black. */
+  background: var(--text);
+}
+
+/* The frame fills the stage; its document sizes its canvas to it. */
+.pymolv-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ---- A line under the bar: text, a button, an alert and
+   its link. Wraps like the bar. */
+
+.pymolv-docking {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 4px 16px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+  min-width: 0;
+}
+
+.pymolv-docking > .btn {
+  flex: none;
+  white-space: nowrap;
+}
+
+.pymolv-docking > .btn:hover {
+  color: var(--text);
+}
+
+/* A type after its name, in the lighter text colour. */
+.pymolv-density-type {
+  color: var(--text-light);
+}
+
+/* ---- Controls: menu bar, command line, busy bar, dialogs.
+   The same light chrome as the top bar; PyMOL's own drawing stays inside the
+   frame. */
+
+.pymolv-menubar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px 12px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pymolv-menubar-button,
+.pymolv-menu-item {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pymolv-menubar-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+/* The company logo before 創薬表示, AgDB's own menu (PT-3606): small and
+   square, its corners half the bar button's. Not blended into the bar: the
+   hover fill would tint it. Greyed with the label while PyMOL is not ready. */
+.pymolv-menubar-logo {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: calc(var(--radius-sm) / 2);
+}
+
+.pymolv-menubar-button:disabled .pymolv-menubar-logo,
+.pymolv-menubar-button[aria-disabled='true'] .pymolv-menubar-logo {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+.pymolv-menubar-button:hover:not(:disabled):not([aria-disabled='true']),
+.pymolv-menubar-button[aria-expanded='true'],
+.pymolv-menu-item:hover,
+.pymolv-menu-item:focus-visible,
+.pymolv-menu-item[aria-expanded='true'] {
+  background: var(--blue-bg);
+}
+
+.pymolv-menubar-button:disabled,
+.pymolv-menubar-button[aria-disabled='true'] {
+  color: var(--text-light);
+  cursor: default;
+}
+
+.pymolv-menubar-button:focus-visible,
+.pymolv-menu-item:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: -2px;
+}
+
+/* Fixed and placed by script from the opener (PymolMenuBar.tsx), above the
+   frame, scrolling when taller than the window. Never wider than the window:
+   the script can only keep it inside when it fits (PT-3755 item 3). */
+.pymolv-menu {
+  position: fixed;
+  z-index: 2;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  min-width: 200px;
+  max-width: calc(100vw - 8px);
+  max-height: calc(100vh - 8px);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.pymolv-menu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.pymolv-menu-label {
+  flex: 1 1 auto;
+}
+
+/* `--text-light`, not `--text-muted`: AA on white (see .pymolv-status). */
+.pymolv-menu-hint,
+.pymolv-menu-arrow {
+  flex: none;
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+/* A locked entry (padlock + reason, owner ruling 2026-08-02): greyed like the
+   disabled bar button, still focusable so the reason can be read. */
+.pymolv-menu-item-locked,
+.pymolv-menu-item-locked .pymolv-menu-hint {
+  color: var(--text-light);
+  cursor: default;
+}
+
+/* The reason wraps within its own column rather than widening the menu past
+   a narrow window (PT-3755 item 3). */
+.pymolv-menu-item-locked {
+  white-space: normal;
+}
+
+.pymolv-menu-item-locked .pymolv-menu-hint {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 16em;
+}
+
+.pymolv-menu-sep {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--border-light);
+}
+
+/* A phone (PT-9673): the one panel that drills down. The script sets its
+   width, height cap and place from the window (PymolMenuBar.tsx); its rows
+   are 44 px touch targets and wrap rather than widen it, so a 40-character
+   label and its hint fit in 304 px. A scroll that reaches its end stays in
+   the panel, not the page or the sheet behind it. */
+.pymolv-menu--drill {
+  min-width: 0;
+  max-width: none;
+  padding-top: 0;
+  overscroll-behavior: contain;
+}
+
+.pymolv-menu--drill .pymolv-menu-item {
+  align-items: center;
+  min-height: 44px;
+  white-space: normal;
+}
+
+.pymolv-menu--drill .pymolv-menu-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.pymolv-menu--drill .pymolv-menu-item-locked .pymolv-menu-hint {
+  max-width: none;
+}
+
+/* Its top row: the way back (or the menu's name) and ×, then the whole path.
+   It stays in sight while the entries scroll under it. */
+.pymolv-menu-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pymolv-menu--drill .pymolv-menu-back {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.pymolv-menu--drill .pymolv-menu-close {
+  flex: none;
+  justify-content: center;
+  width: 44px;
+  font-size: 18px;
+}
+
+.pymolv-menu-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pymolv-menu-path {
+  flex: 1 1 100%;
+  padding: 0 14px;
+  font-size: 12px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+.pymolv-menu-path strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.pymolv-foot {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 16px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border-light);
+}
+
+.pymolv-cmd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pymolv-cmd-prompt {
+  flex: none;
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* DESIGN.md §5.2's input — its border, radius and zone focus ring — in PyMOL's
+   monospace (PT-3291 item 20). */
+.pymolv-cmd-input {
+  flex: 1 1 320px;
+  min-width: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text);
+  font-family: var(--mono-font);
+  font-size: 13px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pymolv-cmd-input:focus {
+  outline: none;
+  border-color: var(--z);
+  box-shadow: 0 0 0 2px var(--z-ring);
+}
+
+/* Not ready: still focusable (aria-disabled, read-only), so Stop can leave
+   focus here while the frame is rebuilt (PT-3291 item 5); greyed as a
+   disabled input would be. */
+.pymolv-cmd-input[aria-disabled="true"] {
+  background: var(--gray-bg);
+  color: var(--text-light);
+  cursor: not-allowed;
+}
+
+.pymolv-cmd-message,
+.pymolv-menu-message,
+.pymolv-busy-note,
+.pymolv-dialog-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.pymolv-cmd-message {
+  flex-basis: 100%;
+}
+
+/* Empty, a status line takes no room but stays in the accessibility tree:
+   with `display: none` the live region left and came back, and the next
+   message could go unread (PT-3755 item 4). */
+.pymolv-cmd-message:empty,
+.pymolv-menu-message:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The menu's status line with its 「詳しく」 and × (PymolMenuMessage, owner
+   2026-11-19): the first two lines, folded; the rest in place, scrolling
+   past 40% of the window. Empty, it takes no room (the line stays in the
+   accessibility tree, as above). */
+.pymolv-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.pymolv-note--empty {
+  display: contents;
+}
+
+.pymolv-note > .pymolv-menu-message {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.pymolv-note:not(.is-expanded) > .pymolv-menu-message:not(:empty) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.pymolv-note.is-expanded > .pymolv-menu-message {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.pymolv-note-actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pymolv-note-close {
+  min-width: 28px;
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* A dialog row's status and the Stop beside it (PT-3297 item 1). */
+.pymolv-session-op {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* A status line takes focus when the button it reports on is disabled
+   (PT-3297 item 7): a ring of its own, not the browser's default. */
+.pymolv-dialog-status:focus-visible {
+  outline: 2px solid var(--z-ring);
+  outline-offset: 2px;
+}
+
+.pymolv-busy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.pymolv-busy-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.pymolv-dialog h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.pymolv-dialog h3 {
+  margin: 16px 0 4px;
+  font-size: 14px;
+}
+
+.pymolv-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* An action with its note beside it. */
+.pymolv-dialog-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.pymolv-dialog-setting {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 2px 12px;
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.pymolv-dialog-setting dt {
+  color: var(--text-light);
+}
+
+.pymolv-dialog-setting dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.pymolv-dialog-table {
+  width: 100%;
+  margin: 8px 0;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.pymolv-dialog-table th,
+.pymolv-dialog-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+}
+
+/* Narrow screens (PT-3606 item 8): a long name or object name breaks
+   inside itself rather than widening the table;
+   a short number and a button stay whole. What still does not fit — a
+   button column at 375 px — scrolls inside the dialog, never the page. */
+.pymolv-dialog-table td {
+  overflow-wrap: anywhere;
+}
+
+.pymolv-dialog-table .pymolv-nowrap,
+.pymolv-dialog-action .btn {
+  white-space: nowrap;
+}
+
+.pymolv-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* A dialog's list (owner 2026-11-09: up to 100 rows): at most this tall,
+   then it scrolls inside with its head in view, so what is below stays in
+   reach. A max-height, so a short list looks as before. */
+.pymolv-added-scroll {
+  max-height: min(280px, 35vh);
+  overflow-y: auto;
+}
+
+.pymolv-added-scroll thead th {
+  position: sticky;
+  top: 0;
+  /* Over a pressed or hovered button's transform (a stacking context) in the
+     rows scrolling under it (PT-8314 item 4). */
+  z-index: 1;
+  background: var(--card-bg);
+}
+
+/* The search text and its 「検索」 button on one line (owner 2026-11-09);
+   on a narrow screen the button goes under the field. */
+.pymolv-search-row {
+  flex-wrap: wrap;
+}
+
+.pymolv-search-row .btn {
+  white-space: nowrap;
+}
+
+/* A dialog's most important choice (owner 2026-11-09), in a box that stands
+   out, its text in
+   the label weight of DESIGN.md §2.2 (600, PT-8314 item 5); the align/super
+   note under it stays normal. */
+.pymolv-dialog .pymolv-align-box {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border: 1px solid var(--blue-dark);
+  border-left: 4px solid var(--blue-text);
+  border-radius: var(--radius-sm);
+  background: var(--blue-bg);
+}
+
+.pymolv-dialog .pymolv-align-box .pymolv-choice {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pymolv-align-box .pymolv-dialog-note {
+  margin-top: 4px;
+}
+
+.pymolv-dialog-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font-size: 13px;
+}
+
+/* The global `.form-group input` rule (index.css) gives every input a full
+   width, padding and a border, a checkbox included: in a dialog here it goes
+   back to its own size (PT-3816). No dialog puts a radio in a `.form-group`
+   (the export's radios sit in `.pymolv-choice` labels and keep the browser's
+   own focus ring), so the reset names only the checkbox (PT-3827 item 11). */
+.pymolv-dialog .form-group input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+/* That reset also takes the global :focus ring (a box-shadow), and the global
+   rule sets `outline: none`, so the checkbox gets an outline of its own:
+   without it the keyboard focus is not visible at all (PT-3827). `--z-ring`,
+   the colour of the ring it replaces: `--z` is too light on white to mark
+   focus. */
+.pymolv-dialog .form-group input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--z-ring);
+  outline-offset: 2px;
+}
+
+/* The molecule export's radio groups (PT-3816): a fieldset without the
+   browser's frame, options in normal weight, one a line. */
+.pymolv-choices {
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+
+.pymolv-choices legend {
+  margin-bottom: 6px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* One option and its text on a line, in normal weight and the dialog's text
+   colour — the export's radios and the Open dialog's align box. Scoped to the
+   dialog so it outranks `.form-group label` (index.css: block, bold, light),
+   which the align box's label sits under (PT-3827 items 3, 8). */
+.pymolv-dialog .pymolv-choice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0;
+  font-size: 13px;
+  font-weight: normal;
+  color: inherit;
+}
+
+.pymolv-choices .form-group {
+  margin: 8px 0 0;
+}
+
+/* The file name and its fixed extension on one line. */
+.pymolv-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-group .pymolv-name-row input {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
+/* ---- Saving: the bar's save buttons and a list's labels and actions. */
+
+.pymolv-save {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pymolv-session-label {
+  overflow-wrap: anywhere;
+}
+
+.pymolv-session-actions {
+  white-space: nowrap;
+}
+
+.pymolv-session-actions .btn + .btn {
+  margin-left: 6px;
+}
+
+/* ---- owner 2026-11-09: exit, notices, cards over the view ---------------- */
+
+/* 「←全画面終了」, first on the bar: the arrow is decoration. */
+.pymolv-exit {
+  gap: 4px;
+}
+
+/* Under the bar: where a saved image went, and the memory warnings. Each
+   region is always mounted (a live region that arrives with its text is not
+   reliably read), so the strip has no height of its own when they are empty. */
+.pymolv-notices {
+  flex: 0 0 auto;
+  padding: 0 16px;
+  background: var(--card-bg);
+}
+
+.pymolv-notices [role='status'] > div:first-child {
+  margin-top: 8px;
+}
+
+/* The controller's node and, over it, what the page shows in the middle of
+   the view. The overlay takes no pointer input; only its cards do. */
+.pymolv-stage-wrap {
+  flex: 1 1 0;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pymolv-stage-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.pymolv-stage-card {
+  pointer-events: auto;
+  max-width: min(520px, 100%);
+  padding: 20px 28px;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.pymolv-stage-card p {
+  margin: 0;
+}
+
+/* The start banner: the engine and its version, then "for <logo> AgDB". */
+.pymolv-start-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pymolv-start-line1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.pymolv-start-line2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 18px;
+  color: var(--text-light);
+}
+
+.pymolv-start-line2 .agdb-wordmark {
+  font-size: 18px;
+}
+
+/* The wait's ring on the start card (owner 2026-11-16). */
+.pymolv-start-ring {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 10px auto 0;
+  border: 3px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: pymolv-start-spin 0.9s linear infinite;
+}
+
+@keyframes pymolv-start-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pymolv-start-ring { animation: none; }
+}
+
+.pymolv-start-step {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* An image save's progress. */
+.pymolv-progress-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pymolv-progress-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.pymolv-progress-stage {
+  font-size: 14px;
+}
+
+.pymolv-progress-clock {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pymolv-progress-card .spinner {
+    animation: none;
+  }
+}
+
+/* A saved image (owner 2026-11-09): the progress card turns into this green
+   one, kept until closed. */
+.pymolv-done-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--success);
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.pymolv-done-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+}
+
+.pymolv-done-detail {
+  font-size: 13px;
+  color: var(--text);
+  /* The file name is one long run (PT-8373 item 8). */
+  overflow-wrap: anywhere;
+}
+
+.pymolv-done-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* The ray-trace dialog (owner 2026-11-16; UI dual consult): the size — the
+   view's multiples with their pixels, the common sizes, one's own width and
+   height — then the quality switch, then 「詳細設定」 folded. Pixel counts in
+   even digits and never broken mid-number. */
+.pymolv-ray-subhead {
+  margin: 8px 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.pymolv-ray-px {
+  font-variant-numeric: tabular-nums;
+}
+
+.pymolv-ray-sides {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 4px 8px;
+  margin: 4px 0 0 24px;
+}
+
+.pymolv-ray-sides .form-group {
+  margin-bottom: 0;
+}
+
+.pymolv-ray-sides input[type='number'] {
+  width: 7em;
+}
+
+.pymolv-ray-times {
+  padding-bottom: 8px;
+}
+
+.pymolv-ray-lock {
+  flex-basis: 100%;
+}
+
+.pymolv-ray-quality {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.pymolv-ray-details {
+  margin: 8px 0;
+}
+
+.pymolv-ray-details > summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pymolv-ray-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 560px) {
+  .pymolv-ray-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pymolv-dialog-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* The leave warning's three ways on. */
+.pymolv-leave-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* ---- In a card (owner 2026-11-09): the same workbench, in the card's flow instead of over the window. The
+   host stretches to the card's engine cell, which the hidden 3Dmol block
+   sizes, so switching engines never changes the card's height. Expanded
+   (「PyMOL 全画面」), the same element is painted over the window again —
+   never moved in the DOM, which would reload PyMOL. */
+
+.pymolv-card-host {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pymolv--card {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  /* The card clips its own corners (`overflow: hidden`). */
+  border-radius: 0;
+}
+
+/* After `.pymolv--card`, at its specificity: one class, so the hover-lift
+   guard in index.css that names it keeps its own (0,3,0). */
+.pymolv--expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+/* The host's tools right above the view: one wrapping row. */
+.pymolv-stage-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+}
+
+/* 「📏 測定」 keeps one width pressed or not (「測定」/「測定中」, Measure /
+   Measuring), so the row never re-wraps and resizes PyMOL under the ink when
+   it is toggled. */
+.pymolv-measure > .sv3d-chip {
+  min-width: 9.5em;
+  justify-content: center;
+}
+
+/* The session dialog's caution (PymolPseExportDialog, PT-3031): the yellow
+   family's text on its own light fill, a left rule so it is not colour alone. */
+.pymolv-dialog-note.pymolv-dialog-warn {
+  padding: 8px 10px;
+  border-left: 3px solid var(--yellow-darker);
+  background: var(--yellow-light);
+  color: var(--yellow-text);
+}
+
+/* The object panel's pull tab (PymolObjectDrawerTab.tsx): laid over the
+   view, taking no width of its own, so the view's picture fills the stage
+   above and below it (owner 2026-11-16) and the panel coming or going never
+   resizes the view. The strip is only where the tab sits — 28 px at the
+   view's right edge, or just left of the open panel (its inline `right`) —
+   and takes no pointer itself: the view gets every press but the tab's.
+   Closed, the tab's hit area reaches 16 px more over the view, 44 px in all
+   (the UI consult's tap target). Open, it does not: its right side is on
+   PyMOL's object panel, whose rows' rightmost button (C) is at the view's
+   right edge (PT-9400 item 3). */
+.pymolv-drawer-strip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  pointer-events: none;
+}
+
+/* Open, the tab is seen only while the mouse is over the panel or the tab,
+   or the keyboard's focus is on it (owner 2026-11-16: it never hides the
+   structure). Transparent, never display:none or visibility:hidden, so it
+   stays in the Tab order and its focus shows it. A screen with no hover (a
+   phone, a tablet) always shows it: it is the visible way to close the panel
+   (UI consult, Codex astra). */
+.pymolv-drawer-strip[data-open='true'] > .pymolv-drawer-tab {
+  opacity: 0;
+  transition: opacity 0.12s ease-out;
+}
+
+.pymolv-drawer-strip[data-revealed='true'] > .pymolv-drawer-tab,
+.pymolv-drawer-strip[data-open='true'] > .pymolv-drawer-tab:hover,
+.pymolv-drawer-strip[data-open='true'] > .pymolv-drawer-tab:focus-visible {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .pymolv-drawer-strip[data-open='true'] > .pymolv-drawer-tab {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pymolv-drawer-strip[data-open='true'] > .pymolv-drawer-tab {
+    transition: none;
+  }
+}
+
+.pymolv-drawer-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  min-height: 112px;
+  padding: 8px 0;
+  pointer-events: auto;
+  border: 1px solid var(--border);
+  border-right: 0;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: var(--gray-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  /* The swipe is the tab's own: no scroll, no zoom, no tap flash. */
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pymolv-drawer-tab[aria-expanded='false']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -16px;
+  right: 0;
+}
+
+.pymolv-drawer-tab[aria-expanded='true'] {
+  background: var(--blue-bg);
+  border-color: var(--blue-text);
+  color: var(--blue-text);
+}
+
+.pymolv-drawer-tab:hover:not([aria-disabled='true']) {
+  border-color: var(--blue-text);
+}
+
+.pymolv-drawer-tab:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: -2px;
+}
+
+/* Pull to zoom (the offline file's open panel only, `zoom`): a grip of three
+   short lines says the tab can be pulled sideways; while it is pulled the tab
+   follows the pointer, seen and above the view's marks. */
+.pymolv-drawer-strip[data-zoom='true'] > .pymolv-drawer-tab {
+  cursor: ew-resize;
+}
+
+.pymolv-drawer-grip {
+  width: 10px;
+  height: 9px;
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+  opacity: 0.7;
+}
+
+.pymolv-drawer-strip[data-dragging='true'] {
+  z-index: 4;
+}
+
+.pymolv-drawer-strip[data-dragging='true'] > .pymolv-drawer-tab {
+  opacity: 1;
+}
+
+.pymolv-drawer-tab[aria-disabled='true'] {
+  color: var(--text-light);
+  border-style: dashed;
+  cursor: not-allowed;
+}
+
+.pymolv-drawer-chevron {
+  flex: none;
+}
+
+/* Pull to zoom's hint as a bubble left of the open tab (owner 2026-11-21:
+   吹き出しで示す), pointing at it; shown after a hover or on keyboard focus.
+   The pointer can rest on it, to read or magnify it (WCAG 1.4.13, PT-10470
+   item 4); a press on it does nothing. Dark on any picture behind it: 14.7:1
+   white on #1f2937. */
+.pymolv-drawer-bubble {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 10px);
+  transform: translateY(-50%);
+  width: max-content;
+  max-width: 240px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #1f2937;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: normal;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+  cursor: default;
+}
+
+.pymolv-drawer-bubble::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: #1f2937;
+}
+
+.pymolv-drawer-word {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}

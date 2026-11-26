@@ -1,0 +1,32 @@
+/* The HTMLapp file's name field (PackFileNameField.tsx): the name, then a
+   fixed `.html` and the small 「デフォルト名」 button. On a phone's width the
+   name takes the whole row and the rest wraps below it, the button tall
+   enough for a finger. */
+.pack-name-row {
+  flex-wrap: wrap;
+}
+
+.pack-name-tail {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pack-name-default {
+  white-space: nowrap;
+}
+
+.pack-name-note {
+  margin: 4px 0 0;
+}
+
+@media (max-width: 520px) {
+  .form-group .pack-name-row input {
+    flex-basis: 100%;
+  }
+
+  .pack-name-default {
+    min-height: 44px;
+  }
+}

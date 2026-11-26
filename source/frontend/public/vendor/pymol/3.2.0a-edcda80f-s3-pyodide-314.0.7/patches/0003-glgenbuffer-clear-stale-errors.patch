@@ -1,0 +1,15 @@
+diff --git a/layerGraphics/gl/GLVertexBuffer.cpp b/layerGraphics/gl/GLVertexBuffer.cpp
+index 76305dd4..266183e1 100644
+--- a/layerGraphics/gl/GLVertexBuffer.cpp
++++ b/layerGraphics/gl/GLVertexBuffer.cpp
+@@ -8,6 +8,10 @@
+ 
+ static bool GLGenBuffer(GLuint& id, GLuint bufferType, pymol::span<const std::byte> data)
+ {
++#ifdef __EMSCRIPTEN__
++  // don't let an unrelated, earlier (sticky) GL error abort buffer creation
++  while (glGetError() != GL_NO_ERROR) {}
++#endif
+   glGenBuffers(1, &id);
+   if (!CheckGLErrorOK(nullptr, "GenericBuffer::genBuffer failed\n"))
+     return false;

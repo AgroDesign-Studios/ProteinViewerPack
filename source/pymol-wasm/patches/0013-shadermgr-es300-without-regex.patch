@@ -1,0 +1,310 @@
+--- a/layer0/ShaderMgr.cpp
++++ b/layer0/ShaderMgr.cpp
+@@ -90,10 +90,12 @@
+ }
+ 
+ #ifdef __EMSCRIPTEN__
+-#include <regex>
++#include "ShaderEs300.h"
+ /**
+  * WebGL2 rejects GL_EXT_frag_depth in GLSL ES 1.00 shaders, so on a WebGL2
+  * context rewrite PyMOL's ES2 shaders to GLSL ES 3.00 (pymolweb spike).
++ * The rewrite itself is ShaderEs300.h: plain string scans whose output is
++ * byte-identical to the regular-expression passes they replaced.
+  */
+ static std::string pymolweb_to_es300(GLuint shad, const std::string& src)
+ {
+@@ -106,19 +108,7 @@
+     return src;
+   GLint type = 0;
+   glGetShaderiv(shad, GL_SHADER_TYPE, &type);
+-  bool frag = (type == GL_FRAGMENT_SHADER);
+-  std::string s = std::regex_replace(src, std::regex(R"(^[ \t]*#(version|extension)[^\n]*)", std::regex::multiline), "");
+-  s = std::regex_replace(s, std::regex(R"(^[ \t]*#define[ \t]+texture[ \t]+texture2D[^\n]*)", std::regex::multiline), "");
+-  s = std::regex_replace(s, std::regex(R"(\btexture2D\s*\()"), "texture(");
+-  s = std::regex_replace(s, std::regex(R"(\btextureCube\s*\()"), "texture(");
+-  s = std::regex_replace(s, std::regex(R"(\bvarying\b)"), frag ? "in" : "out");
+-  if (frag) {
+-    s = std::regex_replace(s, std::regex(R"(\bgl_FragColor\b|\bgl_FragData\s*\[\s*0\s*\])"), "pymolweb_FragColor");
+-    s = std::regex_replace(s, std::regex(R"(\bgl_FragDepthEXT\b)"), "gl_FragDepth");
+-    return "#version 300 es\nprecision highp float;\nout vec4 pymolweb_FragColor;\n" + s;
+-  }
+-  s = std::regex_replace(s, std::regex(R"(\battribute\b)"), "in");
+-  return "#version 300 es\n" + s;
++  return pymolweb_es300_rewrite(src, type == GL_FRAGMENT_SHADER);
+ }
+ #endif
+ 
+--- /dev/null
++++ b/layer0/ShaderEs300.h
+@@ -0,0 +1,270 @@
++#pragma once
++
++/*
++ * GLSL ES 1.00 -> GLSL ES 3.00 source rewrite for a WebGL2 context, as plain
++ * string scans (no regular-expression library).
++ *
++ * pymolweb_es300_rewrite() returns, for every input, the bytes that patch
++ * 0005's regular-expression version returned (tests/es300_rewrite_test.cpp in
++ * the pymol-wasm build keeps that version and compares the two). It runs the
++ * same passes in the same order, each over the previous pass's output:
++ *
++ *   1. ^[ \t]*#(version|extension)[^\n]*           (multiline) -> ""
++ *   2. ^[ \t]*#define[ \t]+texture[ \t]+texture2D[^\n]*  (multiline) -> ""
++ *   3. \btexture2D\s*\(                                -> "texture("
++ *   4. \btextureCube\s*\(                              -> "texture("
++ *   5. \bvarying\b                                     -> "in" (fragment) / "out"
++ *   fragment shaders:
++ *   6. \bgl_FragColor\b|\bgl_FragData\s*\[\s*0\s*\]   -> "pymolweb_FragColor"
++ *   7. \bgl_FragDepthEXT\b                             -> "gl_FragDepth"
++ *   8. prologue "#version 300 es\nprecision highp float;\nout vec4 pymolweb_FragColor;\n"
++ *   other shaders:
++ *   9. \battribute\b                                   -> "in"
++ *  10. prologue "#version 300 es\n"
++ *
++ * Equivalences relied on (regex_replace with the ECMAScript grammar and the
++ * default flags, as implemented by the toolchain's libc++, global locale "C"):
++ *  - A pass matches against its own input, leftmost first, without overlap: the
++ *    search resumes where the previous match ended, and the anchors below look
++ *    at the input bytes on both sides of a position, matched or not.
++ *  - No pattern can match an empty string, so regex_iterator's empty-match
++ *    step never applies.
++ *  - Multiline '^' holds at offset 0 and right after '\n' or '\r' (libc++
++ *    __is_eol).
++ *  - '\b' holds where exactly one of the two neighbouring bytes is a word byte
++ *    [A-Za-z0-9_]; a position outside the input counts as a non-word byte.
++ *    Bytes >= 0x80 are not word bytes in the "C" locale.
++ *  - '\s' is one of ' ' '\t' '\n' '\v' '\f' '\r' (isspace in the "C" locale).
++ *  - '[^\n]*' is greedy and stops only at '\n' (or the end); it takes '\r' and
++ *    any other byte.
++ *  - At a given offset each pattern has at most one match: every '[ \t]*',
++ *    '[ \t]+' and '\s*' is followed by a literal byte outside its class, and the
++ *    two alternatives of pass 6 differ at their eighth byte ('C' / 'D'). So
++ *    neither the order of alternatives nor backtracking can choose a different
++ *    match, and "match at offset i" is a fixed test on the bytes from i on.
++ *  - The replacement texts contain no '$', so the default format copies them
++ *    verbatim.
++ * Every pass is one left-to-right scan; the test at an offset reads ahead only
++ * over its own keyword and the blank / space run or line rest that follows it
++ * (a run no other keyword's test can reach), so the rewrite is linear in the
++ * input length.
++ */
++
++#include <cstddef>
++#include <string>
++
++namespace pymolweb_es300
++{
++
++// Bits for rewrite_masked(): each one drops one rule (test positive controls).
++enum : unsigned {
++  kSkipVersionExtension = 1u << 0,
++  kSkipDefineTexture = 1u << 1,
++  kSkipTexture2D = 1u << 2,
++  kSkipTextureCube = 1u << 3,
++  kSkipVarying = 1u << 4,
++  kSkipFragColor = 1u << 5,  // first alternative of pass 6
++  kSkipFragData0 = 1u << 6,  // second alternative of pass 6
++  kSkipFragDepthEXT = 1u << 7,
++  kSkipFragPrologue = 1u << 8,
++  kSkipAttribute = 1u << 9,
++  kSkipVertexPrologue = 1u << 10,
++  kRuleCount = 11
++};
++
++inline bool is_word(char c)
++{
++  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
++         (c >= '0' && c <= '9') || c == '_';
++}
++
++inline bool is_space(char c)
++{
++  return c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' ||
++         c == '\r';
++}
++
++inline bool is_blank(char c) { return c == ' ' || c == '\t'; }
++
++// '\b' at offset i (0 <= i <= s.size())
++inline bool word_boundary(const std::string& s, std::size_t i)
++{
++  bool before = i > 0 && is_word(s[i - 1]);
++  bool after = i < s.size() && is_word(s[i]);
++  return before != after;
++}
++
++// multiline '^' at offset i
++inline bool line_start(const std::string& s, std::size_t i)
++{
++  return i == 0 || s[i - 1] == '\n' || s[i - 1] == '\r';
++}
++
++// s[i, i + n) == lit
++inline bool has(const std::string& s, std::size_t i, const char* lit, std::size_t n)
++{
++  if (i > s.size() || s.size() - i < n)
++    return false;
++  return s.compare(i, n, lit, n) == 0;
++}
++
++inline std::size_t skip_blanks(const std::string& s, std::size_t i)
++{
++  while (i < s.size() && is_blank(s[i]))
++    ++i;
++  return i;
++}
++
++inline std::size_t skip_spaces(const std::string& s, std::size_t i)
++{
++  while (i < s.size() && is_space(s[i]))
++    ++i;
++  return i;
++}
++
++// '[^\n]*' from offset i: the offset of the next '\n', or the end
++inline std::size_t line_rest_end(const std::string& s, std::size_t i)
++{
++  std::size_t e = s.find('\n', i);
++  return e == std::string::npos ? s.size() : e;
++}
++
++// Passes 1 and 2: the end of a matching line directive at offset i, or 0
++// (a match always ends after its '#', so 0 cannot be a match end).
++inline std::size_t match_version_extension(const std::string& s, std::size_t i)
++{
++  if (!line_start(s, i))
++    return 0;
++  std::size_t j = skip_blanks(s, i);
++  if (!has(s, j, "#", 1))
++    return 0;
++  ++j;
++  if (has(s, j, "version", 7))
++    return line_rest_end(s, j + 7);
++  if (has(s, j, "extension", 9))
++    return line_rest_end(s, j + 9);
++  return 0;
++}
++
++inline std::size_t match_define_texture(const std::string& s, std::size_t i)
++{
++  if (!line_start(s, i))
++    return 0;
++  std::size_t j = skip_blanks(s, i);
++  if (!has(s, j, "#define", 7))
++    return 0;
++  std::size_t k = skip_blanks(s, j + 7);
++  if (k == j + 7 || !has(s, k, "texture", 7))
++    return 0;
++  j = k + 7;
++  k = skip_blanks(s, j);
++  if (k == j || !has(s, k, "texture2D", 9))
++    return 0;
++  return line_rest_end(s, k + 9);
++}
++
++// '\b<word>\s*\(' at offset i: the match end, or 0
++inline std::size_t match_call(const std::string& s, std::size_t i, const char* word, std::size_t n)
++{
++  if (!word_boundary(s, i) || !has(s, i, word, n))
++    return 0;
++  std::size_t j = skip_spaces(s, i + n);
++  return has(s, j, "(", 1) ? j + 1 : 0;
++}
++
++// '\b<word>\b' at offset i: the match end, or 0
++inline std::size_t match_word(const std::string& s, std::size_t i, const char* word, std::size_t n)
++{
++  if (!word_boundary(s, i) || !has(s, i, word, n) || !word_boundary(s, i + n))
++    return 0;
++  return i + n;
++}
++
++// '\bgl_FragData\s*\[\s*0\s*\]' at offset i: the match end, or 0
++inline std::size_t match_frag_data0(const std::string& s, std::size_t i)
++{
++  if (!word_boundary(s, i) || !has(s, i, "gl_FragData", 11))
++    return 0;
++  std::size_t j = skip_spaces(s, i + 11);
++  if (!has(s, j, "[", 1))
++    return 0;
++  j = skip_spaces(s, j + 1);
++  if (!has(s, j, "0", 1))
++    return 0;
++  j = skip_spaces(s, j + 1);
++  return has(s, j, "]", 1) ? j + 1 : 0;
++}
++
++// One regex_replace: every leftmost non-overlapping match of `match` -> repl.
++template <typename Match>
++std::string replace_all(const std::string& s, Match match, const char* repl)
++{
++  std::string out;
++  out.reserve(s.size() + 64);
++  std::size_t i = 0;
++  while (i < s.size()) {
++    std::size_t e = match(s, i);
++    if (e) {
++      out += repl;
++      i = e;
++    } else {
++      out += s[i];
++      ++i;
++    }
++  }
++  return out;
++}
++
++inline std::string rewrite_masked(const std::string& src, bool frag, unsigned skip)
++{
++  std::string s = src;
++  if (!(skip & kSkipVersionExtension))
++    s = replace_all(s, match_version_extension, "");
++  if (!(skip & kSkipDefineTexture))
++    s = replace_all(s, match_define_texture, "");
++  if (!(skip & kSkipTexture2D))
++    s = replace_all(s, [](const std::string& t, std::size_t i) {
++      return match_call(t, i, "texture2D", 9);
++    }, "texture(");
++  if (!(skip & kSkipTextureCube))
++    s = replace_all(s, [](const std::string& t, std::size_t i) {
++      return match_call(t, i, "textureCube", 11);
++    }, "texture(");
++  if (!(skip & kSkipVarying))
++    s = replace_all(s, [](const std::string& t, std::size_t i) {
++      return match_word(t, i, "varying", 7);
++    }, frag ? "in" : "out");
++  if (frag) {
++    if ((skip & (kSkipFragColor | kSkipFragData0)) != (kSkipFragColor | kSkipFragData0))
++      s = replace_all(s, [skip](const std::string& t, std::size_t i) {
++        std::size_t e = (skip & kSkipFragColor) ? 0 : match_word(t, i, "gl_FragColor", 12);
++        if (!e && !(skip & kSkipFragData0))
++          e = match_frag_data0(t, i);
++        return e;
++      }, "pymolweb_FragColor");
++    if (!(skip & kSkipFragDepthEXT))
++      s = replace_all(s, [](const std::string& t, std::size_t i) {
++        return match_word(t, i, "gl_FragDepthEXT", 15);
++      }, "gl_FragDepth");
++    if (skip & kSkipFragPrologue)
++      return s;
++    return "#version 300 es\nprecision highp float;\nout vec4 pymolweb_FragColor;\n" + s;
++  }
++  if (!(skip & kSkipAttribute))
++    s = replace_all(s, [](const std::string& t, std::size_t i) {
++      return match_word(t, i, "attribute", 9);
++    }, "in");
++  if (skip & kSkipVertexPrologue)
++    return s;
++  return "#version 300 es\n" + s;
++}
++
++} // namespace pymolweb_es300
++
++/**
++ * GLSL ES 1.00 source -> GLSL ES 3.00 source; `frag` for a fragment shader.
++ */
++inline std::string pymolweb_es300_rewrite(const std::string& src, bool frag)
++{
++  return pymolweb_es300::rewrite_masked(src, frag, 0);
++}

@@ -583,9 +583,9 @@ index aed58aa..75e541a 100644
 
 ##### PNG の読み込みに失敗したら画像を作らない — 見た目が違うことがある
 
-`MyPNGRead`（`layer0/MyPNG.cpp`）は幅と高さを 0 で始め、読み込みが成功したときだけ画像を作り、データ URI の長さと各読み込みを残りのバイト数と照らし、バイト数が `size_t`・`int` に収まらない大きさは確保の前に拒みます。大きさの上限は加えていません。
+`MyPNGRead`（`layer0/MyPNG.cpp`）は幅と高さを 0 で始め、読み込みが成功したときだけ画像を作り、データ URI の長さと各読み込みを残りのバイト数と照らし、バイト数が `size_t`・`int` に収まらない大きさは確保の前に拒みます。
 
-**影響:** 正しい PNG はこれまでどおり読めます。壊れた背景画像のレイトレースは、落ちずに背景なしで描きます。`load_png` に PNG でないファイル、途中で切れた PNG、短い・途中で切れた・base64 でないデータ URI を渡すとエラーになります。オリジナル版ではどれもエラーになりませんでした。PNG でないファイルからは中身のない画像、途中で切れた PNG からは一部が壊れた画像ができ、壊れたデータ URI はそのまま受け付けていました。
+**影響:** 正しい PNG はこれまでどおり読めます。壊れた背景画像のレイトレースは、背景なしで描きます。`load_png` に PNG でないファイル、途中で切れた PNG、短い・途中で切れた・base64 でないデータ URI を渡すとエラーになります。
 
 **パッチ:** `0011-mypng-failed-read-builds-no-image.patch`
 
@@ -2200,9 +2200,9 @@ index aed58aa..75e541a 100644
 
 ##### A failed PNG read builds no image — The picture can differ
 
-`MyPNGRead` (`layer0/MyPNG.cpp`) starts width and height at 0, builds the image only when the read succeeded, checks a data URI's length and every read against the bytes left, and refuses a size whose byte count does not fit `size_t` / `int` before allocating; no size limit is added.
+`MyPNGRead` (`layer0/MyPNG.cpp`) starts width and height at 0, builds the image only when the read succeeded, checks a data URI's length and every read against the bytes left, and refuses a size whose byte count does not fit `size_t` / `int` before allocating.
 
-**Effect:** Valid PNGs read as before. A ray trace with a broken background image now draws without it instead of crashing. In `load_png`, a file that is not a PNG, a cut-off PNG, or a data URI that is short, cut off or not valid base64 now raises an error. Upstream gave no error in these cases: a non-PNG file gave an empty image, a cut-off PNG gave a partly garbage image, and the bad data URIs were accepted silently.
+**Effect:** Valid PNGs read as before. A ray trace with a broken background image draws without it. In `load_png`, a file that is not a PNG, a cut-off PNG, or a data URI that is short, cut off or not valid base64 raises an error.
 
 **Patch:** `0011-mypng-failed-read-builds-no-image.patch`
 

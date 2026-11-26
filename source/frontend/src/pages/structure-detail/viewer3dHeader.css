@@ -1,0 +1,526 @@
+/*
+ * The 3D view's card: its header (`Viewer3dHeader.tsx`) and the
+ * cell both engines share (owner 2026-11-09, UI dual consult Fable + Codex
+ * astra). Tokens only: no colour is declared here.
+ */
+
+.v3dh {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 10px 16px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.v3dh-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Two native radios as one segmented control. Never wider than its row: at
+   a phone's width the PyMOL option wraps inside instead (below). */
+.v3dh-engine {
+  display: inline-flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 2px;
+  min-inline-size: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--gray-light);
+}
+
+/* The segmented control and, beside it (below when narrow), the PyMOL state. */
+.v3dh-engine-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  min-width: 0;
+}
+
+.v3dh-option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* "Includes PyMOL™": the option draws the shared
+   `PymolContainsLabel` (components/PymolContainsLabel.css), as the offline
+   file's engine sheet does. */
+
+/* The input stays the control (keyboard, screen reader), laid over its label. */
+.v3dh-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* White on `--blue-text` (4.97:1); `--blue-dark` is a fill step and white on it
+   misses AA. The check mark says the same without colour. */
+.v3dh-option.is-selected {
+  background: var(--blue-text);
+  color: var(--card-bg);
+}
+
+.v3dh-option:has(input:focus-visible) {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 2px;
+}
+
+/* A third engine, locked with a reason when it cannot run: shown, greyed,
+   with a lock and the reason beside the control — the lock and the words
+   carry it, not the grey alone. */
+.v3dh-option.is-locked,
+.v3dh-option.is-locked input {
+  cursor: not-allowed;
+}
+
+.v3dh-option.is-locked {
+  color: var(--text-muted);
+}
+
+.v3dh-lock {
+  font-size: 12px;
+}
+
+/* `variant="compact"` (the offline HTML export's header, owner 2026-11-16):
+   no check mark, so the chosen option is told by its fill, bold text and one
+   white rule on its very edge — not a second ring inside it, which read as a
+   double line and ran into the three-line PyMOL label (owner 2026-11-16);
+   the others are lighter. The PyMOL label is three lines (PymolContainsLabel
+   `stacked`), the option no taller. The keyboard's ring stays outside the
+   option, 2px off, so it is never taken for the choice. */
+.v3dh-engine--compact .v3dh-option {
+  gap: 0;
+  padding: 0 12px;
+  font-weight: 500;
+}
+
+.v3dh-engine--compact .v3dh-option.is-selected {
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--card-bg);
+}
+
+/* Forced colours drop the fill and the shadow: an outline inside keeps the
+   choice seen, and the focused choice's ring moves outside, as the focus ring
+   elsewhere, so focus still shows (PT-9446 item 2: the inner outline
+   out-specified the focus rule). */
+@media (forced-colors: active) {
+  .v3dh-engine--compact .v3dh-option.is-selected {
+    outline: 2px solid CanvasText;
+    outline-offset: -3px;
+  }
+
+  .v3dh-engine--compact .v3dh-option.is-selected:has(input:focus-visible) {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}
+
+/* A phone's width (PT-9103 item 6): the options lose some side padding, and
+   the PyMOL option may shrink and wrap its second tier, so the control never
+   runs past the card at 320 px. */
+@media (max-width: 400px) {
+  .v3dh-option {
+    padding: 0 10px;
+  }
+
+  .v3dh-option--pymol {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .v3dh-option--pymol .pymol-contains-line {
+    white-space: normal;
+  }
+}
+
+.v3dh-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Wraps inside the button rather than being clipped by the card's
+   `overflow: hidden` at very narrow widths (PT-8464 item 8). */
+.v3dh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: normal;
+  text-align: left;
+}
+
+/* 「対象：PyMOL」: which engine the two buttons act on. */
+.v3dh-target {
+  align-self: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* 「準備失敗」 beside the control. The wait's spinner turns over the viewer
+   (owner 2026-11-16): `.v3dh-spinner` stays for those who draw one there. */
+.v3dh-load {
+  display: inline-flex;
+  color: var(--text-light);
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.v3dh-load--failed {
+  color: var(--danger-dark);
+}
+
+.v3dh-load--locked {
+  font-weight: 400;
+}
+
+
+.v3dh-spinner {
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: v3dh-spin 0.9s linear infinite;
+}
+
+@keyframes v3dh-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3dh-spinner { animation: none; }
+}
+
+/* The global `a:hover` out-specifies `.btn-*` on the link. */
+a.v3dh-btn.btn-secondary:hover {
+  color: var(--text);
+}
+
+a.v3dh-btn.btn-primary:hover {
+  color: var(--z-fg);
+}
+
+/* ---- Both engines in one grid cell: the hidden one keeps its size
+   (`visibility: hidden`, never `display: none` — 3Dmol must keep measuring
+   its canvas), so the card's height does not change between them. */
+
+.v3d-engines {
+  display: grid;
+}
+
+.v3d-engine-pane {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.v3d-engine-pane.is-hidden {
+  visibility: hidden;
+}
+
+/* As tall as the 3Dmol viewer at least, and stretched to the cell. The third
+   engine's pane the same (its content scrolls inside it). */
+.v3d-engine-pane--pymol,
+.v3d-engine-pane--coot {
+  display: flex;
+  flex-direction: column;
+  min-height: 750px;
+}
+
+.v3d-engine-loading {
+  margin: 0;
+  padding: 16px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* ---- The card in use (owner 2026-11-10): it glows, and only then does the
+   wheel over the structure zoom (`useViewerFocus`). A ring and a halo in the
+   brand blue, plus an outline that forced colours keep. */
+
+.v3d-card {
+  transition: box-shadow 0.15s ease;
+}
+
+.v3d-card.is-active {
+  box-shadow: 0 0 0 3px var(--blue-dark), 0 0 28px 6px var(--blue);
+  outline: 1px solid var(--blue-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3d-card { transition: none; }
+}
+
+/* 3Dmol's own block: as tall as the viewer has always been in the card. */
+.v3d-3dmol-body {
+  display: flex;
+  width: 100%;
+  height: 750px;
+}
+
+/* 「クリックでフォーカスON（マウス操作可能に）」, over the view while the card
+   is not in use, on hover (3Dmol) or on hover / keyboard focus (PyMOL's
+   shield). In the middle and large (owner 2026-11-11: the 13px line at the
+   bottom edge went unseen); no scrim, so the structure stays readable round
+   it, and it wraps on a narrow card. */
+.v3d-hint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: var(--card-bg);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 3;
+}
+
+.v3d-card:not(.is-active) .sv3d-stage:hover > .v3d-hint--passive,
+.v3d-shield:hover > .v3d-hint,
+.v3d-shield:focus-visible > .v3d-hint {
+  opacity: 0.92;
+}
+
+/* Over the PyMOL frame while the card is not in use: the page never sees the
+   wheel inside the frame, so the frame is covered and the wheel scrolls the
+   page. A click (or Enter) takes it away. At the stage overlay's own layer
+   and before it in the DOM, so the overlay's cards (save progress, done
+   card, start banner) stay above it and pressable; the overlay itself lets
+   the pointer through. */
+.v3d-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.v3d-shield:focus-visible {
+  outline: 3px solid var(--blue-text);
+  outline-offset: -3px;
+}
+
+/* ---- 3Dmol painted over the window, in place (『全画面表示』; never moved in
+   the DOM, so the viewer keeps everything). */
+
+.v3d-engine-pane--expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  visibility: visible;
+}
+
+.v3d-engine-pane--expanded > .v3d-3dmol-body {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
+
+.v3d-full-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--card-bg);
+}
+
+.v3d-full-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ---- A time beside a button, a one-line notice under the header, and a
+   dialog with a list (owner 2026-11-10). */
+
+.v3dh-saved {
+  align-self: center;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.v3d-notice-slot:empty {
+  display: none;
+}
+
+.v3d-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--info-bg);
+  color: var(--text);
+  font-size: 13px;
+}
+
+.v3d-notice-close {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.vhist-title {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.vhist-note,
+.vhist-empty {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.vhist-problem {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--danger-dark);
+}
+
+.vhist-failed {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.vhist-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.vhist-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+}
+
+.vhist-when {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.vhist-engine,
+.vhist-source,
+.vhist-size {
+  color: var(--text-light);
+}
+
+.vhist-badge {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--blue-light);
+  color: var(--blue-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vhist-actions {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+
+/* ── 「別タブとして起動します」 ───────────────────────────────────────────── */
+
+/* In the middle of the view for a moment after 「専用ウインドウ起動」. The
+   layer shares the engines' cell and lets every pointer through. */
+.v3d-center-notice-layer {
+  grid-area: 1 / 1;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.v3d-center-notice {
+  max-width: 90%;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: var(--card-bg);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.v3d-center-notice.is-shown {
+  opacity: 0.95;
+}
+
+.v3d-center-notice:empty {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3d-hint,
+  .v3d-center-notice {
+    transition: none;
+  }
+}
+
+/* A note under the card while PyMOL is shown. */
+.v3d-seq-note {
+  margin: 8px 0 4px;
+  font-size: 13px;
+  color: var(--text-light);
+}

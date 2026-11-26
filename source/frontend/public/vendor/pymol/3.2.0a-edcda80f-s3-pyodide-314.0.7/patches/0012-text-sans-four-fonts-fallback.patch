@@ -1,0 +1,59 @@
+--- a/layer1/Text.cpp
++++ b/layer1/Text.cpp
+@@ -29,8 +29,12 @@
+ 
+ #ifdef _PYMOL_FREETYPE
+ #include "FontTTF.h"
++#ifndef __EMSCRIPTEN__
++/* The wasm build registers no Gentium face (TextInit), so it does not
++ * compile the header in. */
+ #include "FontTTF2.h"
+ #endif
++#endif
+ 
+ #define FONT_NAME_MAX 255
+ 
+@@ -71,9 +75,25 @@
+ public:
+   // TODO make const
+   CFont* getFont(unsigned font_id) {
++#ifdef __EMSCRIPTEN__
++    if (font_id < m_fonts.size() && m_fonts[font_id]) {
++      return m_fonts[font_id].get();
++    }
++    /* The wasm build embeds only the four Sans faces (TextInit), so any
++     * other id >= 5 (Serif, Mono, Gentium, or an id no build has, e.g. one a
++     * session file brings) draws with Sans (font 5) instead of drawing
++     * nothing. Every caller (the GL and the ray label paths, distance and
++     * dihedral labels) comes through here; SettingCheckFontID is not on the
++     * ray path. The id is unsigned, so a negative id also lands on font 5;
++     * SettingCheckFontID already maps those to 5 on every label path. */
++    if (font_id >= 5 && m_fonts.size() > 5 && m_fonts[5]) {
++      return m_fonts[5].get();
++    }
++#else
+     if (font_id < m_fonts.size()) {
+       return m_fonts[font_id].get();
+     }
++#endif
+     return nullptr;
+   }
+ 
+@@ -461,6 +481,9 @@
+   I->addFont(6, FontTypeNew(G, TTF_DejaVuSans_Oblique_dat, TTF_DejaVuSans_Oblique_len));
+   I->addFont(7, FontTypeNew(G, TTF_DejaVuSans_Bold_dat, TTF_DejaVuSans_Bold_len));
+   I->addFont(8, FontTypeNew(G, TTF_DejaVuSans_BoldOblique_dat, TTF_DejaVuSans_BoldOblique_len));
++#ifndef __EMSCRIPTEN__
++  /* The wasm build stops at the four Sans faces 5-8: ids 9-18 are not
++   * registered and getFont draws them with font 5. */
+   I->addFont(9, FontTypeNew(G, TTF_DejaVuSerif_dat, TTF_DejaVuSerif_len));
+   I->addFont(10, FontTypeNew(G, TTF_DejaVuSerif_Bold_dat, TTF_DejaVuSerif_Bold_len));
+   I->addFont(11, FontTypeNew(G, TTF_DejaVuSansMono_dat, TTF_DejaVuSansMono_len));
+@@ -473,6 +496,7 @@
+   I->addFont(18, FontTypeNew(G, TTF_DejaVuSerif_BoldOblique_dat, TTF_DejaVuSerif_BoldOblique_len));
+ #endif
+ #endif
++#endif
+ 
+   return true;
+ }

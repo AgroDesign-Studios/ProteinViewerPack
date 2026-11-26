@@ -1,0 +1,57 @@
+/* The third-party notices beside AgDB's viewers (owner 2026-11-13/14): the
+   PyMOL(TM) trademark notice (PymolNotice) and the 3Dmol.js credit
+   (Mol3dNotice) share one neutral look, `lib-notice` (PT-9113 item 5):
+   small, muted, wraps. Tokens only. */
+.lib-notice {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+.lib-notice--block {
+  padding: 8px 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* A second notice straight under a block one (Mol3dNotice under PymolNotice): one rule, one strip. */
+.lib-notice--block.lib-notice--follow {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* The notice's license link, whether it opens a page (a) or a dialog (the
+   offline file's button): the text-step blue and underlined, so it reads as
+   a link by more than colour (WCAG 1.4.1) at AA contrast (1.4.3) — the global
+   `a` blue is a fill step, too light for 12px text on white. */
+.lib-notice a,
+.lib-notice a:hover,
+.lib-notice-link {
+  color: var(--blue-text);
+  text-decoration: underline;
+}
+
+/* The dialog-opening link is a button with nothing of a button's look. */
+.lib-notice-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* `brief`: the full line, or on a phone the short one (Mol3dNotice). */
+.lib-notice-brief {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .lib-notice-full {
+    display: none;
+  }
+
+  .lib-notice-brief {
+    display: inline;
+  }
+}

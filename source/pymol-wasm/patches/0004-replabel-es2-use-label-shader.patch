@@ -1,0 +1,18 @@
+diff --git a/layer2/RepLabel.cpp b/layer2/RepLabel.cpp
+index 9740ab91..9f88db99 100644
+--- a/layer2/RepLabel.cpp
++++ b/layer2/RepLabel.cpp
+@@ -1737,8 +1737,13 @@ void RepLabel::render(RenderInfo* info)
+     RepLabelPick(I, info);
+     return;
+   }
++#ifdef PURE_OPENGL_ES_2
++  // the label shader needs no geometry shader; the ES2 immediate path draws no text
++  auto use_shader = SettingGet<bool>(G, cSetting_use_shaders);
++#else
+   auto use_shader = SettingGet<bool>(G, cSetting_use_shaders) &&
+                     G->ShaderMgr->GeometryShadersPresent();
++#endif
+ 
+   if (!use_shader) {
+     RepLabelRenderImmediate(I, info);

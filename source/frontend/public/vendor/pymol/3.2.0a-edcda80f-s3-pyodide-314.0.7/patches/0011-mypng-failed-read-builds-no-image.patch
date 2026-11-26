@@ -1,0 +1,125 @@
+--- a/layer0/MyPNG.cpp
++++ b/layer0/MyPNG.cpp
+@@ -17,6 +17,9 @@
+ #include"MemoryDebug.h"
+ #include"pymol/memory.h"
+ 
++#include <climits>
++#include <cstdint>
++
+ 
+ /* backwards compatibility */
+ 
+@@ -76,7 +79,8 @@
+   44,  45,  46,  47,  48,  49,  50,  51};
+ 
+ static unsigned char *base64_decode(const char *data,
+-				    size_t input_length=0) {
++				    size_t input_length=0,
++				    size_t *output_length=nullptr) {
+   unsigned char *decoded_data = nullptr;
+   unsigned int triple;
+   unsigned int i = 0, j = 0, k;
+@@ -103,6 +107,8 @@
+       decoded_data[j++] = (triple >> (--k) * 8) & 0xFF;
+   }
+ 
++  if (output_length)
++    *output_length = j;
+   return decoded_data;
+ 
+ ok_except1:
+@@ -113,6 +119,7 @@
+ typedef struct {
+   unsigned char *c; // moving pointer
+   unsigned char *h; // for freeing
++  size_t n;         // bytes left at c
+ } uchar2p;
+ 
+ #ifdef _PYMOL_LIBPNG
+@@ -129,6 +136,10 @@
+   if(!io_ptr)
+     return;
+ 
++  if(byteCountToRead > io_ptr->n)
++    png_error(png_ptr, "PNG data ends early");
++  io_ptr->n -= byteCountToRead;
++
+   while(byteCountToRead--) {
+     *(outBytes++) = *(io_ptr->c++);
+   }
+@@ -375,8 +386,8 @@
+   png_byte *pix_ptr = nullptr;
+   png_uint_32 row_bytes = 0;
+ 
+-  png_uint_32 width;
+-  png_uint_32 height;
++  png_uint_32 width = 0;
++  png_uint_32 height = 0;
+   int bit_depth;
+   int color_type;
+   int row, col;
+@@ -384,16 +395,21 @@
+   int i;
+   int ok = true;
+   double file_gamma;
+-  uchar2p data = {NULL, nullptr};
++  uchar2p data = {NULL, nullptr, 0};
+ 
+   if(!file_name)
+     return nullptr;
+ 
+   if(!strncmp(file_name, "data:image/png;base64,", 22)) {
+     const char *base64str = file_name + 22;
+-    data.h = data.c = base64_decode(base64str);
+-    memcpy(buf, data.c, 8);
+-    data.c += 8;
++    data.h = data.c = base64_decode(base64str, 0, &data.n);
++    if(!data.c || data.n < 8) {
++      ok = false;
++    } else {
++      memcpy(buf, data.c, 8);
++      data.c += 8;
++      data.n -= 8;
++    }
+ 
+   } else {
+     png_file = pymol_fopen(file_name, "rb");
+@@ -469,7 +485,17 @@
+ 
+     /* row_bytes is the width x number of channels x (bit-depth / 8) */
+     row_bytes = png_get_rowbytes(png_ptr, info_ptr);
+-    if((png_pixels = (png_byte *) malloc(row_bytes * height * sizeof(png_byte))) == nullptr) {
++    /* Refuse, before allocating, a size whose byte counts do not fit:
++     * row_bytes * height and the row pointers in size_t (32-bit on
++     * wasm32), and the Image below (width * height pixels of 4 bytes,
++     * counted in int). A check on arithmetic only, not a size cap: what
++     * fits is still tried. */
++    if((uint64_t) row_bytes * height > SIZE_MAX ||
++       (uint64_t) height * sizeof(png_bytep) > SIZE_MAX ||
++       (uint64_t) width * height > INT_MAX ||
++       (uint64_t) width * height * 4 > SIZE_MAX) {
++      ok = false;
++    } else if((png_pixels = (png_byte *) malloc((size_t) row_bytes * height)) == nullptr) {
+       ok = false;
+     }
+   }
+@@ -488,7 +514,7 @@
+ 
+     /* set the individual row_pointers to point at the correct offsets */
+     for(i = 0; i < ((signed) height); i++)
+-      row_pointers[i] = png_pixels + i * row_bytes;
++      row_pointers[i] = png_pixels + (size_t) i * row_bytes;
+ 
+     /* now we can go ahead and just read the whole image */
+     png_read_image(png_ptr, row_pointers);
+@@ -497,8 +523,8 @@
+     png_read_end(png_ptr, info_ptr);
+   }
+ 
+-  img = std::make_unique<pymol::Image>(width, height);
+   if(ok) {
++    img = std::make_unique<pymol::Image>(width, height);
+     auto p = img->bits();
+     for(row = 0; row < (signed) height; row++) {
+       pix_ptr = row_pointers[(height - 1) - row];

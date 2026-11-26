@@ -1,0 +1,46 @@
+--- a/modules/chempy/pkl.py
++++ b/modules/chempy/pkl.py
+@@ -232,11 +232,42 @@
+                 cls.dump = pickle.dump
+ 
+ 
++# Bundled data through the C unpickler.
++#
++# PKL.fromFile reads a file under $PYMOL_DATA (the fragments and mutagenesis
++# side-chain libraries the wheel ships) with the stdlib C unpickler, which is
++# much faster than the pure-Python cPickle.load, and every other file with
++# cPickle.load exactly as before. Both are unrestricted file loaders, so no
++# trust boundary moves: session data still goes only through restricted_loads
++# above. The two differ on a protocol < 3 STRING whose bytes are not printable
++# ASCII (C: str or UnicodeDecodeError, _decode_string: bytes); the shipped
++# data is protocol 4 and the build compares both paths on it. A file counts
++# as under $PYMOL_DATA by its real path.
++
++import os as _os
++
++
++def _bundled_file(fname):
++    '''
++    True if fname resolves (symlinks and ".." included) to a path inside the
++    resolved $PYMOL_DATA. False if $PYMOL_DATA is unset or empty, and for a
++    URL (Storage.my_open fetches those).
++    '''
++    data = _os.environ.get('PYMOL_DATA')
++    if not data or '://' in fname:
++        return False
++    data = _os.path.realpath(data)
++    return _os.path.commonpath([data, _os.path.realpath(fname)]) == data
++
++
+ class PKL(Storage):
+ 
+     def fromFile(self,fname,**params):
+         fp = self.my_open(fname,'rb')
+-        result = cPickle.load(fp)
++        if _bundled_file(fname):
++            result = pickle.load(fp)
++        else:
++            result = cPickle.load(fp)
+         fp.close()
+         return result
+ 

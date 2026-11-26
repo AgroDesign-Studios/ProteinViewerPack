@@ -1,0 +1,12 @@
+{
+  "notice": "This application was developed (modified and extended) by AgroDesign Studios using the Open-Source PyMOL source code under its open-source license. PyMOL™ is a trademark of Schrödinger, LLC.",
+  "about_title": "About this software",
+  "about_licenses_link": "Third-party licenses",
+  "about_absent_title": "Not available in this browser build",
+  "about_absent_demo": "The demo wizards (Wizard > Demo)",
+  "about_absent_stereo": "Two stereo modes: Quad-Buffered and OpenVR",
+  "about_absent_antialias": "Real-time antialiasing (FXAA, SMAA)",
+  "about_absent_volume": "Pre-integrated volume rendering",
+  "about_absent_fonts": "Label fonts other than Sans (Serif, Mono, Gentium): such labels are drawn in Sans",
+  "contains_label": "<small>Includes</small> <line><big>PyMOL™</big></line>"
+}

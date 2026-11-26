@@ -1,0 +1,83 @@
+MIT License
+
+Copyright (c) 2026 AgroDesign Studios
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+------------------------------------------------------------------------------
+What the MIT License above covers
+------------------------------------------------------------------------------
+
+It covers AgroDesign Studios' own code in this folder: every file not named
+below, including the files the app shares with AgroDesign's own applications
+(under frontend/src/ and frontend/vite-plugins/), which are published here
+under the same licence.
+
+It does not cover, and does not change the licence of, the following. Each
+keeps its own licence:
+
+- frontend/public/vendor/pymol/3.2.0a-edcda80f-s3-pyodide-314.0.7/ — the
+  in-browser PyMOL runtime: Pyodide 314.0.7 (Mozilla Public License 2.0),
+  CPython (PSF License Agreement), Open-Source PyMOL 3.2.0a (its own licence),
+  NumPy (BSD 3-Clause) and the code each of them bundles. The full texts are
+  in that folder's licenses/ (LICENSE.*.txt, NOTICES.*.txt; where Pyodide's
+  source is: SOURCE.pyodide.txt). The folder's README.md, host.js and
+  worker.js are AgroDesign Studios' own and are covered by the MIT License.
+
+- The patches to Open-Source PyMOL — patches/*.patch in that runtime folder
+  and pymol-wasm/patches/*.patch (byte-identical copies) — follow the licence
+  of the Open-Source PyMOL files they change.
+
+  Patch 0011 (0011-mypng-failed-read-builds-no-image.patch) changes
+  base64_decode in Open-Source PyMOL's layer0/MyPNG.cpp. PyMOL took that
+  decoder and its decoding table from a Stack Overflow post, whose posts were
+  published under CC BY-SA 3.0; licenses/NOTICES.pymol-third-party.txt
+  (section "base64 decoding table") records the most likely source and
+  licence. The patch is published as it is; the lines it changes keep that
+  origin and licence.
+
+- pymol-wasm/notices/*.LICENSE — licence texts of upstream code inside
+  Open-Source PyMOL, kept verbatim (pymol-wasm/notices/README.md says from
+  where).
+
+- In pymol-wasm/tests/es300_rewrite_test.cpp (marked in the file),
+  stringReplaceAll and call_compute_color_for_light are copied from
+  Open-Source PyMOL's layer0/ShaderMgr.cpp, and old_es300 is patch 0005's
+  code (a patch to Open-Source PyMOL, as above). Both follow Open-Source
+  PyMOL's licence (Copyright (C) Schrodinger, LLC; full text in
+  licenses/LICENSE.pymol.txt of the runtime folder above).
+
+- In frontend/src/pages/pymol-viewer/pymolSettingsData.ts, the generated rows
+  (GENERATED_SETTINGS) are Open-Source PyMOL's own setting help, taken from
+  its data/setting_help.csv; in frontend/src/pages/pymol-viewer/
+  pymolMenuData.ts, the generated menu (PYMOL_MENU) is Open-Source PyMOL's
+  menu bar, its labels and commands, taken from its pymol/_gui.py. Both
+  follow Open-Source PyMOL's licence (Copyright (C) Schrodinger, LLC; full
+  text in licenses/LICENSE.pymol.txt of the runtime folder above). The rest of
+  each file is AgroDesign Studios' own and is covered by the MIT License.
+
+- The npm packages frontend/package-lock.json names (React, 3Dmol.js, Vite and
+  the others). They are not in this folder; npm installs them, and each keeps
+  its own licence. A built HTML file lists the ones it carries, with their
+  texts, in its Help > Licences tab and in the repository's NOTICE.
+
+- frontend/src/pages/structure-html-export/__fixtures__/1crn.cif — PDB entry
+  1CRN from the wwPDB, whose data is free of copyright restrictions (CC0 1.0).
+
+"PyMOL" is a trademark of Schrodinger, LLC.

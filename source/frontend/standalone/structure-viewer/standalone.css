@@ -1,0 +1,3615 @@
+/* The offline structure file's page frame (standalone/structure-viewer/):
+   the header, the one cell both engines share and the HELP dialog (no
+   footer since 2026-11-16). Everything inside the panes is the shared CSS (index.css,
+   structureViewer.css, pymolViewer.css, viewer3dHeader.css). Tokens only,
+   per DESIGN-CONTRACT §1. */
+
+/* index.css locks the viewport for the app shell, where only `.page`
+   scrolls; this page has no shell, so the document scrolls (PT-2125). */
+html,
+body,
+#root {
+  height: auto;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: visible;
+  background: var(--bg);
+}
+
+/* index.css's hover-lift guard is kept whole by the build's minifier since
+   PT-9107 (its translate/scale/rotate reset is a nested rule), so this page
+   needs no guard of its own. */
+
+.sav {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 0;
+}
+
+/* The viewport reaches under a notch (`viewport-fit=cover`, index.html): a
+   phone on its side keeps the desktop layout, inset by the safe area too
+   (PT-9192 item 8). The phone mode pads its own parts (below). */
+.sav:not(.sav--mobile) {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* The header (owner 2026-11-16): the logo, unframed, beside two lines — the
+   app's name, small, over the structure's — then the small buttons in two
+   rows, then the engine switch at the right end at its own size. The names
+   give way first (cut with …); a window too narrow for the rest (under
+   760 px) wraps the buttons under them rather than clip. */
+.sav-head {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 4px 12px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sav-ident {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* The logo as it is drawn: no frame and no backdrop of the page's. */
+.sav-brand-logo {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.sav-names {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sav-brand-name {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.25;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sav-brand-org {
+  font-weight: 700;
+}
+
+.sav-brand-app {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.sav-head h1 {
+  min-width: 0;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The structure's name, after its PDB ID when it came from the PDB (owner
+   2026-11-19): the ID never shrinks, the name is cut with … first. */
+.sav-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sav-title-row > h1 {
+  flex: 1 1 auto;
+}
+
+.sav-pdb-link {
+  position: relative;
+  flex: none;
+  padding: 1px 6px;
+  border: 1px solid var(--blue-text);
+  border-radius: var(--radius-sm);
+  color: var(--blue-text);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sav-pdb-link:hover {
+  background: var(--blue-light);
+}
+
+.sav-pdb-link:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 1px;
+}
+
+/* A phone: the same small chip, touched anywhere within 44 px. */
+.sav--mobile .sav-pdb-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, 44px);
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
+.sav-head h1:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: -2px;
+}
+
+/* The small buttons, two rows: Open, Export, 詳細 and HELP above; the
+   layout, full screen and the language below (UI consult, Claude Opus). */
+.sav-head-actions {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sav-head-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 26 px high with 4 px between them: past the 24 px a pointer target needs
+   (WCAG 2.5.8), each with its own ring when focused. */
+.sav-head-row > .btn,
+.sav-head-row > .sav-details > summary {
+  min-height: 26px;
+  padding: 2px 9px;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.2;
+  border-radius: var(--radius-sm);
+}
+
+.sav-head-row > .btn:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 1px;
+}
+
+/* 「詳細」 among the buttons: drawn as one of them. */
+.sav-head-row > .sav-details > summary {
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.sav-head-row > .sav-details > summary:hover {
+  border-color: var(--blue-text);
+}
+
+/* The engine switch: the right end, as tall as the two rows of buttons
+   beside it (owner 2026-11-16: 「もっと縦長に」) — two 26 px rows and the
+   4 px between them, less the switch's own 2 px padding and 1 px border
+   each side — so the three-line PyMOL label has room. A minimum: larger
+   text makes it taller still, and it stretches with the rows when they
+   grow. */
+.sav-head-engine {
+  flex: none;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.sav-head .v3dh-option {
+  min-height: calc(26px * 2 + 4px - 6px);
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+/* The lines (UI consult, Codex astra): the small tier at
+   11 px, PyMOL™ at 14 px, 1.1 between the lines. */
+.sav-head .pymol-contains--stacked {
+  line-height: 1.1;
+}
+
+.sav-head .pymol-contains--stacked .pymol-contains-small,
+.sav-head .pymol-contains--stacked .pymol-contains-line {
+  font-size: 11px;
+}
+
+.sav-head .pymol-contains--stacked .pymol-contains-big {
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+/* Where the two rows sit beside it (wider than a phone's width), the switch
+   is the rows' height whatever their text makes it. */
+@media (min-width: 641px) {
+  .sav:not(.sav--mobile) .sav-head-engine,
+  .sav:not(.sav--mobile) .sav-head-engine .v3dh-engine-wrap {
+    align-self: stretch;
+    align-items: stretch;
+  }
+
+  .sav:not(.sav--mobile) .sav-head-engine .v3dh-load {
+    align-self: center;
+  }
+}
+
+/* A narrower window: 全画面 and スマホ表示 keep their icon (their name is
+   their aria-label and title). */
+@media (max-width: 900px) {
+  .sav-head-actions .sav-btn-text {
+    display: none;
+  }
+}
+
+@media (max-width: 759px) {
+  .sav:not(.sav--mobile) .sav-head {
+    flex-wrap: wrap;
+  }
+
+  .sav:not(.sav--mobile) .sav-ident {
+    flex-basis: 100%;
+  }
+}
+
+/* The desktop layout chosen on a phone-wide window: touch-sized buttons. */
+@media (max-width: 640px) {
+  .sav-head-row {
+    flex-wrap: wrap;
+  }
+
+  .sav-head-row > .btn,
+  .sav-head-row > .sav-details > summary {
+    min-height: 44px;
+  }
+}
+
+.sav-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+/* A narrow window in the desktop layout: the actions under the name, full width. */
+@media (max-width: 640px) {
+  .sav-head-actions {
+    width: 100%;
+  }
+
+  .sav-head-actions > .btn {
+    flex: 1 1 auto;
+    min-height: 44px;
+  }
+}
+
+/* The page's live region: always mounted, visually hidden while empty (a
+   `display: none` one may not be announced when it fills, PT-9101). */
+.sav-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  background: var(--blue-bg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sav-status.is-error {
+  color: var(--danger-dark);
+}
+
+.sav-status--empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sav-note {
+  margin: 0;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+/* Both engines in one grid cell: the hidden one keeps its size (3Dmol and
+   the PyMOL canvas keep measuring), so switching never re-lays the page —
+   the shared viewer's rule (viewer3dHeader.css `.v3d-engines`). */
+.sav-stage {
+  flex: 1 1 auto;
+  display: grid;
+  min-width: 0;
+  background: var(--card-bg);
+}
+
+.sav-pane {
+  grid-area: 1 / 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sav-pane.is-hidden {
+  visibility: hidden;
+}
+
+.sav-pane-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* The 3Dmol stage: at most 70% of the window and 750 px tall; shorter on a phone. */
+.sav-dmol-stage {
+  position: relative;
+  height: min(70vh, 750px);
+  min-height: 320px;
+}
+
+.sav-dmol {
+  position: absolute;
+  inset: 0;
+}
+
+/* PyMOL: the shared workbench classes, laid out for this page. */
+.sav-pymol {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sav-pymol .pymolv-menubar {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* 「初期表示」 left of File (owner 2026-11-15): one row with the menu bar,
+   the button outside its menubar role, a rule between them. The menu bar
+   takes the rest of the row and wraps there, so at 390 px the button and
+   File still share the first line: the button stays at the top, level
+   with the menu bar's first line, never centred on all of its lines. */
+.sav-pymol-menurow {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+  padding-left: 12px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sav-pymol-menurow > .btn {
+  flex: none;
+  white-space: nowrap;
+  margin: 2px 8px 0 0;
+}
+
+.sav-sheet-pymol .sav-pymol-menurow > .btn {
+  margin-top: 4px;
+}
+
+.sav-pymol-menurow > .pymolv-menubar {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 8px;
+  border-bottom: 0;
+  border-left: 1px solid var(--border-light);
+}
+
+/* 「描画」 after PyMOL's menus (owner 2026-11-21): 3Dmol.js mode's drop-down and, a tool up, the way back. */
+.sav-pymol-menurow > .sav-pymol-draw {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 8px 0 0;
+}
+
+/* The pen's note under the sequence row and its box while they show (PR #10244's review). */
+.sav-pymol-stage > .sv3d-tool-note {
+  top: var(--sav-ink-note-top, 8px);
+}
+
+/* A phone's note at the view's foot: the lines' 「視点が動いた」 note moves above it (PR #10244's review). */
+.sav-pymol-stage.has-note > .sv3d-stale-note {
+  bottom: auto;
+  top: calc(var(--sav-ink-note-top, 8px) + 84px);
+}
+
+/* The phone sheet's 「描画」 chips wrap under their title. */
+.sav-pymol-draw-sheet .sv3d-chips {
+  flex-wrap: wrap;
+}
+
+/* The view across the whole stage; the object panel's pull tab lies over
+   it at the right (owner 2026-11-16: no strip of its own, so the picture
+   reaches above and below the tab). Opening or closing the panel is PyMOL's
+   own re-layout, never a new view size. */
+.sav-pymol-stage {
+  flex-direction: row;
+  height: min(70vh, 750px);
+  min-height: 320px;
+}
+
+.sav-pymol-host {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+}
+
+/* A phone measuring (the 表示ツール sheet closed so atoms can be tapped): the
+   card — distances, angles or dihedrals, the last one away, the end — by the
+   view's lower left; it takes no touch but its own (owner 2026-11-19). */
+.sav-measure-float {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  z-index: 3;
+  max-width: calc(100% - 16px);
+}
+
+.sav-measure-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.sav-measure-modes,
+.sav-measure-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.sav-measure-card .btn {
+  flex: 1 1 0;
+  min-height: 44px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+/* A phone: the view's 「オブジェクト」, top right, opening the 表示ツール sheet's
+   object list (owner 2026-11-19: no PyMOL object panel on a phone). */
+.sav-objs-fab {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.sav-objs-count {
+  min-width: 22px;
+  padding: 1px 6px;
+  border-radius: 11px;
+  background: var(--blue-text);
+  color: var(--card-bg);
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* A phone: a preset's note (PymolMenuMessage) over the view's foot, out of
+   the layout, so a long one never shrinks the view (owner 2026-11-19; UI
+   consult, Opus). Above the measuring card while a measurement runs. One
+   line folded. */
+.sav-note-float {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 3;
+}
+
+.sav-note-float--above {
+  bottom: 124px;
+}
+
+.sav-note-float > .pymolv-note:not(.pymolv-note--empty) {
+  align-items: center;
+  padding: 4px 4px 4px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.sav-note-float .pymolv-menu-message {
+  color: var(--text);
+}
+
+.sav-note-float > .pymolv-note:not(.is-expanded) > .pymolv-menu-message:not(:empty) {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+/* Its × and 「詳しく」 are phone targets too (PT-9918 item 3). */
+.sav--mobile .sav-note-float .pymolv-note-actions .btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* The desktop's mark on PyMOL's object panel (owner 2026-11-19: マウスオーバーで光らせる):
+   a light frame and a wash over the button (or name) under the mouse, and what it does
+   left of the panel, at the row, over the view (covering no other button); neither takes
+   the pointer. */
+.sav-panel-mark {
+  position: absolute;
+  z-index: 2;
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px var(--blue);
+  background: color-mix(in srgb, var(--card-bg) 30%, transparent);
+  pointer-events: none;
+}
+
+.sav-pymol-stage.is-panel-spot .sav-gl {
+  cursor: pointer;
+}
+
+.sav-panel-tip {
+  position: absolute;
+  z-index: 3;
+  transform: translate(calc(-100% - 8px), -50%);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--text);
+  color: var(--card-bg);
+  font-size: 12px;
+  line-height: 1.5;
+  /* One line where it fits; a long reason (a button that does nothing here) wraps. */
+  width: max-content;
+  max-width: 320px;
+  white-space: normal;
+  pointer-events: none;
+}
+
+/* The lid over PyMOL's mouse box (owner 2026-11-21: Mouse Mode hidden by
+   default): PyMOL's own panel grey (0.2 → #333, measured), taking the presses
+   there; lifted, it slides up into its tab and lets everything through. */
+.sav-mouse-lid {
+  position: absolute;
+  z-index: 2;
+  background: #333;
+  transform-origin: top;
+  transition: transform 160ms ease;
+  /* A touch on it scrolls or zooms nothing (PT-10471 item 3). */
+  touch-action: none;
+}
+
+.sav-mouse-lid.is-open {
+  transform: scaleY(0);
+  pointer-events: none;
+}
+
+/* A drag from the view passes through (PT-10471 item 1); a PyMOL menu over
+   the box is seen and pressed (PT-10470 item 1). */
+.sav-mouse-lid.is-through {
+  pointer-events: none;
+}
+
+.sav-mouse-lid.is-aside,
+.sav-mouse-lid-tab.is-aside {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Its tab: shut, the lid's label on the lid itself, covering nothing PyMOL
+   draws (PT-10470 item 2); open, it rides up with the lid onto the box's top
+   edge above the "Mouse Mode" line (.is-above), a tab's open foot — when
+   nothing PyMOL draws is there. The panel's grey with light words
+   (10.2:1). */
+.sav-mouse-lid-tab {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  padding: 0 10px;
+  border: 1px solid #5b5b5b;
+  border-radius: 6px;
+  background: #333;
+  color: #e5e7eb;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 160ms ease, top 160ms ease;
+}
+
+.sav-mouse-lid-tab.is-above {
+  transform: translateY(-100%);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+.sav-mouse-lid-tab.is-small {
+  min-height: 0;
+  padding: 0 6px;
+  border-radius: 3px;
+  font-size: 9px;
+}
+
+.sav-mouse-lid-tab:hover {
+  background: #404040;
+  color: #fff;
+}
+
+.sav-mouse-lid-tab:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sav-mouse-lid,
+  .sav-mouse-lid-tab {
+    transition: none;
+  }
+}
+
+/* The end of PyMOL's movie-button row redrawn by the page (owner
+   2026-11-21): 「Seq」 and ▼ over PyMOL's S, ▼ and F, in PyMOL's own
+   button look — pink on grey, a bevelled edge — a shade darker so the words
+   read (#ffd0d0 on #5a5a5a, 5.0:1); 「Seq」 outlined while the sequence
+   shows, ▼ while a motion runs. At least 18 px high: smaller than the 24 px
+   target size where PyMOL's own row is (WCAG 2.5.8's equivalent-control
+   exception: the 「配列」 tag and ▼'s choices do the same; PT-10649 item 4). */
+.sav-ctl-tail {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  background: #333;
+}
+
+.sav-ctl-tail.is-through {
+  pointer-events: none;
+}
+
+.sav-ctl-tail.is-aside {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.sav-ctl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  border: 1px solid;
+  border-color: #a6a6a6 #4c4c4c #4c4c4c #a6a6a6;
+  background: #5a5a5a;
+  color: #ffd0d0;
+  /* The strip sets the size (its height's: PT-10648 item 3). */
+  font: 700 1em/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Darker on a hover, so the words keep their contrast (#ffd0d0 on #4a4a4a, 6.5:1; PT-10649 item 5). */
+.sav-ctl-btn:hover {
+  background: #4a4a4a;
+}
+
+.sav-ctl-btn.is-on {
+  box-shadow: inset 0 0 0 2px #ffd0d0;
+}
+
+.sav-ctl-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+}
+
+/* ▼'s choices, above it: how it moves and how fast (owner: 『左右に揺らす』/
+   『回転』, 1倍・2倍・4倍), then start or stop. Light words on #1f2937 (white
+   14.7:1; the chosen one white on #1d4ed8, 6.7:1); a strip under it covers
+   the gap down to ▼, so the pointer can cross. */
+.sav-motion-pop {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  z-index: 4;
+  display: grid;
+  gap: 6px;
+  min-width: 190px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #1f2937;
+  color: #f9fafb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.sav-motion-pop::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.sav-motion-row {
+  display: flex;
+  gap: 4px;
+}
+
+.sav-motion-choice,
+.sav-motion-go {
+  flex: 1;
+  min-height: 32px;
+  padding: 0 8px;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  background: #374151;
+  color: #f9fafb;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sav-motion-choice[aria-pressed='true'] {
+  border-color: #93c5fd;
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.sav-motion-go {
+  background: #f9fafb;
+  color: #111827;
+  font-weight: 600;
+}
+
+.sav-motion-choice:focus-visible,
+.sav-motion-go:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+
+.sav-motion-choice[aria-disabled='true'],
+.sav-motion-go[aria-disabled='true'],
+.sav-ctl-btn[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* The page's sequence over the top of PyMOL's view, and its 「配列」 tag
+   (owner 2026-11-21; UI consult, Opus 5.5 and Codex astra): one row in
+   PyMOL's own sequence look — monospace, light on a dark see-through band —
+   scrolled sideways; the residue under the mouse lit as the panel's buttons
+   are (.sav-panel-mark's yellow), and a see-through box at the top left
+   saying which (white on rgba(17, 24, 39, 0.82): over 12:1 on any picture
+   behind it). */
+.sav-seq {
+  position: absolute;
+  z-index: 3;
+  height: 40px;
+  background: rgba(17, 24, 39, 0.82);
+  color: #e5e7eb;
+}
+
+.sav-seq-row {
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 14px 8px 0;
+  font: 13px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  scrollbar-width: thin;
+}
+
+.sav-seq-row:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+
+.sav-seq-res {
+  position: relative;
+  display: inline-block;
+  min-width: 1ch;
+  padding: 2px 0;
+  text-align: center;
+  cursor: default;
+}
+
+.sav-seq-res.is-lit {
+  border-radius: 2px;
+  background: #fde047;
+  color: #111827;
+  box-shadow: 0 0 0 2px #fde047, 0 0 8px 2px rgba(253, 224, 71, 0.7);
+}
+
+.sav-seq-num {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  font-size: 9px;
+  /* 6.7:1 on the band over a white view (#3c424e), PR #10172's review. */
+  color: #cbd5e1;
+  pointer-events: none;
+}
+
+.sav-seq-chain {
+  display: inline-block;
+  margin: 0 6px 0 10px;
+  color: #93c5fd;
+  font-size: 11px;
+}
+
+.sav-seq-chain:first-child {
+  margin-left: 0;
+}
+
+.sav-seq-note {
+  display: inline-block;
+  margin-left: 8px;
+  color: #cbd5e1;
+  font: 12px/1.2 var(--font-sans, system-ui, sans-serif);
+}
+
+.sav-seq-info {
+  position: absolute;
+  z-index: 3;
+  max-width: min(420px, 60%);
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(17, 24, 39, 0.82);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+/* Empty, it stays in the document unseen: a live region that comes and goes is not read out. */
+.sav-seq-info.is-empty {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* The 「配列」 tag at the view's top right: a tab hanging from the top edge,
+   or from the row's foot while it shows. */
+.sav-seq-tag {
+  position: absolute;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  padding: 0 10px;
+  border: 1px solid #4b5563;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  background: rgba(17, 24, 39, 0.82);
+  color: #f9fafb;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translateX(-100%);
+}
+
+/* A phone's tag, under the 「オブジェクト」 button: a whole tab with all its edges. */
+.sav--mobile .sav-seq-tag {
+  min-height: 32px;
+  border-top: 1px solid #4b5563;
+  border-radius: 6px;
+}
+
+.sav-seq-tag:hover {
+  background: rgba(31, 41, 55, 0.95);
+}
+
+.sav-seq-tag:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+}
+
+/* A spot whose press does nothing here (PyMOL's own full screen, a frame button
+   with one frame): dashed and grey, its words saying why — not colour alone. */
+.sav-panel-mark--off {
+  box-shadow: none;
+  outline: 2px dashed var(--text-muted);
+  outline-offset: 0;
+  background: color-mix(in srgb, var(--card-bg) 15%, transparent);
+}
+
+/* Pull to zoom (owner 2026-11-20), while the tab is dragged: a dashed line
+   where each size's left edge would be, numbered; the one a release chooses
+   solid, a size the view has no room for grey; the chip says the size. */
+.sav-zoom-guides {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.sav-zoom-guide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 2px dashed var(--blue);
+  opacity: 0.75;
+}
+
+.sav-zoom-guide.is-chosen {
+  border-left-style: solid;
+  opacity: 1;
+}
+
+.sav-zoom-guide.is-off {
+  border-left-color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.sav-zoom-guide-num {
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  min-width: 18px;
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+.sav-zoom-guide.is-chosen .sav-zoom-guide-num {
+  background: var(--blue-text);
+  color: var(--card-bg);
+}
+
+.sav-zoom-guide.is-off .sav-zoom-guide-num {
+  text-decoration: line-through;
+}
+
+/* At the top, by the chosen size's line: the pulled tab, mid-height, never covers it. */
+.sav-zoom-chip {
+  position: absolute;
+  top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 240px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--text);
+  color: var(--card-bg);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.sav-zoom-chip-note {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* 「スクリーンショット（PNG）」's form (owner 2026-11-20): in "Includes PyMOL™"
+   mode, the owner's sentence about the object panel, whether it is open now,
+   and the button that folds it — set apart as a note, above the buttons. */
+.sav-shot-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--info-border);
+  border-radius: 6px;
+  background: var(--info-bg);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sav-shot-panel p {
+  margin: 0;
+}
+
+.sav-shot-panel-note {
+  font-weight: 600;
+}
+
+/* 「オリジナル表示」's switch: in PyMOL's settings dialog (a computer) and at the
+   head of the phone's 「オブジェクト」 tab, with what it does under it. */
+.sav-original-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+/* A finger's 44 px, as the touch switch's (PT-10132 item 5). */
+.sav-original-setting .ui-switch-row {
+  min-height: 44px;
+}
+
+/* 「オリジナル表示」 on a phone shows PyMOL's panel with the shared tab; open, its
+   28 px reach 16 px more over the view, as the closed tab's do: 44 px for a
+   finger, never over the panel (PT-10132 item 6). */
+.sav--mobile .pymolv-drawer-tab[aria-expanded='true']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -16px;
+  right: 0;
+}
+
+.sav-original-note {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sav-gl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: var(--text);
+  outline: none;
+  touch-action: none;
+}
+
+.sav-nogl {
+  padding: 24px 16px;
+}
+
+.sav-nogl h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.sav-link {
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue-text);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* The licence dialog: a flush Modal, its title bar's × top right, and one
+   scroll, the body's (owner 2026-11-15). Bounded by the dialog, whose height
+   is the dynamic viewport's on a phone, so the address bar never pushes the
+   × or the last text out of reach. */
+.sav-lic {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: calc(100dvh - 16px);
+}
+
+.sav-lic h2 {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* The ×: a 44 px target at every width, inside the bar's own height. */
+.sav-lic button[aria-label][title] {
+  min-width: 44px;
+  min-height: 44px;
+  margin: -10px -10px -10px 0;
+}
+
+.sav-lic-intro {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.sav-lic-contents {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 4px;
+}
+
+.sav-lic-all {
+  flex: none;
+  white-space: nowrap;
+}
+
+.sav-lic-body h3 {
+  margin: 14px 0 6px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.sav-lic-body .sav-lic-group {
+  font-size: 15px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 12px;
+}
+
+/* A whole text, unclipped: no scroll of its own, its line breaks kept and a
+   long line wrapped. */
+.sav-lic-body pre {
+  margin: 0 0 8px;
+  padding: 10px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+}
+
+/* HELP (HelpDialog.tsx, owner 2026-11-16; four tabs since 2026-11-18): the tabs fixed under the
+   title bar, the panel below them the one scroll. One height for every tab,
+   so the dialog does not jump when the tab changes. */
+.sav-help {
+  height: min(720px, calc(100dvh - 16px));
+}
+
+.sav-help-tabs {
+  flex: none;
+  display: flex;
+  gap: 4px;
+  padding: 8px 16px 0;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--card-bg);
+}
+
+.sav-help-tab {
+  min-height: 40px;
+  padding: 6px 16px;
+  margin-bottom: -1px;
+  border: 1px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: none;
+  color: var(--text-light);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sav-help-tab:hover {
+  color: var(--text);
+}
+
+/* The chosen tab: its bar, darker text and bold — not colour alone. */
+.sav-help-tab[aria-selected='true'] {
+  color: var(--blue-text);
+  font-weight: 700;
+  border-color: var(--border-light) var(--border-light) var(--blue-text);
+  background: var(--card-bg);
+}
+
+.sav-help-tab:focus-visible,
+.sav-help-panel:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: -2px;
+}
+
+.sav-help-usage section + section {
+  margin-top: 14px;
+}
+
+.sav-help-usage h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.sav-help-usage p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* 「このアプリ」: its name and version, maker and author, a term over its
+   value on one line (owner 2026-11-16), wrapping on a phone. */
+.sav-lic-about {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 16px;
+  margin: 0 0 12px;
+  font-size: 13px;
+}
+
+.sav-lic-about > div {
+  display: contents;
+}
+
+.sav-lic-about dt {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.sav-lic-about dd {
+  margin: 0;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* At the head of 「使い方」 (owner 2026-11-19), a line under it so the rows
+   do not read as the tab's first section. */
+.sav-help-usage > .sav-lic-about {
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* The packages the app uses, inside 「このアプリ」. */
+.sav-lic-body .sav-lic-sub {
+  margin: 16px 0 4px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+/* The group's one link out, under its heading (3Dmol.js's site, PyMOL's repository). */
+.sav-lic-link {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+
+/* A group's 「引用（Citation）」: the citation set off by a rule on its start side. */
+.sav-lic-cite {
+  margin: 0 0 10px;
+}
+
+.sav-lic-cite-text {
+  margin: 0 0 8px;
+  padding: 2px 0 2px 10px;
+  border-left: 3px solid var(--border-light);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.sav-lic-cite-text > p {
+  margin: 0;
+}
+
+/* The runtimes' texts not read yet, or not readable (PT-9446 item 1). */
+.sav-lic-load {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 4px 0 8px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.sav-lic-load.is-error {
+  color: var(--danger-dark);
+}
+
+.sav--mobile .sav-help-tab {
+  min-height: 44px;
+}
+
+/* A phone (390 px): the four tabs share the width equally, and a label
+   that does not fit takes a second line at its one break (the ja labels'
+   zero-width space: 「最新版／ダウンロード」「ライセンス／表記」) — never cut
+   short or scrolled sideways; with four tabs (owner 2026-11-18) the type is
+   a size smaller and the padding narrower, so 「ダウンロード」 fits a quarter
+   of a 375 px screen (UI consult, 2026-11-16 and 2026-11-18). */
+@media (max-width: 640px) {
+  .sav-help-tabs {
+    gap: 2px;
+    padding: 6px 8px 0;
+  }
+
+  .sav-help-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 44px;
+    padding: 4px 4px;
+    font-size: 13px;
+    line-height: 1.25;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* A 360 px phone: 「ダウンロード」 at 13px is 78px and a quarter of the row 83px
+   with the tab's padding and border; a size smaller keeps it on one line
+   (owner 2026-11-18: 入らないところは字を小さく). */
+@media (max-width: 374px) {
+  .sav-help-tab {
+    font-size: 12px;
+  }
+}
+
+/* 「最新版ダウンロード」 (LatestPanel.tsx): the app's facts with the releases
+   link under the repository, then ① (the note, the button, the status line and
+   what it found) and ② under it. */
+.sav-latest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sav-latest p {
+  margin: 0;
+}
+
+.sav-latest-current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 14px;
+}
+
+.sav-latest-label {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.sav-latest-current strong {
+  white-space: nowrap;
+}
+
+.sav-latest-badge {
+  white-space: nowrap;
+}
+
+.sav-latest-status {
+  min-height: 1.6em;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.sav-latest-status.is-error {
+  color: var(--danger-dark);
+}
+
+.sav-latest-note {
+  color: var(--text-light);
+}
+
+.sav-latest-check[aria-disabled='true'] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* The repository row's note (owner 2026-11-20): under the URL, on its own line. */
+.sav-lic-github-note {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+/* ① then ⇓ then ② (owner 2026-11-20), one under the other at every width:
+   a circled number in a gutter left of each step, the arrow over ②'s. */
+.sav-latest-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.sav-latest-stepbox {
+  display: grid;
+  grid-template-columns: 2em minmax(0, 1fr);
+  column-gap: 8px;
+  align-items: start;
+}
+
+.sav-latest-num {
+  grid-column: 1;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 44px;
+  color: var(--blue-text);
+  text-align: center;
+}
+
+.sav-latest-arrow {
+  grid-column: 1 / -1;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--text-light);
+  text-align: left;
+  padding-left: 0.4em;
+}
+
+.sav-latest-stepbody {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sav-latest-check,
+.sav-latest-prepare {
+  min-height: 44px;
+}
+
+/* Greyed ② keeps the shared .btn[aria-disabled] look (index.css): a second
+   opacity on it left the label near 1.5:1 (PT-10123 item 2). */
+.sav-latest-prepare[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+.sav-latest-why {
+  overflow-wrap: anywhere;
+}
+
+/* The latest version made with the current data (LatestPanel.tsx, owner
+   2026-11-17): the button, what moves and what does not, the steps said one
+   by one, Stop / Try again, and the way to use a copy at hand. */
+.sav-latest-update,
+.sav-latest-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.sav-latest-update .btn,
+.sav-latest-fallback .btn {
+  min-height: 44px;
+}
+
+.sav-latest-moves {
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+.sav-latest-moves li {
+  overflow-wrap: anywhere;
+}
+
+.sav-latest-moves-title {
+  font-weight: 600;
+}
+
+.sav-latest-live {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+}
+
+.sav-latest-step {
+  overflow-wrap: anywhere;
+}
+
+.sav-latest-step.is-error {
+  color: var(--danger-dark);
+}
+
+.sav-latest-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* The save step (SaveStep.tsx, owner 2026-11-17): the file's name, format and
+   size, then the two ways to save it — side by side on a computer, one under
+   the other on a phone, each a 44 px target — and why one is not offered. */
+.sav-save {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sav-save p {
+  margin: 0;
+}
+
+.sav-save-ready {
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+}
+
+/* A picture's preview (owner 2026-11-17; UI consult): centred above the file,
+   whole in at most 320 x 200 px, on a faint 8 px checkerboard that shows
+   where the picture is see-through (the page's, never in the saved file). */
+.sav-save-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.sav-save-preview img {
+  display: block;
+  max-width: min(100%, 320px);
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  background-color: var(--card-bg);
+  --sav-check: color-mix(in srgb, var(--border-light) 55%, var(--card-bg));
+  background-image: conic-gradient(var(--sav-check) 25%, var(--card-bg) 0 50%, var(--sav-check) 0 75%, var(--card-bg) 0);
+  background-size: 16px 16px;
+}
+
+.sav-save-file {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 16px;
+  margin: 0;
+}
+
+.sav-save-file > div {
+  display: contents;
+}
+
+.sav-save-file dt {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.sav-save-file dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.sav-save-file code {
+  white-space: normal;
+  word-break: break-all;
+}
+
+.sav-save-detail {
+  color: var(--text-light);
+}
+
+.sav-save-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sav-save-btn {
+  min-height: 44px;
+}
+
+.sav-save-btn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.sav-save-why {
+  color: var(--text-light);
+}
+
+.sav-save-back {
+  align-self: flex-start;
+}
+
+@media (max-width: 640px) {
+  .sav-save-actions {
+    flex-direction: column;
+  }
+
+  .sav-save-preview img {
+    max-width: 100%;
+    max-height: 160px;
+  }
+
+  .sav-save-btn {
+    width: 100%;
+  }
+}
+
+.sav-fatal {
+  margin: 24px 16px;
+  color: var(--danger-dark);
+}
+
+/* 「ファイルを開く」 (owner 2026-11-14): what opened or why not, always mounted
+   (an empty live region takes no room). */
+.sav-open-message {
+  margin: 0;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+.sav-open-message:empty {
+  padding: 0;
+}
+
+.sav-open-message.is-error {
+  color: var(--danger-dark);
+}
+
+/* The blank file's panel, and the stage's own while nothing is open. */
+.sav-empty {
+  grid-area: 1 / 1;
+  align-self: center;
+  justify-self: center;
+  max-width: 560px;
+  margin: 32px 16px;
+  padding: 24px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.sav-empty h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.sav-empty p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.sav-empty .sav-empty-formats {
+  margin: 12px 0 0;
+}
+
+/* A file dragged over the page: the stage says it will open it. The overlay
+   takes no pointer, so the drop lands on the page's handler. */
+.sav-stage {
+  position: relative;
+}
+
+.sav-drop {
+  position: absolute;
+  inset: 8px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--blue-text);
+  border-radius: var(--radius);
+  background: var(--blue-bg);
+  color: var(--blue-text);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* PyMOL's wait over the stage (owner 2026-11-16): a veil the pointer goes
+   through, so 3Dmol.js under it stays usable, and a ring that turns, or
+   stands still where motion is reduced (the words beside it say the rest). */
+.sav-pyload {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+
+.sav-pyload-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--text);
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* The viewer's name over its state (owner 2026-11-17): the name the stronger line. */
+.sav-pyload-name {
+  font-size: 15px;
+}
+
+.sav-pyload-text {
+  margin-top: -4px;
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+.sav-pyload-ring {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--blue-text);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: sav-pyload-spin 0.9s linear infinite;
+}
+
+@keyframes sav-pyload-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sav-pyload-ring { animation: none; }
+}
+
+/* The phone mode (DESIGN §2.6's 640 px, PT-9133 item 2). */
+.sav--mobile .sav-empty {
+  margin: 16px;
+  padding: 16px;
+}
+
+.sav--mobile .sav-empty .btn {
+  width: 100%;
+  min-height: 44px;
+}
+
+/* 「開く」 (OpenDialog): the drop area, the formats, the PDB ID, the choice
+   (the part that is busy), then the progress line and the alert. */
+.sav-open,
+.sav-open-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* The whole area is the button that opens the file picker. */
+.sav-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 128px;
+  padding: 20px 16px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sav-dropzone:hover,
+.sav-dropzone.is-over {
+  border-color: var(--blue-text);
+  background: var(--blue-bg);
+}
+
+/* A file dropped on the page waits here for 「開く」: its name stands out. */
+.sav-dropzone.is-staged {
+  border-style: solid;
+  border-color: var(--blue-text);
+  background: var(--blue-bg);
+}
+
+.sav-dropzone.is-staged .sav-dropzone-sub {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.sav-dropzone:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 2px;
+}
+
+.sav-dropzone-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sav-dropzone-sub {
+  font-size: 13px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+.sav-open-formats,
+.sav-open-note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+/* The app's form field look (`.form-group`), without its bottom margin. */
+.sav-pdb {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+
+.sav-pdb label {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.sav-pdb-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sav-pdb-row input {
+  flex: 1 1 160px;
+  width: auto;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.sav-pdb-row input[aria-invalid='true'] {
+  border-color: var(--danger-dark);
+}
+
+.sav-pdb-row .btn {
+  min-height: 44px;
+}
+
+.sav-open-mode {
+  margin: 0;
+  padding: 12px 0 0;
+  border: 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.sav-open-mode legend {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* A whole label is the radio's tap target: 44 px (PT-9186 item 4). */
+.sav-open-mode .pymolv-choice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+}
+
+/* "Includes PyMOL™" mode's choice, first in the dialog and unlike the items
+   under it (owner 2026-11-20; UI consult): the mode's pink ground, a bar on
+   its left and its tag, with each answer a card (a border, and a filled
+   ground when chosen, not colour alone). --pink-text keeps 3:1 against the
+   ground for the bar (--pink-dark does not, index.css). */
+.sav-open-mode--pymol {
+  padding: 10px 12px 12px;
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--pink-text);
+  border-radius: var(--radius);
+  background: var(--pink-bg);
+}
+
+.sav-open-mode--pymol legend {
+  float: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.sav-open-mode--pymol legend + * {
+  clear: both;
+}
+
+/* The tag's two lines stay one box beside the question, which wraps under it if it must. */
+.sav-open-mode-tag {
+  display: inline-flex;
+  flex: none;
+}
+
+.sav-open-mode--pymol .sav-tag--pymol {
+  display: inline-block;
+  background: var(--card-bg);
+}
+
+.sav-open-mode-scope {
+  margin: 0 0 6px;
+}
+
+.sav-open-mode--pymol .sav-open-choice {
+  margin-top: 6px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  cursor: pointer;
+}
+
+.sav-open-mode--pymol .sav-open-choice.is-selected {
+  border-color: var(--pink-text);
+  box-shadow: inset 0 0 0 1px var(--pink-text);
+  font-weight: 600;
+}
+
+.sav-open-status,
+.sav-open-error {
+  margin: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.sav-open-status {
+  color: var(--text-light);
+}
+
+.sav-open-error {
+  color: var(--danger-dark);
+  font-weight: 600;
+}
+
+/* The way round a download with no connection (PT-9781): two numbered steps
+   in the body's colour under the alert. The link, the address itself, has a
+   line of its own (UI consult) and wraps anywhere on a 320 px phone; its
+   padding makes a tap target of about 44 px. */
+.sav-open-steps {
+  margin: 0;
+  padding-left: 1.4em;
+  font-size: 13px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.sav-open-steps .sav-link {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding: 12px 0;
+}
+
+/* Empty, they take no room but stay in the accessibility tree: a
+   `display: none` live region may not be announced when it fills (PT-9101,
+   PT-9186 item 3). The gap above them goes with them. One rule for every
+   such region (PT-9229 item 8): the open dialog's lines, the residue said by
+   the view (PT-9193 item 1) and the command line's words while the phone's
+   sheet is closed (PT-9229 item 5). */
+.sav-open-status:empty,
+.sav-open-error:empty,
+.sav-stage-readout:empty,
+.sav-cmd-echo:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sav-open-inputs[aria-busy='true'] .sav-dropzone {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+/* 「エクスポート」 (ExportDialog): one row per format, its engine as a word. */
+.sav-export-intro {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.sav-export-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sav-export-row {
+  padding: 0;
+}
+
+.sav-export-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sav-export-item:hover:not(:disabled):not([aria-disabled='true']) {
+  border-color: var(--blue-text);
+  background: var(--blue-bg);
+}
+
+.sav-export-item:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 2px;
+}
+
+.sav-export-item:disabled,
+.sav-export-item[aria-disabled='true'] {
+  color: var(--text-muted);
+  background: var(--gray-bg);
+  cursor: not-allowed;
+}
+
+.sav-export-item[aria-expanded='true'] {
+  border-color: var(--blue-text);
+}
+
+.sav-export-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* The featured entry (「HTMLappとして出力」, owner 2026-11-16): a pale blue
+   fill, a blue band down its left edge and the 「おすすめ」 badge — the word
+   says it, the colour only repeats it. */
+.sav-export-row--featured .sav-export-item {
+  border-color: var(--blue-text);
+  border-left-width: 5px;
+  background: var(--blue-bg);
+}
+
+/* Its fill already is the other rows' hover colour, so the general hover
+   above changed nothing on it: the pointer goes one shade darker here (owner
+   2026-11-19: マウスオーバーで色が更に濃くなるなど). */
+.sav-export-row--featured .sav-export-item:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--blue-light);
+}
+
+/* Its engine tags sit on white, so their 11 px words keep 4.5:1 on every
+   fill of the row (PT-9894): --blue-text is 4.15:1 and --pink-text 4.09:1
+   on the hover's --blue-light, 4.97:1 and 4.88:1 on white. */
+.sav-export-row--featured .sav-tag {
+  background: var(--card-bg);
+}
+
+.sav-export-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--blue-text);
+  color: var(--card-bg);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.6;
+  vertical-align: 0.1em;
+  white-space: nowrap;
+}
+
+/* The engine tags: small words, outlined, one above the other in a column
+   of one width (owner 2026-11-15); the colour only repeats what they say. */
+.sav-tags {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 64px;
+}
+
+.sav-tag {
+  padding: 0 6px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* "Includes PyMOL™" does not fit the column on one line (owner 2026-11-18:
+   入らないところは字を小さく): two lines, the first word in the smaller type
+   the two-tier PyMOL label uses (PymolContainsLabel.css, stacked). */
+.sav-tag--pymol {
+  padding: 1px 4px 2px;
+  border-radius: var(--radius-sm);
+  color: var(--pink-text);
+}
+
+.sav-tag--pymol .sav-tag-small,
+.sav-tag--pymol .sav-tag-big {
+  display: block;
+  line-height: 1.2;
+}
+
+.sav-tag--pymol .sav-tag-small {
+  font-size: 9.5px;
+  font-weight: 500;
+}
+
+.sav-tag--3dmol {
+  color: var(--blue-text);
+}
+
+.sav-export-note {
+  margin: 4px 2px 0;
+  font-size: 12px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+.sav-export-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-dark);
+}
+
+.sav-export-ask p {
+  flex: 1 1 240px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--yellow-text);
+}
+
+.sav-export-ask .btn {
+  min-height: 44px;
+}
+
+/* ---- Phone mode (owner 2026-11-14; useMobile.ts, MobileBar.tsx) ----------
+   At 640 px and narrower the page is `.sav--mobile`: a short header, the
+   viewer filling the screen above a bar fixed to the bottom, nothing after
+   them (owner 2026-11-16: the footer is gone, the page fits the screen),
+   and every dialog a sheet docked to the bottom. Tap targets are 44 px or more (the UI
+   consult). Wider, `.sav-screen` is no box at all. */
+.sav-screen {
+  display: contents;
+}
+
+.sav--mobile {
+  /* The bar's own height; the safe area under it is added where it is used. */
+  --sav-mbar-h: 64px;
+  padding-bottom: calc(var(--sav-mbar-h) + env(safe-area-inset-bottom, 0px));
+  /* The screen exactly, not the large viewport (100vh) behind the address bar: nothing to scroll to. */
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.sav--mobile .sav-screen {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--sav-mbar-h) - env(safe-area-inset-bottom, 0px));
+  height: calc(100dvh - var(--sav-mbar-h) - env(safe-area-inset-bottom, 0px));
+  min-height: 320px;
+}
+
+.sav--mobile .sav-head {
+  flex: none;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 0 max(12px, env(safe-area-inset-right, 0px)) 0 max(12px, env(safe-area-inset-left, 0px));
+}
+
+/* 「詳細」, the camera, the language and 「PC」 at the right: 44 px targets
+   (owner 2026-11-16: the way back to the desktop layout at the right end,
+   where HELP was). The names before them give way first (cut with …). */
+.sav-head-phone {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sav--mobile .sav-lang,
+.sav--mobile .sav-pc-btn,
+.sav--mobile .sav-image > summary {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 13px;
+}
+
+.sav--mobile .sav-brand-name {
+  font-size: 10px;
+}
+
+/* 「PC」: the screen icon beside the word; a header too narrow for both
+   keeps the word (owner 2026-11-16: the icon only if there is room). */
+.sav-pc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+@media (max-width: 359px) {
+  .sav-pc-btn > .sav-page-icon {
+    display: none;
+  }
+}
+
+/* The language switch: the flag before the name (owner 2026-11-17); a header
+   too narrow for both keeps the name, as 「PC」 keeps its word. */
+.sav-lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.sav-flag {
+  flex: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 359px) {
+  .sav:not(.sav--mobile) .sav-lang > .sav-flag {
+    display: none;
+  }
+}
+
+/* The phone layout: the flag alone (owner 2026-11-19), round (owner
+   2026-11-21: 丸型の国旗アイコンとして、横スペースを節約する) — the flag's
+   middle in a 24 px circle (its SVG slices to the square) — in a button
+   32 px wide and 44 px high (the owner's choice: 12 px of the header back
+   for a narrower target, still over WCAG's 24 px); the button's name says
+   the language. */
+.sav--mobile .sav-lang-word {
+  display: none;
+}
+
+.sav--mobile .sav-lang {
+  min-width: 32px;
+  width: 32px;
+  padding: 0;
+}
+
+.sav--mobile .sav-lang > .sav-flag {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.sav--mobile .sav-head h1 {
+  font-size: 14px;
+}
+
+.sav--mobile .sav-meta {
+  font-size: 12px;
+}
+
+/* 「詳細」: what the file is, opened as a small panel under it, over the
+   page, so the header keeps its one line (HeadDetails.tsx). */
+.sav-details {
+  position: relative;
+  flex: none;
+}
+
+.sav-details > summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue-text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sav-details > summary:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 2px;
+}
+
+.sav-details-pop {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: max-content;
+  max-width: min(72ch, calc(100vw - 24px));
+  /* Moved back inside the header and the screen by HeadDetails.tsx (PT-9400 item 2). */
+  transform: translateX(var(--sav-pop-shift, 0px));
+  padding: 10px 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+/* A phone: the names take the room left (.sav-ident), so 「詳細」, the
+   language and HELP sit at the right edge and the panel opens leftwards from
+   there (PT-9400 item 2). */
+.sav--mobile .sav-details-pop {
+  left: auto;
+  right: 0;
+}
+
+/* 「画像出力」 (owner 2026-11-16): the camera beside its name on a computer,
+   alone on a phone (its name its label), drawn as the buttons round it. */
+.sav-image > summary {
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.sav-image > summary:hover {
+  border-color: var(--blue-text);
+}
+
+.sav-image > summary[aria-disabled='true'] {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Its two pictures, one button each with the line under it. */
+.sav-image-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(36ch, calc(100vw - 48px));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sav-image-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sav-image-item:hover:not([aria-disabled='true']) {
+  border-color: var(--blue-text);
+  background: var(--blue-bg);
+}
+
+.sav-image-item:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 2px;
+}
+
+.sav-image-item[aria-disabled='true'] {
+  color: var(--text-muted);
+  background: var(--gray-bg);
+  cursor: not-allowed;
+}
+
+.sav-image-item[aria-expanded='true'] {
+  border-color: var(--blue-text);
+}
+
+.sav-image-item .sav-tags {
+  width: auto;
+}
+
+.sav-image-note {
+  margin: 4px 2px 0;
+  font-size: 12px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+/* The viewer takes what the header and the live lines leave of the screen. */
+.sav--mobile .sav-stage {
+  flex: 1 1 0;
+  min-height: 200px;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.sav--mobile .sav-pane,
+.sav--mobile .sav-pane-body,
+.sav--mobile .sav-pymol {
+  min-height: 0;
+}
+
+.sav--mobile .sav-dmol-stage,
+.sav--mobile .sav-pymol-stage {
+  flex: 1 1 0;
+  height: auto;
+  min-height: 0;
+}
+
+/* PyMOL's bar by the view keeps only its live lines, Retry and the end of
+   a measurement there: while they are empty it takes no room, and is still
+   announced when it fills. */
+.sav-pymol > .pymolv-bar:not(:has(.btn, .pymolv-measure, .pymolv-status:not(:empty), .pymolv-error:not(:empty))) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Tap targets by the view (PT-9195 item 4): Retry, PyMOL's busy-bar Cancel
+   and its measurement chip. */
+.sav--mobile .sav-status .btn,
+.sav--mobile .sav-pymol .btn,
+.sav--mobile .sav-pymol .sv3d-chip {
+  min-height: 44px;
+}
+
+/* The residue picked on the view, said by the view: the controls are in the
+   closed 「表示」 sheet (PT-9193 item 1). Takes no touch from the view. */
+.sav-stage-readout {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 3;
+  max-width: calc(100% - 16px);
+  margin: 0;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  font-size: 13px;
+  color: var(--text);
+  pointer-events: none;
+}
+
+
+/* The bar: Open, Export, View and (full edition) Engine, fixed above the
+   home indicator. Under the dialogs (`.modal-overlay`, z-index 200). */
+.sav-mbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  gap: 4px;
+  padding: 4px max(8px, env(safe-area-inset-right, 0px)) calc(4px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+}
+
+.sav-mbar-btn {
+  flex: 1 1 0;
+  min-width: 44px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  /* Its own pressed look below; the browser's tap flash lingered over the sheet it opened. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sav-mbar-btn:active:not(:disabled) {
+  background: var(--blue-bg);
+}
+
+.sav-mbar-btn:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: -2px;
+}
+
+.sav-mbar-btn:disabled,
+.sav-mbar-btn[aria-disabled='true'] {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.sav-mbar-btn[aria-disabled='true']:active {
+  background: none;
+}
+
+.sav-mbar-icon {
+  flex: none;
+}
+
+.sav-mbar-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.sav-mbar-sub {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+/* "Includes PyMOL™" under 「モード」: one line in smaller type (owner
+   2026-11-18: 入らないところは字を小さく), the size of the two-tier label's
+   small tier; the button keeps its height. */
+.sav-mbar-sub--long {
+  font-size: 9.5px;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+
+/* Every dialog of the page — Open, Export and its forms, the licences,
+   PyMOL's dialogs, the two sheets — docks to the bottom, full width, with
+   room under it for the home indicator. */
+.sav--mobile .modal-overlay {
+  align-items: flex-end;
+}
+
+.sav--mobile .modal {
+  width: 100%;
+  max-width: none !important;
+  max-height: calc(100dvh - 16px);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-bottom: env(safe-area-inset-bottom, 0px) solid var(--card-bg);
+}
+
+.sav--mobile .modal button,
+.sav--mobile .modal .btn {
+  min-height: 44px;
+}
+
+/* The title bar's ×, a glyph with no padding of its own. */
+.sav--mobile .modal button[aria-label][title] {
+  min-width: 44px;
+}
+
+/* 16 px, or a phone zooms the page in when the field takes focus (over
+   the toolbar's own inline 11 px). */
+.sav--mobile .modal input:not([type='radio'], [type='checkbox'], [type='range']),
+.sav--mobile .modal select,
+.sav--mobile .modal textarea {
+  min-height: 44px;
+  font-size: 16px !important;
+}
+
+.sav--mobile .modal .pymolv-choice {
+  min-height: 44px;
+}
+
+/* 「表示」 leaves the view in sight above it, dimmed only a little, so a
+   zoom button's effect shows. */
+.sav--mobile .modal-overlay:has(.sav-sheet--view) {
+  background: color-mix(in srgb, var(--text) 15%, transparent);
+  backdrop-filter: none;
+}
+
+/* The sheet takes the focus when the engine's controls in it change (MobileBar.tsx). */
+.sav-sheet--view:focus {
+  outline: none;
+}
+
+.sav--mobile .modal:has(> .sav-sheet--view) {
+  max-height: 60dvh;
+}
+
+.sav-sheet {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.sav-zoom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sav-zoom .btn {
+  flex: 1 1 0;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.sav-sheet-hint {
+  margin: 8px 0 12px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* PyMOL's sheet: 「オブジェクト」 and 「表示・操作」 tabs, each panel scrolling on its own. */
+.sav-sheet-tabs {
+  display: flex;
+  flex: none;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sav-sheet-tab {
+  flex: 1 1 0;
+  min-height: 44px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--text-light);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sav-sheet-tab[aria-selected='true'] {
+  border-bottom-color: var(--blue-text);
+  color: var(--blue-text);
+}
+
+.sav-sheet-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.sav-sheet-panel[hidden] {
+  display: none;
+}
+
+/* The object list (PymolObjectSheet): a row is a switch and the name, which opens the entry. */
+.sav-objs-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sav-obj-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sav-obj-switch {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.sav-obj-switch-track {
+  position: relative;
+  width: 36px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+}
+
+.sav-obj-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  transition: left 0.15s;
+}
+
+.sav-obj-switch[aria-pressed='true'] .sav-obj-switch-track {
+  background: var(--blue-text);
+  border-color: var(--blue-text);
+}
+
+.sav-obj-switch[aria-pressed='true'] .sav-obj-switch-thumb {
+  left: 16px;
+}
+
+.sav-obj-open {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.sav-obj-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sav-obj-kind {
+  flex: none;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.sav-obj-chev {
+  flex: none;
+  font-size: 20px;
+  color: var(--text-light);
+}
+
+.sav-objs-empty,
+.sav-objs-more {
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+/* One entry: what can be done to it, in groups. */
+.sav-obj-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.sav-obj-title {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.sav-obj-title:focus {
+  outline: none;
+}
+
+.sav-obj-sec {
+  padding: 8px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.sav-obj-sec h4 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.sav-obj-sec p {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.sav-obj-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sav-obj-chips .btn {
+  padding: 0 12px;
+}
+
+.sav-obj-chips .btn[aria-pressed='true'] {
+  background: var(--blue-text);
+  border-color: var(--blue-text);
+  color: var(--card-bg);
+}
+
+.sav-obj-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.sav-obj-swatch {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* PyMOL's 「表示・操作」 tab: 「初期表示」 and 「📏 測定」, the 創薬表示 presets, and PyMOL's menu and command line folded. */
+.sav-pymol-quick,
+.sav-pymol-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+}
+
+.sav-pymol-presets {
+  border-top: 1px solid var(--border-light);
+}
+
+.sav-pymol-presets-title {
+  flex: 1 0 100%;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.sav-pymol-more {
+  border-top: 1px solid var(--border-light);
+}
+
+.sav-pymol-more > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* The engine's own controls, edge to edge as above its view. */
+.sav-sheet-tools {
+  margin: 0 -16px -12px;
+}
+
+.sav-sheet-tools:empty {
+  display: none;
+}
+
+.sav-sheet-pymol .pymolv-menubar {
+  padding: 4px 12px 4px 8px;
+}
+
+.sav-sheet-pymol .pymolv-foot {
+  padding: 8px 16px 12px;
+}
+
+/* The command line's own element (movableHost.ts) and its slot by the view:
+   neither takes part in the layout. */
+.sav-movable,
+.sav-pymol-cmd {
+  display: contents;
+}
+
+/* PyMOL's command line, as low as it goes (owner 2026-11-16): 3 px above
+   and below its strip, the prompt and the input on one line, the input
+   32 px high. A phone keeps a 44 px input with 16 px text (iOS zooms into a
+   smaller one when it takes focus). */
+.sav-pymol > .pymolv-foot {
+  gap: 2px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+/* In the phone's sheet the strip ends the sheet: only its top is cut. */
+.sav-sheet-pymol .pymolv-foot {
+  gap: 2px;
+  padding-top: 4px;
+}
+
+.sav .pymolv-cmd {
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.sav:not(.sav--mobile) .pymolv-cmd-input {
+  height: 32px;
+  padding: 4px 10px;
+}
+
+.sav--mobile .pymolv-cmd-input {
+  min-height: 44px;
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
+/* 「エンジン」: two choices, each with what it costs. */
+.sav-engines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sav-engine {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.sav-engine.is-selected {
+  border-color: var(--blue-text);
+  background: var(--blue-bg);
+}
+
+.sav-engine.is-disabled {
+  background: var(--gray-bg);
+  cursor: not-allowed;
+}
+
+.sav-engine input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+}
+
+.sav-engine-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sav-engine-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sav-engine-note {
+  font-size: 13px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+.sav-engine-status {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.sav-engine-status:empty {
+  margin: 0;
+}
+
+.sav-engine-alert p {
+  margin: 12px 0 8px;
+  font-size: 13px;
+  color: var(--danger-dark);
+  overflow-wrap: anywhere;
+}
+
+/* ---- One screen, full screen, the layout toggle, the note (owner 2026-11-15) ----
+   A computer's window holds the whole app without scrolling: the page is the
+   window's height, the header keeps to its own lines, and the viewer takes
+   what is left (both UI consultants). A window too low for the viewer's
+   controls and a 240 px view (a phone on its side, a short laptop with a
+   zoom) grows the page and scrolls instead: the stage never shrinks below
+   what its pane needs (PT-9260 item 5). */
+.sav:not(.sav--mobile) {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.sav:not(.sav--mobile) .sav-stage {
+  flex: 1 1 0;
+  min-height: auto;
+  grid-template-rows: minmax(min-content, 1fr);
+}
+
+.sav:not(.sav--mobile) .sav-pane,
+.sav:not(.sav--mobile) .sav-pane-body,
+.sav:not(.sav--mobile) .sav-pymol {
+  min-height: 0;
+}
+
+.sav:not(.sav--mobile) .sav-dmol-stage,
+.sav:not(.sav--mobile) .sav-pymol-stage {
+  flex: 1 1 0;
+  height: auto;
+  min-height: 240px;
+}
+
+.sav-details-pop > .sav-meta {
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+}
+
+/* The page buttons' icons (pageIcons.tsx): beside the word, which says what it does. */
+.sav-page-icon {
+  flex: none;
+  vertical-align: -0.15em;
+}
+
+/* The page's own expanded view (no browser full screen): the viewer alone,
+   as tall as the window, and the way out always in sight. `.sav.` raises
+   these over the one-screen rules above, whatever the window's height
+   (PT-9260 item 3). */
+.sav.sav--expanded {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.sav--expanded .sav-head,
+.sav--expanded .sav-notice,
+.sav--expanded .sav-note,
+.sav--expanded .sav-mbar {
+  display: none;
+}
+
+.sav--expanded .sav-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  height: auto;
+  min-height: 0;
+}
+
+.sav.sav--expanded .sav-stage {
+  flex: 1 1 0;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.sav.sav--expanded .sav-pane,
+.sav.sav--expanded .sav-pane-body,
+.sav.sav--expanded .sav-pymol {
+  min-height: 0;
+}
+
+.sav.sav--expanded .sav-dmol-stage,
+.sav.sav--expanded .sav-pymol-stage {
+  flex: 1 1 0;
+  height: auto;
+  min-height: 0;
+}
+
+/* The viewer alone: the engines' controls go too (they come back with the
+   way out); the live lines stay, so what happens is still said. Measured at
+   844x390 with no Fullscreen API: the 3Dmol.js toolbar left a 110 px view. */
+.sav.sav--expanded .sav-pane-body > :not(.sav-dmol-stage),
+.sav.sav--expanded .sav-pymol .sav-pymol-menurow,
+.sav.sav--expanded .sav-pymol .pymolv-bar > .btn,
+.sav.sav--expanded .sav-pymol .sav-pymol-cmd {
+  /* The toolbar's rows lay themselves out with inline styles. */
+  display: none !important;
+}
+
+.sav-expand-band {
+  display: flex;
+  flex: none;
+  justify-content: flex-end;
+  padding: max(4px, env(safe-area-inset-top, 0px)) max(8px, env(safe-area-inset-right, 0px)) 4px 8px;
+}
+
+.sav-expand-exit {
+  min-height: 44px;
+}
+
+/* The phone layout chosen on a computer: a phone-wide column, so it reads as
+   the phone's app (owner 2026-11-15: 「SmartPhoneで使えるという明示的なPR」). */
+.sav--phone-col {
+  max-width: 480px;
+  margin: 0 auto;
+  border-left: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+}
+
+.sav--phone-col .sav-mbar {
+  left: 50%;
+  right: auto;
+  width: min(100%, 480px);
+  transform: translateX(-50%);
+}
+
+.sav--phone-col .modal-overlay {
+  justify-content: center;
+}
+
+.sav--phone-col .modal {
+  max-width: 480px !important;
+}
+
+/* The 表示 sheet's page buttons: full screen and the desktop layout. */
+.sav-sheet-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.sav-sheet-page > .btn {
+  flex: 1 1 140px;
+  min-height: 44px;
+}
+
+/* The note the app opens with: under the header, closed with ×. */
+.sav-notice {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 6px 8px 6px 16px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--blue-bg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sav-notice-text {
+  flex: 1 1 auto;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.sav-notice-sign {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sav-notice-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+}
+
+.sav-notice-close {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-light);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sav-notice-close:hover {
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.sav-notice-close:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 2px;
+}
+
+.sav--mobile .sav-notice {
+  flex-wrap: wrap;
+  padding: 6px max(8px, env(safe-area-inset-right, 0px)) 6px max(12px, env(safe-area-inset-left, 0px));
+}
+
+.sav--mobile .sav-notice-close,
+.sav--mobile .sav-notice .btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* The licence dialog's contents and groups. */
+.sav-lic-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sav-lic-note {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+/* One entry: its name (and version and licence) as the summary, a 44 px
+   row; the text opens below it. Not sticky: an open text keeps the whole
+   height of a phone's screen to read in. */
+/* A rule between two entries; the group headings carry their own. */
+.sav-lic-item + .sav-lic-item {
+  border-top: 1px solid var(--border-light);
+}
+
+.sav-lic-item > summary,
+.sav-lic-item--bare {
+  padding: 12px 4px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+
+.sav-lic-item > summary {
+  cursor: pointer;
+}
+
+.sav-lic-item > summary:hover {
+  background: var(--bg);
+}
+
+.sav-lic-item > summary:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: -2px;
+}
+
+.sav-lic-item--bare {
+  margin: 0;
+}
+
+.sav-lic-group:focus {
+  outline: none;
+}
+
+.sav-lic-group:focus-visible {
+  outline: 2px solid var(--blue-text);
+  outline-offset: 2px;
+}
+
+/* 「使い方」's last section, 対応 OS とブラウザ (owner 2026-11-18): a list, which a
+   phone's width keeps whole; who tried what, in smaller type under it. */
+.sav-help-env {
+  margin: 0 0 6px;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sav-help-usage p.sav-help-env-note {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* 「開いたときの表示」 in 「HTMLappとして出力」 (owner 2026-11-16): one switch a
+   viewer, what it keeps (or why it cannot be taken) under it. */
+.sav-app-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.sav-app-state .sav-app-why {
+  margin: 0 0 6px 42px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.sav-app-state > .sav-app-note {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* The Light viewer's touch controls (owner 2026-11-17): a switch and what the fingers do now. */
+.sav-touch-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 8px 0 4px;
+}
+
+.sav-touch-setting .ui-switch-row {
+  min-height: 44px;
+}
+
+.sav-touch-heading {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sav-touch-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* The first-run guide (FirstRunGuide, owner 2026-11-19): speech bubbles over
+   the page, above the phone's bar (100) and under the dialogs (200). They
+   take no pointer, so a press reaches the page (and closes them); the page
+   places each one and its arrow (`--sav-guide-arrow`, from the bubble's
+   left). White on --blue-text is 4.96:1. */
+.sav-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  pointer-events: none;
+}
+
+.sav-guide-bubble {
+  position: fixed;
+  width: max-content;
+  max-width: min(260px, calc(100vw - 16px));
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  background: var(--blue-text);
+  color: var(--card-bg);
+  box-shadow: var(--shadow-md);
+  font-size: 13px;
+  line-height: 1.5;
+  animation: sav-guide-in 0.25s ease-out;
+}
+
+/* Two bubbles in a narrow window (a phone's bar): each half the width, so
+   they sit side by side, each over its own button. */
+@media (max-width: 559px) {
+  .sav-guide--pair .sav-guide-bubble {
+    max-width: calc(50vw - 12px);
+  }
+}
+
+.sav-guide-bubble::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--sav-guide-arrow, 50%) - 7px);
+  border: 7px solid transparent;
+}
+
+.sav-guide-bubble--below::before {
+  bottom: 100%;
+  border-bottom-color: var(--blue-text);
+}
+
+.sav-guide-bubble--above::before {
+  top: 100%;
+  border-top-color: var(--blue-text);
+}
+
+.sav-guide-text,
+.sav-guide-close {
+  margin: 0;
+}
+
+.sav-guide-close {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+@keyframes sav-guide-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sav-guide-bubble {
+    animation: none;
+  }
+}
+
+/* A computer's 「🖱 マウス操作」 (owner 2026-11-19): the button at the right end of PyMOL's menu
+   row, and its card over the view's top right, clear of the object panel; not modal, so the view
+   behind it still turns. */
+.sav-mouse-btn {
+  flex: none;
+  margin: 2px 8px 0 auto;
+  white-space: nowrap;
+}
+
+.sav-mouse-guide {
+  position: absolute;
+  top: 8px;
+  z-index: 6;
+  width: min(440px, calc(100% - 16px));
+  max-height: calc(100% - 16px);
+  overflow-y: auto;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-md);
+  color: var(--text);
+  font-size: 13px;
+}
+
+.sav-mouse-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sav-mouse-head h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.sav-mouse-head h2:focus {
+  outline: none;
+}
+
+.sav-mouse-close {
+  min-width: 32px;
+  min-height: 32px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-light);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sav-mouse-close:hover {
+  background: var(--gray-bg);
+}
+
+.sav-mouse-table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+}
+
+.sav-mouse-table caption {
+  padding: 2px 0 4px;
+  font-weight: 700;
+  text-align: left;
+  color: var(--blue-text);
+}
+
+.sav-mouse-table th,
+.sav-mouse-table td {
+  padding: 4px 6px;
+  border-top: 1px solid var(--border-light);
+  text-align: left;
+  vertical-align: top;
+  font-weight: 400;
+}
+
+.sav-mouse-table thead th {
+  border-top: 0;
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.sav-mouse-table tbody th {
+  font-weight: 600;
+}
+
+.sav-mouse-code {
+  width: 1%;
+  white-space: nowrap;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.sav-mouse-more {
+  margin-top: 6px;
+}
+
+.sav-mouse-more > summary {
+  padding: 4px 0;
+  font-weight: 700;
+  color: var(--blue-text);
+  cursor: pointer;
+}
+
+/* The folded table's caption is its summary's words: said once to a screen reader, not shown twice. */
+.sav-mouse-more .sav-mouse-table caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.sav-mouse-other {
+  margin: 8px 0 0;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--info-bg);
+}
+
+.sav-mouse-note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--text-light);
+}

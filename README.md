@@ -140,6 +140,7 @@
 ## ライセンス・帰属・商標
 
 - このアプリ自体は [MIT License](LICENSE)。同梱のオープンソースソフトウェアはそれぞれのライセンスに従い、名前・版・全文は [`NOTICE`](NOTICE) とアプリの「HELP」→「ライセンス表記」にあります。
+- アプリのソースコードは [`source/`](source/) にあります。ライセンスと、それが覆う範囲は [`source/LICENSE`](source/LICENSE) に書いています。
 - Includes PyMOL™.（PyMOL™ を含みます。）フル版の "Includes PyMOL™" モードは、AgroDesign Studios が Open-Source PyMOL のソースコードをそのライセンスのもとで変更・機能追加し、WebAssembly でブラウザ向けにビルドしたものです。Schrödinger, LLC が配布する PyMOL 製品とは別のものです。
 - Includes 3Dmol.js（BSD 3-Clause License）。論文の引用は上の「引用」の節にあります。
 - フル版の PyMOL の実行環境は [FreeType](https://freetype.org) を使っています。このソフトウェアの一部は FreeType Team の成果にもとづいています（原文: "This software is based in part on the work of the FreeType Team." FreeType License の全文は [`NOTICE`](NOTICE) にあります）。
@@ -297,6 +298,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## License, attribution and trademarks
 
 - This app is under the [MIT License](LICENSE). The open-source software it carries keeps its own licence; names, versions and full texts are in [`NOTICE`](NOTICE) and in the app under "Help" → "Licences".
+- The app's source code is in [`source/`](source/); its licence and what that licence covers are in [`source/LICENSE`](source/LICENSE).
 - Includes PyMOL™. The full edition's "Includes PyMOL™" mode is built from Open-Source PyMOL source code, which AgroDesign Studios modified and extended under its license and compiled for the browser with WebAssembly. It is distinct from the PyMOL products distributed by Schrödinger, LLC.
 - Includes 3Dmol.js (BSD 3-Clause License). Its paper is under "Citation" above.
 - The full edition's PyMOL runtime uses FreeType: this software is based in part on the work of the FreeType Team ([FreeType](https://freetype.org); the FreeType License's full text is in [`NOTICE`](NOTICE)).
@@ -320,6 +322,11 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## 更新履歴
 
 各バージョンの主な変更です。ダウンロードは [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) から。
+
+### v1.0.7（2026-11-26）
+- アプリのソースコードを、このリポジトリの [`source/`](source/) で公開しました。アプリを組み立てるファイルとそのテスト、PyMOL の実行環境のビルド、リリースのスクリプトです。ビルドのしかた、テストの実行、リリースと同じファイルができることの確かめ方は [`source/README.md`](source/README.md) にあります。
+- HELP の「最新版ダウンロード」: GitHub のリポジトリの下の一文を「最新版アプリとソースコードは、GitHub で公開しています。」にしました。
+- 「HTMLappとして出力（このアプリをコピー）」: 保存を押すと、ファイル名の欄に実際に保存する名前（使えない文字を除いたもの）が出るようにしました。コピーを作っているあいだは、欄とその既定に戻すボタンを押せなくしました。
 
 ### v1.0.6（2026-11-22）
 - "Includes PyMOL™" モード: 右上の「配列」タグ（下の「Seq」でも同じ）で、配列を画面の上に 1 行で出せるようにしました。文字にマウスを重ねる（スマホでは押す）と、その文字が光り、PyMOL の画面でその残基が一時的に黄色の太い棒で目立ち、左上に「どの構造の、どの鎖の、何番の、何という残基か」が出ます。
@@ -359,7 +366,7 @@ If you publish work that used this app, please cite the viewer you used, in the 
 - エクスポートの「HTMLappとして出力」が、マウスを重ねると濃い色になるようにしました。
 
 ### v1.0.1（2026-11-19）
-- アプリを本番用の設定で組み直しました。使い方と見た目は同じで、ファイルが小さくなりました（ライト版は約 1.4 MB → 約 1.2 MB）。v1.0.0 で入っていた、開発用の情報（作成に使ったコンピュータ内のファイルの場所）も入らなくなりました。
+- アプリを本番用の設定で組み直しました。使い方と見た目は同じで、ファイルが小さくなりました（ライト版は約 1.4 MB → 約 1.2 MB）。
 - v1.0.0 をお使いの方は、HELP の「最新版ダウンロード」から、今のデータを引き継いだ v1.0.1 を準備できます。
 
 ### v1.0.0（2026-11-19）
@@ -370,6 +377,11 @@ If you publish work that used this app, please cite the viewer you used, in the 
 ## Release notes
 
 The main changes in each version. Downloads are on the [Releases](https://github.com/AgroDesign-Studios/ProteinViewerPack/releases) page.
+
+### v1.0.7 (2026-11-26)
+- The app's source code is published in [`source/`](source/) of this repository: the files the app is built from, with their tests, the build of the PyMOL runtime and the release scripts. [`source/README.md`](source/README.md) says how to build it, run the tests and check that it makes the same files as a release.
+- Help > "Latest version": the note under the GitHub repository says that the latest version of the app and its source code are published on GitHub.
+- "Save as HTMLapp (a copy of this app)": pressing save shows, in the file-name field, the name the file is saved under (without the characters a file name cannot hold); while the copy is made, the field and its default button cannot be used.
 
 ### v1.0.6 (2026-11-22)
 - "Includes PyMOL™" mode: the "Sequence" tag at the top right (or "Seq" below) shows the sequence in one row over the view. A residue under the mouse (tapped on a phone) is lit, stands out in PyMOL's view for the moment as thick yellow sticks, and a box at the top left says which structure, chain, number and residue it is.
@@ -409,7 +421,7 @@ The main changes in each version. Downloads are on the [Releases](https://github
 - In the export dialog, "Save as HTMLapp (a copy of this app)" now darkens under the pointer.
 
 ### v1.0.1 (2026-11-19)
-- The app is now built with production settings. It works and looks the same, but the files are smaller (the light edition goes from about 1.4 MB to about 1.2 MB). The development details v1.0.0 carried (where its files sat on the computer that built it) are gone.
+- The app is now built with production settings. It works and looks the same, but the files are smaller (the light edition goes from about 1.4 MB to about 1.2 MB).
 - If you use v1.0.0, HELP > "Latest version" can prepare v1.0.1 with your current data carried over.
 
 ### v1.0.0 (2026-11-19)

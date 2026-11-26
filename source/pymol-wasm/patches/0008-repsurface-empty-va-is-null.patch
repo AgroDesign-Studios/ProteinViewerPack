@@ -1,0 +1,20 @@
+--- a/layer2/RepSurface.cpp
++++ b/layer2/RepSurface.cpp
+@@ -266,7 +266,7 @@
+   float* v = I->V.data();
+   float* vn = I->VN.data();
+   float* vc = I->VC.data();
+-  float* va = I->VA.data();
++  float* va = I->VA.empty() ? nullptr : I->VA.data();
+   int* t = I->T.data();
+   int* s = I->S.data();
+   int c = I->N;
+@@ -1577,7 +1577,7 @@
+   float* v = I->V.data();
+   float* vn = I->VN.data();
+   float* vc = I->VC.data();
+-  float* va = I->VA.data();
++  float* va = I->VA.empty() ? nullptr : I->VA.data();
+   int* rc = I->RC.data();
+   int* t = I->T.data();
+   int* s = I->S.data();

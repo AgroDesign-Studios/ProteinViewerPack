@@ -1,0 +1,52 @@
+Pyodide: where its source code is
+=================================
+
+This file carries Pyodide 314.0.7 in executable form (pyodide.js,
+pyodide.asm.mjs, pyodide.asm.wasm, python_stdlib.zip), distributed under the
+Mozilla Public License 2.0 (its full text is listed beside this one). As MPL
+section 3.2(a) asks, the source code of these files is available at:
+
+  https://github.com/pyodide/pyodide/releases/tag/314.0.7
+  https://github.com/pyodide/pyodide (the commit of tag 314.0.7)
+
+pyodide.asm.wasm also links hiwire, Pyodide's JavaScript reference table,
+under the same licence; its source is at:
+
+  https://github.com/pyodide/hiwire (commit 6a1e67280a15d929ebeceee54a6358c9c8d5f697,
+  the one Pyodide 314.0.7's cpython/Makefile builds)
+
+What this copy changed
+----------------------
+
+pyodide.js, pyodide.asm.mjs and pyodide.asm.wasm are the release's files,
+unmodified.
+
+python_stdlib.zip is NOT the release's file. AgDB's pinned builder
+(pymol-wasm/ in the AgDB repository, build.sh step 5b) made it from the
+release's python_stdlib.zip (in pyodide-core-314.0.7.tar.bz2 at the release
+link above) as follows, and changed nothing else:
+
+  - The 167 modules the PyMOL viewer imports while it starts
+    (pymol-wasm/pyc_targets.json, "stdlib") are shipped compiled: each x.py is
+    replaced, at the same place in the archive, by x.pyc, the bytecode the
+    same Pyodide 314.0.7 CPython (3.14.2) compiles from that x.py
+    (unchecked-hash, optimize 0, without the column table), and the x.py
+    itself is left out. The text of no file was edited.
+  - 15 of those modules are Pyodide's own Python code, covered by the MPL:
+    _pyodide/__init__.py, _pyodide/_base.py, _pyodide/_core_docs.py,
+    _pyodide/_future_helper.py, _pyodide/_importhook.py,
+    _pyodide/docs_argspec.py, _pyodide/docstring.py, _pyodide/jsbind.py,
+    pyodide/__init__.py, pyodide/_package_loader.py, pyodide/_state.py,
+    pyodide/code.py, pyodide/common.py, pyodide/ffi/__init__.py,
+    pyodide/webloop.py. They are in Executable Form only in this copy; their
+    Source Code Form is the same path in the release's python_stdlib.zip, and
+    in the pyodide repository at the tag above (src/py/).
+  - The other 152 are CPython standard-library modules (Python Software
+    Foundation License, LICENSE.cpython.txt). This paragraph is the brief
+    summary of the changes made to Python that the PSF License (clause 3) asks
+    a derivative work to include: those 152 modules are shipped as bytecode
+    without their source, and the archive is re-compressed. Their source is
+    the release's python_stdlib.zip, or CPython 3.14.2.
+  - Every member of the archive is re-compressed with deflate level 9 (the
+    release uses level 6); the uncompressed content of every member not named
+    above is byte-identical to the release's.

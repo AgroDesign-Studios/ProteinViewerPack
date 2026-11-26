@@ -1,0 +1,12 @@
+{
+  "notice": "本アプリは、Open-Source PyMOL のソースコードをオープンソースライセンスのもとで利用し、AgroDesign Studios が開発（変更・機能追加）したアプリです。PyMOL™ は Schrödinger, LLC の商標です。",
+  "about_title": "このソフトについて",
+  "about_licenses_link": "サードパーティのライセンス",
+  "about_absent_title": "このブラウザ版に無い機能",
+  "about_absent_demo": "デモのウィザード（Wizard > Demo）",
+  "about_absent_stereo": "立体視の 2 方式: Quad-Buffered と OpenVR",
+  "about_absent_antialias": "リアルタイムのアンチエイリアス（FXAA、SMAA）",
+  "about_absent_volume": "ボリュームの Pre-integrated Rendering",
+  "about_absent_fonts": "Sans 以外のラベル書体（Serif、Mono、Gentium）: そのラベルは Sans で描かれます",
+  "contains_label": "<small>Includes</small> <line><big>PyMOL™</big></line>"
+}
